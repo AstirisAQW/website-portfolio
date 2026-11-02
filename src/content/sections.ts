@@ -1,19 +1,29 @@
-import { CodeIcon, FileTextIcon, UserIcon, type IconComponent } from '../components/Icons'
+import {
+  AwardIcon,
+  CodeIcon,
+  CpuIcon,
+  FileTextIcon,
+  UserIcon,
+  type IconComponent,
+} from '../components/Icons'
 
-interface SectionInfo {
+export interface SectionInfo {
   id: string
   label: string
+  number: string
+  tagline: string
   icon: IconComponent
 }
 
-/** Single source of truth for the page sections: navbar, footer and scroll-spy all read this. */
+/** Single source of truth for the portfolio sections */
 export const SECTIONS = [
-  { id: 'about', label: 'about', icon: UserIcon },
-  { id: 'projects', label: 'projects', icon: CodeIcon },
-  { id: 'resume', label: 'resume', icon: FileTextIcon },
+  { id: 'about', label: 'about', number: '01', tagline: 'Profile & Overview', icon: UserIcon },
+  { id: 'spectrum', label: 'spectrum', number: '02', tagline: 'Architecture Spectrum', icon: CpuIcon },
+  { id: 'projects', label: 'projects', number: '03', tagline: 'Curated Work', icon: CodeIcon },
+  { id: 'credentials', label: 'credentials', number: '04', tagline: 'Honors & Education', icon: AwardIcon },
+  { id: 'resume', label: 'resume', number: '05', tagline: 'Curriculum Vitae', icon: FileTextIcon },
 ] as const satisfies readonly SectionInfo[]
 
-/** Union of the real section ids, so a mistyped id fails to compile instead of silently breaking nav. */
 export type SectionId = (typeof SECTIONS)[number]['id']
 
 export const SECTION_IDS: readonly SectionId[] = SECTIONS.map((section) => section.id)

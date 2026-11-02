@@ -2,7 +2,7 @@ import type { ComponentType, ReactNode, SVGProps } from 'react'
 
 export type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
-// Small stroke icons on a 24x24 grid, drawn here so the site needs no icon library.
+// Clean SVG icons on a 24x24 grid with standard stroke and scale
 function make(children: ReactNode): IconComponent {
   return function Icon(props) {
     return (
@@ -75,6 +75,84 @@ export const ExternalLinkIcon = make(
     <path d="M15 3h6v6" />
     <path d="M10 14 21 3" />
     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+  </>,
+)
+
+export const ArrowUpRightIcon = make(
+  <>
+    <path d="M7 17 17 7" />
+    <path d="M7 7h10v10" />
+  </>,
+)
+
+export const ArrowUpIcon = make(
+  <>
+    <path d="m5 12 7-7 7 7" />
+    <path d="M12 19V5" />
+  </>,
+)
+
+export const ArrowDownIcon = make(
+  <>
+    <path d="m19 12-7 7-7-7" />
+    <path d="M12 5v14" />
+  </>,
+)
+
+export const CheckCircleIcon = make(
+  <>
+    <circle cx="12" cy="12" r="10" />
+    <path d="m9 12 2 2 4-4" />
+  </>,
+)
+
+export const AwardIcon = make(
+  <>
+    <circle cx="12" cy="8" r="6" />
+    <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+  </>,
+)
+
+export const TerminalIcon = make(
+  <>
+    <polyline points="4 17 10 11 4 5" />
+    <line x1="12" x2="20" y1="19" y2="19" />
+  </>,
+)
+
+export const CpuIcon = make(
+  <>
+    <rect width="16" height="16" x="4" y="4" rx="2" />
+    <rect width="6" height="6" x="9" y="9" />
+    <path d="M9 1v3" />
+    <path d="M15 1v3" />
+    <path d="M9 20v3" />
+    <path d="M15 20v3" />
+    <path d="M20 9h3" />
+    <path d="M20 14h3" />
+    <path d="M1 9h3" />
+    <path d="M1 14h3" />
+  </>,
+)
+
+export const LayersIcon = make(
+  <>
+    <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+    <path d="m22 12.5-8.58 3.91a2 2 0 0 1-1.66 0L2 12.5" />
+    <path d="m22 17.5-8.58 3.91a2 2 0 0 1-1.66 0L2 17.5" />
+  </>,
+)
+
+export const EyeIcon = make(
+  <>
+    <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+    <circle cx="12" cy="12" r="3" />
+  </>,
+)
+
+export const SparklesIcon = make(
+  <>
+    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
   </>,
 )
 

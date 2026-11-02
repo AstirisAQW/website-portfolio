@@ -3,14 +3,13 @@ import type { SectionId } from '../content/sections'
 
 interface SectionProps {
   id: SectionId
-  /** Vertical padding differs per section, so each one passes its own. */
   className?: string
   children: ReactNode
 }
 
 export function Section({ id, className = '', children }: SectionProps) {
   return (
-    <section id={id} className={`mx-auto max-w-4xl px-4 font-serif sm:px-6 ${className}`}>
+    <section id={id} className={`relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 ${className}`}>
       {children}
     </section>
   )

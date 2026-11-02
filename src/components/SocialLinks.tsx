@@ -1,30 +1,37 @@
-import { GithubIcon, LinkedinIcon } from './Icons'
+import { ArrowUpRightIcon, GithubIcon, LinkedinIcon } from './Icons'
 import { SITE } from '../content/site'
 
 const LINKS = [
-  { label: 'GitHub Profile', href: SITE.githubUrl, Icon: GithubIcon, colors: 'bg-ink hover:bg-accent' },
   {
-    label: 'LinkedIn Profile',
+    label: 'GitHub',
+    handle: '@AstirisAQW',
+    href: SITE.githubUrl,
+    Icon: GithubIcon,
+  },
+  {
+    label: 'LinkedIn',
+    handle: 'joseph-deysolong',
     href: SITE.linkedinUrl,
     Icon: LinkedinIcon,
-    colors: 'bg-linkedin hover:bg-linkedin-strong',
   },
 ]
 
 export function SocialLinks({ className = '' }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      {LINKS.map(({ label, href, Icon, colors }) => (
+    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
+      {LINKS.map(({ label, handle, href, Icon }) => (
         <a
           key={label}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          title={label}
-          aria-label={label}
-          className={`${colors} rounded p-2 text-white shadow-2xs transition-colors`}
+          title={`${label} (${handle})`}
+          aria-label={`${label}: ${handle}`}
+          className="border-line bg-card hover:border-accent hover:text-accent group inline-flex items-center gap-2 rounded-md border px-3 py-1.5 font-mono text-xs text-body transition-colors shadow-2xs"
         >
-          <Icon className="h-4 w-4" />
+          <Icon className="h-3.5 w-3.5 text-soft group-hover:text-accent transition-colors" />
+          <span>{label}</span>
+          <ArrowUpRightIcon className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
         </a>
       ))}
     </div>
