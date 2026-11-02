@@ -1,4 +1,4 @@
-import { ArrowUpIcon, GithubIcon, LinkedinIcon } from './Icons'
+import { ArrowUpIcon, GithubIcon, LinkedinIcon, MailIcon } from './Icons'
 import { SECTIONS, type SectionId } from '../content/sections'
 import { SITE } from '../content/site'
 import { smoothScrollTo } from '../utils/lenis'
@@ -13,66 +13,71 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-[#050608] text-white/60 border-t border-white/10 relative z-10 px-4 py-20 sm:px-6 lg:px-8 font-mono text-xs">
-      <div className="mx-auto max-w-7xl space-y-12">
-        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
-          {/* Identity & Technical Footprint */}
-          <div className="space-y-3 max-w-lg">
-            <div className="flex items-center gap-2 text-[var(--accent-primary)] font-bold">
-              <span>// COLOPHON & RECORD SPECIFICATION</span>
-            </div>
-            <h3 className="text-white font-display text-2xl font-black uppercase tracking-tight">
+    <footer id="contact" className="border-t border-white/10 bg-[#07080b] text-body text-xs py-20 px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl space-y-12">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+          {/* Contact & Identity */}
+          <div className="space-y-3 max-w-md">
+            <span className="text-[var(--accent-primary)] font-medium text-xs">
+              Get in Touch
+            </span>
+            <h3 className="text-white font-display text-2xl font-bold tracking-tight">
               {SITE.name}
             </h3>
-            <p className="font-sans text-xs text-white/60 leading-relaxed">
-              B.S. in Computer Science (Cum Laude, DOST-SEI JLSS Scholar) • University of
-              Science and Technology of Southern Philippines. Specializing in bare-metal MIPS
-              architecture, graph kinematic anomaly detection, and production distributed systems.
+            <p className="text-body text-sm leading-relaxed">
+              Available for software engineering and systems research opportunities.
             </p>
           </div>
 
-          {/* Social Profiles & Back to Top */}
+          {/* Social Links (Moved from hero) */}
           <div className="flex flex-wrap items-center gap-3">
             <a
               href={SITE.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="group flex items-center gap-2 border border-white/15 bg-white/[0.02] px-3.5 py-2 text-white/70 hover:border-white hover:text-white transition-all"
+              className="inline-flex items-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/80 hover:text-white hover:border-white transition-colors"
             >
-              <GithubIcon className="h-3.5 w-3.5" />
-              <span>[GITHUB]</span>
+              <GithubIcon className="h-4 w-4" />
+              <span>GitHub</span>
             </a>
 
             <a
               href={SITE.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn Profile"
-              className="group flex items-center gap-2 border border-white/15 bg-white/[0.02] px-3.5 py-2 text-white/70 hover:border-white hover:text-white transition-all"
+              className="inline-flex items-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/80 hover:text-white hover:border-white transition-colors"
             >
-              <LinkedinIcon className="h-3.5 w-3.5" />
-              <span>[LINKEDIN]</span>
+              <LinkedinIcon className="h-4 w-4" />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href={SITE.email}
+              className="inline-flex items-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/80 hover:text-white hover:border-white transition-colors"
+            >
+              <MailIcon className="h-4 w-4" />
+              <span>Email</span>
             </a>
 
             <button
               type="button"
               onClick={handleScrollToTop}
-              className="group flex items-center gap-2 border border-white/20 bg-white/[0.04] px-4 py-2 uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all cursor-pointer"
+              aria-label="Back to top"
+              className="inline-flex items-center gap-1.5 rounded-sm border border-white/10 bg-white/[0.02] px-3.5 py-2.5 text-xs text-white/60 hover:text-white hover:border-white transition-colors cursor-pointer"
             >
-              <span>[TOP]</span>
-              <ArrowUpIcon className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" />
+              <span>Back to top</span>
+              <ArrowUpIcon className="h-3 w-3" />
             </button>
           </div>
         </div>
 
-        {/* Lower Divider & Navigation Links */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 text-[11px] text-white/40">
+        {/* Bottom Nav & Copyright */}
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 text-xs text-soft">
           <div>
-            {SITE.years} © {SITE.name} • ENGINEERED WITH REACT 19, TS, GSAP & LENIS
+            © {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </div>
 
-          <nav aria-label="Footer Nav" className="flex flex-wrap items-center gap-5 uppercase tracking-wider">
+          <nav aria-label="Footer Nav" className="flex flex-wrap items-center gap-6">
             {SECTIONS.map((item) => (
               <a
                 key={item.id}
@@ -83,7 +88,7 @@ export function Footer() {
                 }}
                 className="hover:text-white transition-colors"
               >
-                [{item.label}]
+                {item.label}
               </a>
             ))}
           </nav>

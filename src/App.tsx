@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Footer } from './components/Footer'
 import { Navbar } from './components/Navbar'
 import { SECTION_IDS } from './content/sections'
 import { useActiveSection } from './hooks/useActiveSection'
 import { AboutSection } from './components/AboutSection'
-import { KineticTicker } from './components/KineticTicker'
 import { ProjectsSection } from './components/ProjectsSection'
 import { SystemsSpectrum } from './components/SystemsSpectrum'
 import { CredentialsSection } from './components/CredentialsSection'
-import { ResumeSection } from './components/ResumeSection'
-import { ScrollRail } from './components/ScrollRail'
-import { AnimatedBackground } from './components/AnimatedBackground'
 import { ArrowUpIcon } from './components/Icons'
 import { initSmoothScroll, smoothScrollTo } from './utils/lenis'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   const activeSection = useActiveSection(SECTION_IDS)
@@ -22,6 +22,25 @@ export default function App() {
     // Initialize Lenis smooth scroll and synchronize with GSAP ScrollTrigger
     const lenis = initSmoothScroll()
 
+    // Reusable, calm scroll-reveal pattern across sections
+    let ctx: gsap.Context | undefined
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      ctx = gsap.context(() => {
+        gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
+          gsap.from(el, {
+            y: 24,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+            },
+          })
+        })
+      })
+    }
+
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400)
     }
@@ -30,54 +49,43 @@ export default function App() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      ctx?.revert()
       lenis?.destroy()
     }
   }, [])
 
   return (
-    <div className="bg-[#08090c] text-[#e2e4e9] selection:bg-white selection:text-black relative min-h-screen font-sans antialiased">
-      {/* High-Performance Architectural Grid & Focal Ambient Lights */}
-      <AnimatedBackground />
-
-      {/* Floating HUD Section Index Rail (Desktop) */}
-      <ScrollRail activeSection={activeSection} />
-
-      {/* Fixed Architectural Header */}
+    <div className="bg-[#090a0d] text-[#e2e4e9] selection:bg-white selection:text-black relative min-h-screen font-sans antialiased">
+      {/* Clean, Fixed Editorial Header */}
       <Navbar activeSection={activeSection} />
 
-      {/* Main Restructured Scroll-Based Progression */}
-      <main className="relative z-10 pb-24">
-        {/* 01: Hero / Manifesto */}
+      {/* Main Progression: Hero → Projects → Skills/Systems → Credentials+Resume */}
+      <main className="relative z-10">
+        {/* 01: Hero */}
         <AboutSection />
 
-        {/* Kinetic Scroll-Scrubbed Text Marquee */}
-        <KineticTicker />
-
-        {/* 02: Selected Works // GSAP Stacking Cards Showcase */}
+        {/* 02: Selected Projects */}
         <ProjectsSection />
 
-        {/* 03: Architecture Matrix & Deep-Dive */}
+        {/* 03: Systems & Core Disciplines */}
         <SystemsSpectrum />
 
-        {/* 04: Institutional Records & Accolades */}
+        {/* 04: Credentials & Resume */}
         <CredentialsSection />
-
-        {/* 05: Official Dossier & Curriculum Vitae */}
-        <ResumeSection />
       </main>
 
-      {/* Colophon & Footer */}
+      {/* 05: Contact & Footer */}
       <Footer />
 
-      {/* Floating Back-to-Top Button */}
+      {/* Subtle Floating Back-to-Top Button */}
       {showScrollTop && (
         <button
           type="button"
           onClick={() => smoothScrollTo('body', 0)}
           aria-label="Scroll back to top"
-          className="group fixed right-6 bottom-6 z-40 flex h-10 w-10 items-center justify-center border border-white/20 bg-[#0c0e14] text-white hover:border-white hover:bg-white hover:text-black transition-all duration-200 cursor-pointer shadow-2xl"
+          className="fixed right-6 bottom-6 z-40 flex h-10 w-10 items-center justify-center rounded-sm border border-white/15 bg-[#11141c] text-white/70 hover:text-white hover:border-white transition-colors cursor-pointer shadow-xl"
         >
-          <ArrowUpIcon className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+          <ArrowUpIcon className="h-4 w-4" />
         </button>
       )}
     </div>

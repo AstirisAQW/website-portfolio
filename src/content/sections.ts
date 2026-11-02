@@ -1,27 +1,15 @@
-import {
-  AwardIcon,
-  CodeIcon,
-  CpuIcon,
-  FileTextIcon,
-  UserIcon,
-  type IconComponent,
-} from '../components/Icons'
-
 export interface SectionInfo {
   id: string
   label: string
   number: string
-  tagline: string
-  icon: IconComponent
 }
 
 /** Single source of truth for portfolio section structure */
 export const SECTIONS = [
-  { id: 'about', label: 'ABOUT', number: '01', tagline: 'Profile & Manifesto', icon: UserIcon },
-  { id: 'projects', label: 'WORKS', number: '02', tagline: 'Selected Works', icon: CodeIcon },
-  { id: 'spectrum', label: 'SPECTRUM', number: '03', tagline: 'Architecture Matrix', icon: CpuIcon },
-  { id: 'credentials', label: 'CREDENTIALS', number: '04', tagline: 'Academic Accolades', icon: AwardIcon },
-  { id: 'resume', label: 'DOSSIER', number: '05', tagline: 'Curriculum Vitae', icon: FileTextIcon },
+  { id: 'about', label: 'About', number: '01' },
+  { id: 'projects', label: 'Projects', number: '02' },
+  { id: 'spectrum', label: 'Systems', number: '03' },
+  { id: 'credentials', label: 'Credentials & Resume', number: '04' },
 ] as const satisfies readonly SectionInfo[]
 
 export type SectionId = (typeof SECTIONS)[number]['id']

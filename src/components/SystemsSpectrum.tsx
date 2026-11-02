@@ -6,9 +6,7 @@ import { smoothScrollTo } from '../utils/lenis'
 
 interface DomainInfo {
   id: string
-  codePrefix: string
   label: string
-  shortTitle: string
   icon: typeof CpuIcon
   headline: string
   summary: string
@@ -28,13 +26,11 @@ interface DomainInfo {
 const DOMAINS: DomainInfo[] = [
   {
     id: 'systems',
-    codePrefix: 'SYS-01',
-    label: 'SYSTEMS & BARE-METAL ARCHITECTURE',
-    shortTitle: 'SYSTEMS',
+    label: 'Low-Level Systems',
     icon: CpuIcon,
-    headline: 'Low-Level MIPS Assembly & Stack Allocation',
+    headline: 'MIPS Assembly & Stack Allocation',
     summary:
-      'Direct manipulation of CPU registers, activation record stack frame management, and recursion optimization. Eliminates runtime garbage collection overhead through deterministic memory layouts.',
+      'Direct register allocation, stack activation frame management, and recursion optimization without runtime overhead or garbage collection.',
     mathFormula: 'T(n) = O(V + E) • Stack Allocation: 8 Bytes per Frame ($ra, $s0)',
     snippet: {
       lang: 'MIPS_ASSEMBLY.s',
@@ -52,18 +48,16 @@ const DOMAINS: DomainInfo[] = [
     featuredProject: {
       id: 'blackjack-in-mips',
       title: 'BlackJack in MIPS',
-      description: 'Single-player blackjack engine engineered purely in bare-metal MIPS assembly without runtimes.',
+      description: 'Single-player blackjack engine engineered purely in bare-metal MIPS assembly.',
     },
   },
   {
     id: 'ml',
-    codePrefix: 'ML-02',
-    label: 'TEMPORAL GRAPH ML & KINEMATICS',
-    shortTitle: 'GRAPH ML',
+    label: 'Graph Machine Learning',
     icon: SparklesIcon,
-    headline: 'Node Embedding Kinematics & Anomaly Detection',
+    headline: 'Embedding Kinematics & Anomaly Detection',
     summary:
-      'Modeling dynamic graph evolution by treating node embedding trajectories as physical kinematic systems. Computes instantaneous velocity and acceleration vectors to identify topological anomalies.',
+      'Modeling dynamic graph evolution by treating node embedding trajectories as physical kinematic systems, computing instantaneous velocity and acceleration vectors.',
     mathFormula: 'v(t) = (z_t - z_{t-1}) / Δt • a(t) = (v_t - v_{t-1}) / Δt',
     snippet: {
       lang: 'KINEMATIC_DYMON.py',
@@ -80,18 +74,16 @@ const DOMAINS: DomainInfo[] = [
     featuredProject: {
       id: 'dymon',
       title: 'DyMoN',
-      description: 'Post-hoc anomaly detection module for temporal graphs tracking node embedding kinematics.',
+      description: 'Anomaly detection module for temporal graphs tracking node embedding kinematics.',
     },
   },
   {
     id: 'web',
-    codePrefix: 'WEB-03',
-    label: 'DETERMINISTIC AUTOMATA & PLATFORMS',
-    shortTitle: 'FULL-STACK',
+    label: 'Automata & Web Platforms',
     icon: LayersIcon,
-    headline: 'Finite State Automata & Reactive Runtimes',
+    headline: 'Finite State Machines & Reactive Runtimes',
     summary:
-      'Building state machines with verifiable formal language transitions, interactive browser-based graph visualizations, and production relational schema architectures.',
+      'Designing state machines with verifiable formal language transitions, interactive graph visualizations, and scalable web application architectures.',
     mathFormula: 'M = (Q, Σ, δ, q0, F) • δ: Q × Σ → P(Q)',
     snippet: {
       lang: 'AUTOMATA_ENGINE.ts',
@@ -118,35 +110,16 @@ export function SystemsSpectrum() {
   const current = DOMAINS[activeTab]
 
   return (
-    <Section id="spectrum" className="py-28">
+    <Section id="spectrum" className="py-24 sm:py-32">
       <SectionHeading
         number="03"
-        title="Architecture Matrix & Disciplines"
-        subtitle="Deconstructing core technical competencies: from bare-metal instruction sets to kinematic graph neural algorithms and deterministic state engines."
+        title="Systems & Disciplines"
+        subtitle="Core focus across low-level instruction sets, kinematic graph neural algorithms, and deterministic state engines."
       />
 
-      <div className="card-architectural mt-12 border border-white/10 shadow-2xl">
-        {/* Technical Top Header Bar */}
-        <div className="border-b border-white/10 bg-white/[0.02] px-6 py-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-          <div className="flex items-center gap-3">
-            <span className="text-[var(--accent-primary)] font-bold">
-              [{current.codePrefix}]
-            </span>
-            <span className="text-white/30">|</span>
-            <span className="text-white font-semibold tracking-wider">
-              PARADIGM MATRIX // SPECIFICATION SHEET
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 text-soft text-[11px]">
-            <span>PRECISION: DETERMINISTIC</span>
-            <span className="text-white/20">•</span>
-            <span>SPEC: REVISION 2026.1</span>
-          </div>
-        </div>
-
-        {/* Paradigm Tab Switcher (Architectural Inverted Tabs) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10 bg-black/40">
+      <div className="reveal mt-12 rounded-sm border border-white/10 bg-[#0f1118] shadow-2xl overflow-hidden">
+        {/* Domain Tab Switcher */}
+        <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10 bg-black/30">
           {DOMAINS.map((domain, index) => {
             const isSelected = activeTab === index
             return (
@@ -154,10 +127,10 @@ export function SystemsSpectrum() {
                 key={domain.id}
                 type="button"
                 onClick={() => setActiveTab(index)}
-                className={`flex items-center justify-between p-4 sm:p-5 font-mono text-xs uppercase tracking-wider text-left transition-all border-b md:border-b-0 md:border-r border-white/10 last:border-r-0 cursor-pointer ${
+                className={`flex items-center justify-between p-4 sm:p-5 text-xs font-medium text-left transition-colors border-b md:border-b-0 md:border-r border-white/10 last:border-r-0 cursor-pointer ${
                   isSelected
-                    ? 'bg-white text-black font-bold'
-                    : 'text-white/60 hover:text-white hover:bg-white/[0.03]'
+                    ? 'bg-white text-black font-semibold'
+                    : 'text-body hover:text-white hover:bg-white/[0.02]'
                 }`}
               >
                 <span>{domain.label}</span>
@@ -169,63 +142,63 @@ export function SystemsSpectrum() {
           })}
         </div>
 
-        {/* Tab Content & Blueprint Code Grid */}
-        <div className="p-6 sm:p-8 lg:p-10 space-y-8">
+        {/* Tab Content & Code Grid */}
+        <div className="p-6 sm:p-8 lg:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             {/* Left: Domain Analysis */}
             <div className="space-y-6">
-              <div className="space-y-2">
-                <div className="font-mono text-xs text-[var(--accent-primary)]">
-                  // {current.codePrefix} DEFINITION
-                </div>
-                <h3 className="text-ink font-display text-2xl sm:text-3xl font-bold tracking-tight">
+              <div className="space-y-1">
+                <span className="font-mono text-xs text-[var(--accent-primary)]">
+                  Focus Domain
+                </span>
+                <h3 className="text-white font-display text-2xl sm:text-3xl font-bold tracking-tight">
                   {current.headline}
                 </h3>
               </div>
 
-              <p className="text-body font-sans text-sm sm:text-base leading-relaxed">
+              <p className="text-body text-sm sm:text-base leading-relaxed">
                 {current.summary}
               </p>
 
               {/* Mathematical Formula Callout */}
               {current.mathFormula && (
-                <div className="border border-white/10 bg-white/[0.02] p-4 font-mono text-xs space-y-1">
-                  <span className="text-[10px] uppercase tracking-widest text-white/40 block">
-                    GOVERNING MODEL / COMPLEXITY
+                <div className="rounded-sm border border-white/10 bg-white/[0.01] p-4 text-xs space-y-1">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 block">
+                    Governing Complexity
                   </span>
-                  <div className="text-[var(--accent-primary)] font-medium pt-0.5">
+                  <div className="text-[var(--accent-primary)] font-mono font-medium pt-0.5">
                     {current.mathFormula}
                   </div>
                 </div>
               )}
 
-              {/* Technologies Array */}
+              {/* Technologies */}
               <div className="space-y-2">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-white/40 block">
-                  TECHNICAL COMPETENCIES
+                <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 block">
+                  Core Technologies
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {current.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="border border-white/10 bg-white/[0.02] px-2.5 py-1 font-mono text-xs text-white/80"
+                      className="rounded-sm border border-white/10 bg-white/[0.02] px-2.5 py-1 text-xs text-white/70"
                     >
-                      [{tech}]
+                      {tech}
                     </span>
                   ))}
                 </div>
               </div>
 
               {/* Representative Project Jump Action */}
-              <div className="border border-white/10 bg-white/[0.02] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="rounded-sm border border-white/10 bg-white/[0.01] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-0.5">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--accent-primary)]">
-                    CONNECTED REPOSITORY
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)]">
+                    Related Project
                   </span>
-                  <p className="font-display text-sm font-bold text-white">
+                  <p className="font-display text-sm font-semibold text-white">
                     {current.featuredProject.title}
                   </p>
-                  <p className="font-sans text-xs text-soft max-w-sm">
+                  <p className="text-xs text-soft max-w-sm">
                     {current.featuredProject.description}
                   </p>
                 </div>
@@ -233,22 +206,21 @@ export function SystemsSpectrum() {
                 <button
                   type="button"
                   onClick={() => smoothScrollTo('#projects')}
-                  className="group inline-flex items-center gap-1.5 border border-white/30 bg-white/[0.05] px-4 py-2 font-mono text-xs uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all shrink-0 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-sm border border-white/20 bg-white/[0.04] px-3.5 py-2 text-xs font-medium text-white hover:bg-white hover:text-black transition-colors shrink-0 cursor-pointer"
                 >
-                  <span>[ VIEW WORK ]</span>
-                  <ArrowUpRightIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <span>View Project</span>
+                  <ArrowUpRightIcon className="h-3 w-3" />
                 </button>
               </div>
             </div>
 
-            {/* Right: Real Code Implementation Frame */}
-            <div className="border border-white/15 bg-[#050609] overflow-hidden shadow-2xl">
-              <div className="border-b border-white/10 bg-[#090b10] px-4 py-2.5 flex items-center justify-between font-mono text-xs text-soft">
+            {/* Right: Code Implementation Frame */}
+            <div className="rounded-sm border border-white/10 bg-[#07080c] overflow-hidden shadow-2xl">
+              <div className="border-b border-white/10 bg-[#0c0e14] px-4 py-2.5 flex items-center justify-between font-mono text-xs text-soft">
                 <div className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 bg-[var(--accent-primary)]" />
-                  <span className="text-white font-medium">{current.snippet.lang}</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]" />
+                  <span className="text-white/80">{current.snippet.lang}</span>
                 </div>
-                <span className="text-[10px] text-white/30">READONLY // ARCHIVE</span>
               </div>
               <pre className="p-5 overflow-x-auto font-mono text-xs text-emerald-400/90 leading-relaxed">
                 <code>{current.snippet.code}</code>

@@ -11,11 +11,11 @@ import type { Project, ProjectCategory } from '../types/project'
 gsap.registerPlugin(ScrollTrigger)
 
 const FILTER_CATEGORIES: { id: 'all' | ProjectCategory; label: string }[] = [
-  { id: 'all', label: 'ALL WORKS' },
-  { id: 'systems', label: 'SYSTEMS & ARCH' },
-  { id: 'ml', label: 'GRAPH ML & RESEARCH' },
-  { id: 'web', label: 'FULL-STACK PLATFORMS' },
-  { id: 'simulation', label: 'AUTOMATA & ENGINES' },
+  { id: 'all', label: 'All Works' },
+  { id: 'systems', label: 'Systems & Architecture' },
+  { id: 'ml', label: 'Graph ML & Research' },
+  { id: 'web', label: 'Full-Stack Platforms' },
+  { id: 'simulation', label: 'Automata & Simulation' },
 ]
 
 export function ProjectsSection() {
@@ -43,9 +43,8 @@ export function ProjectsSection() {
         const nextCard = cards[index + 1]
 
         gsap.to(card, {
-          scale: 0.93,
+          scale: 0.94,
           opacity: 0.35,
-          filter: 'brightness(0.6)',
           ease: 'none',
           scrollTrigger: {
             trigger: nextCard,
@@ -57,22 +56,21 @@ export function ProjectsSection() {
       })
     }, containerRef)
 
-    // Refresh ScrollTrigger calculations after DOM layout settles
     ScrollTrigger.refresh()
 
     return () => ctx.revert()
   }, [filteredProjects])
 
   return (
-    <Section id="projects" className="py-28">
+    <Section id="projects" className="py-24 sm:py-32">
       <SectionHeading
         number="02"
-        title="Selected Works & Systems"
-        subtitle="Scroll through key artifacts: from MIPS assembly to graph kinematic anomaly detection models."
+        title="Selected Projects"
+        subtitle="A collection of systems-level architectures, dynamic graph machine learning models, and production web applications."
       />
 
-      {/* Filter Tabs in Architectural Sharp Monospace */}
-      <div className="mt-10 flex flex-wrap items-center gap-2">
+      {/* Filter Tabs in Sentence Case */}
+      <div className="reveal mt-8 flex flex-wrap items-center gap-2">
         {FILTER_CATEGORIES.map((tab) => {
           const isSelected = activeCategory === tab.id
           const count =
@@ -85,16 +83,16 @@ export function ProjectsSection() {
               key={tab.id}
               type="button"
               onClick={() => setActiveCategory(tab.id)}
-              className={`inline-flex items-center gap-2 border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all cursor-pointer ${
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium rounded-sm transition-colors cursor-pointer ${
                 isSelected
-                  ? 'border-white bg-white text-black font-bold'
-                  : 'border-white/10 bg-white/[0.02] text-soft hover:border-white/30 hover:text-white'
+                  ? 'bg-white text-black font-semibold'
+                  : 'bg-white/[0.03] text-body hover:bg-white/[0.08] hover:text-white border border-white/10'
               }`}
             >
               <span>{tab.label}</span>
               <span
-                className={`text-[10px] px-1.5 py-0.2 ${
-                  isSelected ? 'bg-black text-white' : 'bg-white/10 text-white/60'
+                className={`text-[10px] px-1.5 py-0.2 rounded-sm ${
+                  isSelected ? 'bg-black/10 text-black' : 'bg-white/10 text-white/60'
                 }`}
               >
                 {count}
@@ -104,8 +102,8 @@ export function ProjectsSection() {
         })}
       </div>
 
-      {/* GSAP Stacking Cards Track */}
-      <div ref={containerRef} className="mt-12 space-y-12 lg:space-y-24">
+      {/* Stacking Cards Track */}
+      <div ref={containerRef} className="mt-12 space-y-12 lg:space-y-20">
         {filteredProjects.map((project, index) => (
           <div
             key={project.id}
@@ -121,7 +119,7 @@ export function ProjectsSection() {
         ))}
       </div>
 
-      {/* Full-Screen Inspection Modal */}
+      {/* Inspection Modal */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
