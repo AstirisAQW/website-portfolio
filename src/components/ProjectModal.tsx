@@ -36,28 +36,35 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#080a11]/85 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-black/85 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Modal Dialog */}
-      <div className="border-line bg-paper text-ink relative z-10 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border p-6 sm:p-8 shadow-2xl">
+      <div className="card-architectural relative z-10 max-h-[92vh] w-full max-w-5xl overflow-y-auto border border-white/20 p-6 sm:p-10 shadow-2xl">
+        {/* Corner registration marks */}
+        <span className="absolute top-2 left-2 font-mono text-[9px] text-white/30 select-none">+</span>
+        <span className="absolute top-2 right-2 font-mono text-[9px] text-white/30 select-none">+</span>
+        <span className="absolute bottom-2 left-2 font-mono text-[9px] text-white/30 select-none">+</span>
+        <span className="absolute bottom-2 right-2 font-mono text-[9px] text-white/30 select-none">+</span>
+
         {/* Header */}
-        <div className="border-line flex items-start justify-between border-b pb-4">
+        <div className="border-b border-white/10 pb-5 flex items-start justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="glass-card text-[var(--accent-primary)] border border-[var(--accent-border)] rounded-md px-2.5 py-0.5 font-mono text-xs font-semibold">
-                {project.categoryLabel}
+            <div className="flex items-center gap-3 font-mono text-xs">
+              <span className="text-[var(--accent-primary)] font-bold">
+                [{project.categoryLabel}]
               </span>
-              <span className="text-muted font-mono text-xs">• {project.year}</span>
+              <span className="text-white/30">•</span>
+              <span className="text-white/50">VERSION {project.year}</span>
             </div>
-            <h3 id="modal-title" className="text-ink font-display text-2xl sm:text-3xl font-extrabold mt-2">
+            <h3 id="modal-title" className="text-white font-display text-3xl sm:text-4xl font-black mt-2">
               {project.title}
             </h3>
             {project.subtitle && (
-              <p className="text-[var(--accent-primary)] font-mono text-sm mt-0.5">
-                {project.subtitle}
+              <p className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider mt-1">
+                // {project.subtitle}
               </p>
             )}
           </div>
@@ -66,86 +73,80 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="glass-card text-soft hover:text-ink rounded-xl p-2 transition-colors cursor-pointer"
+            className="border border-white/15 bg-white/[0.03] text-white p-2.5 hover:bg-white hover:text-black transition-colors cursor-pointer"
           >
             <CloseIcon className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Modal Screenshot Frame */}
-        <div className="border-line bg-[#05070c] my-6 overflow-hidden rounded-xl border p-2 shadow-inner">
+        {/* Screenshot Viewport */}
+        <div className="border border-white/15 bg-black my-6 p-2 shadow-2xl">
           <Picture
             {...project.image}
-            className="w-full max-h-[60vh] object-contain rounded-lg"
-            imgClassName="w-full h-auto max-h-[60vh] object-contain mx-auto rounded-lg"
+            className="w-full max-h-[60vh] object-contain"
+            imgClassName="w-full h-auto max-h-[60vh] object-contain mx-auto"
           />
         </div>
 
-        {/* Technical Context */}
-        <div className="space-y-4">
-          <p className="text-body font-sans text-sm sm:text-base leading-relaxed">
+        {/* Technical Specs & Description */}
+        <div className="space-y-6">
+          <p className="font-sans text-base text-white/80 leading-relaxed max-w-3xl">
             {project.description}
           </p>
 
           {/* Highlights */}
           {project.highlights && (
-            <div className="space-y-1.5">
-              <span className="text-muted font-mono text-xs block uppercase tracking-wider font-semibold">
-                Architecture & Engineering Notes
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {project.highlights.map((item) => (
-                  <span
-                    key={item}
-                    className="glass-card text-ink border border-line rounded-lg px-3 py-1 font-mono text-xs"
-                  >
-                    • {item}
-                  </span>
+            <div className="border border-white/10 bg-white/[0.02] p-4 font-mono text-xs space-y-2">
+              <div className="text-[10px] uppercase tracking-widest text-white/40 border-b border-white/5 pb-1">
+                KEY TECHNICAL HIGHLIGHTS
+              </div>
+              <div className="space-y-1.5 pt-1">
+                {project.highlights.map((item, i) => (
+                  <div key={item} className="flex items-center gap-2 text-white/90">
+                    <span className="text-[var(--accent-primary)] font-bold">0{i + 1}</span>
+                    <span>{item}</span>
+                  </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Tags */}
-          <div className="space-y-1.5 pt-1">
-            <span className="text-muted font-mono text-xs block uppercase tracking-wider font-semibold">
-              Tech Stack
+          {/* Stack Tags */}
+          <div className="space-y-2">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-white/40 block">
+              STACK REPOSITORY
             </span>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-sand text-soft rounded-md px-2.5 py-1 font-mono text-xs"
+                  className="border border-white/10 bg-white/[0.02] px-2.5 py-1 font-mono text-xs text-white/80"
                 >
-                  {tag}
+                  [{tag}]
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Modal Action Footer */}
-          <div className="border-line flex flex-wrap items-center justify-between gap-3 border-t pt-5 mt-6">
+          {/* Modal Actions */}
+          <div className="border-t border-white/10 pt-6 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:scale-105 active:scale-95 text-white inline-flex items-center gap-2 rounded-xl px-4 py-2.5 font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-md"
-              style={{
-                background: 'var(--accent-gradient)',
-                boxShadow: '0 0 14px var(--accent-glow)',
-              }}
+              className="group inline-flex items-center gap-2 border border-white bg-white px-6 py-3 font-bold uppercase tracking-wider text-black hover:bg-transparent hover:text-white transition-all"
             >
               <GithubIcon className="h-4 w-4" />
-              <span>View Repository on GitHub</span>
-              <ArrowUpRightIcon className="h-3 w-3" />
+              <span>[ VIEW CODE ON GITHUB ]</span>
+              <ArrowUpRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
 
             <button
               type="button"
               onClick={onClose}
-              className="text-soft hover:text-ink font-mono text-xs px-3 py-2 cursor-pointer"
+              className="text-white/50 hover:text-white uppercase tracking-wider px-3 py-2 cursor-pointer"
             >
-              Close Preview
+              [ CLOSE VIEW ]
             </button>
           </div>
         </div>

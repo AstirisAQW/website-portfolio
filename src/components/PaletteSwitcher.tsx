@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { PALETTES, applyPalette, getInitialPalette, type Palette } from '../utils/theme'
-import { SparklesIcon } from './Icons'
 
 export function PaletteSwitcher() {
   const [current, setCurrent] = useState<Palette>(getInitialPalette)
@@ -21,19 +20,16 @@ export function PaletteSwitcher() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        aria-label="Change Accent Color Palette"
-        title={`Current palette: ${current.name}`}
-        className="glass-card hover:border-[var(--accent-border)] flex items-center gap-2 rounded-full px-3 py-1.5 font-mono text-xs text-ink transition-all shadow-sm cursor-pointer"
+        aria-label="Select accent theme"
+        title={`Theme: ${current.name}`}
+        className="group flex items-center gap-2 border border-white/15 bg-white/[0.03] px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-white hover:border-white/40 transition-colors cursor-pointer"
       >
         <span
-          className="h-2.5 w-2.5 rounded-full shadow-xs transition-colors duration-300"
-          style={{
-            backgroundColor: current.primary,
-            boxShadow: `0 0 8px ${current.primary}`,
-          }}
+          className="h-2 w-2 rounded-none transition-colors"
+          style={{ backgroundColor: current.primary }}
         />
-        <span className="hidden sm:inline font-medium text-xs">{current.label}</span>
-        <SparklesIcon className="h-3 w-3 text-soft" />
+        <span className="hidden sm:inline font-medium">[{current.label}]</span>
+        <span className="text-white/40 text-[10px]">▼</span>
       </button>
 
       {/* Dropdown Menu */}
@@ -44,11 +40,11 @@ export function PaletteSwitcher() {
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
-          <div className="border-line bg-paper/95 backdrop-blur-md absolute right-0 mt-2 z-50 w-44 rounded-xl border p-2 shadow-2xl animate-fade-in">
-            <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-muted">
-              Select Color Palette
+          <div className="border border-white/20 bg-[#0c0e14] absolute right-0 mt-2 z-50 w-48 p-1 shadow-2xl font-mono text-xs">
+            <div className="px-3 py-1.5 text-[9px] uppercase tracking-widest text-white/40 border-b border-white/10">
+              ACCENT PRESET
             </div>
-            <div className="space-y-1 mt-1">
+            <div className="space-y-0.5 mt-1">
               {PALETTES.map((p) => {
                 const isActive = current.id === p.id
                 return (
@@ -56,23 +52,20 @@ export function PaletteSwitcher() {
                     key={p.id}
                     type="button"
                     onClick={() => handleSelect(p)}
-                    className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 font-mono text-xs transition-colors cursor-pointer ${
+                    className={`flex w-full items-center justify-between px-3 py-2 text-left uppercase tracking-wider transition-colors cursor-pointer ${
                       isActive
-                        ? 'bg-sand text-ink font-semibold'
-                        : 'text-body hover:bg-tint hover:text-ink'
+                        ? 'bg-white text-black font-bold'
+                        : 'text-white/70 hover:bg-white/10 hover:text-white'
                     }`}
                   >
                     <div className="flex items-center gap-2">
                       <span
-                        className="h-2.5 w-2.5 rounded-full"
-                        style={{
-                          backgroundColor: p.primary,
-                          boxShadow: isActive ? `0 0 6px ${p.primary}` : 'none',
-                        }}
+                        className="h-2 w-2 rounded-none"
+                        style={{ backgroundColor: p.primary }}
                       />
                       <span>{p.name}</span>
                     </div>
-                    {isActive && <span className="text-[var(--accent-primary)] text-xs">✓</span>}
+                    {isActive && <span>✓</span>}
                   </button>
                 )
               })}

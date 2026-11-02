@@ -11,11 +11,11 @@ import type { Project, ProjectCategory } from '../types/project'
 gsap.registerPlugin(ScrollTrigger)
 
 const FILTER_CATEGORIES: { id: 'all' | ProjectCategory; label: string }[] = [
-  { id: 'all', label: 'All Projects' },
-  { id: 'ml', label: 'Graph ML & Research' },
-  { id: 'systems', label: 'Systems & Architecture' },
-  { id: 'web', label: 'Full-Stack Web' },
-  { id: 'simulation', label: 'Automata & Simulation' },
+  { id: 'all', label: 'ALL WORKS' },
+  { id: 'systems', label: 'SYSTEMS & ARCH' },
+  { id: 'ml', label: 'GRAPH ML & RESEARCH' },
+  { id: 'web', label: 'FULL-STACK PLATFORMS' },
+  { id: 'simulation', label: 'AUTOMATA & ENGINES' },
 ]
 
 export function ProjectsSection() {
@@ -33,37 +33,45 @@ export function ProjectsSection() {
       return
     }
 
-    const cards = containerRef.current?.querySelectorAll('.project-card')
+    const cards = containerRef.current?.querySelectorAll<HTMLElement>('.project-stack-card')
     if (!cards || cards.length === 0) return
 
     const ctx = gsap.context(() => {
-      cards.forEach((card) => {
-        gsap.from(card, {
+      // GSAP ScrollTrigger: Stacking card depth on scroll
+      cards.forEach((card, index) => {
+        if (index === cards.length - 1) return
+        const nextCard = cards[index + 1]
+
+        gsap.to(card, {
+          scale: 0.93,
+          opacity: 0.35,
+          filter: 'brightness(0.6)',
+          ease: 'none',
           scrollTrigger: {
-            trigger: card,
+            trigger: nextCard,
             start: 'top 85%',
-            toggleActions: 'play none none none',
+            end: 'top 30%',
+            scrub: true,
           },
-          y: 40,
-          opacity: 0,
-          duration: 0.7,
-          ease: 'power3.out',
         })
       })
     }, containerRef)
+
+    // Refresh ScrollTrigger calculations after DOM layout settles
+    ScrollTrigger.refresh()
 
     return () => ctx.revert()
   }, [filteredProjects])
 
   return (
-    <Section id="projects" className="py-24">
+    <Section id="projects" className="py-28">
       <SectionHeading
-        number="03"
-        title="Featured Engineering Projects"
-        subtitle="Post-hoc graph kinematic anomaly detection, MIPS bare-metal assembly games, finite automata visualizers, and production web platforms."
+        number="02"
+        title="Selected Works & Systems"
+        subtitle="Scroll through key artifacts: from MIPS assembly to graph kinematic anomaly detection models."
       />
 
-      {/* Filter Tabs */}
+      {/* Filter Tabs in Architectural Sharp Monospace */}
       <div className="mt-10 flex flex-wrap items-center gap-2">
         {FILTER_CATEGORIES.map((tab) => {
           const isSelected = activeCategory === tab.id
@@ -77,20 +85,16 @@ export function ProjectsSection() {
               key={tab.id}
               type="button"
               onClick={() => setActiveCategory(tab.id)}
-              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-xs font-semibold transition-all cursor-pointer ${
+              className={`inline-flex items-center gap-2 border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all cursor-pointer ${
                 isSelected
-                  ? 'text-white shadow-lg'
-                  : 'glass-card hover:border-[var(--accent-border)] text-soft hover:text-ink'
+                  ? 'border-white bg-white text-black font-bold'
+                  : 'border-white/10 bg-white/[0.02] text-soft hover:border-white/30 hover:text-white'
               }`}
-              style={{
-                background: isSelected ? 'var(--accent-gradient)' : undefined,
-                boxShadow: isSelected ? '0 0 14px var(--accent-glow)' : undefined,
-              }}
             >
               <span>{tab.label}</span>
               <span
-                className={`text-[10px] rounded-full px-2 py-0.5 ${
-                  isSelected ? 'bg-black/30 text-white' : 'bg-sand text-muted'
+                className={`text-[10px] px-1.5 py-0.2 ${
+                  isSelected ? 'bg-black text-white' : 'bg-white/10 text-white/60'
                 }`}
               >
                 {count}
@@ -100,18 +104,24 @@ export function ProjectsSection() {
         })}
       </div>
 
-      {/* Projects List */}
-      <div ref={containerRef} className="mt-10 space-y-8">
-        {filteredProjects.map((project) => (
-          <ProjectCard
+      {/* GSAP Stacking Cards Track */}
+      <div ref={containerRef} className="mt-12 space-y-12 lg:space-y-24">
+        {filteredProjects.map((project, index) => (
+          <div
             key={project.id}
-            project={project}
-            onInspect={(proj) => setSelectedProject(proj)}
-          />
+            className="sticky top-24 sm:top-28 will-change-transform"
+          >
+            <ProjectCard
+              project={project}
+              index={index}
+              total={filteredProjects.length}
+              onInspect={(proj) => setSelectedProject(proj)}
+            />
+          </div>
         ))}
       </div>
 
-      {/* Project Screenshot Inspection Modal */}
+      {/* Full-Screen Inspection Modal */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}

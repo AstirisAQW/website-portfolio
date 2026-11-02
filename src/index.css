@@ -1,73 +1,90 @@
 @import 'tailwindcss';
 
-/* Senior Frontend Developer - Modern High-Tech Theme */
+/* Bespoke Architecture & Design Engineering Tokens */
 :root {
-  --accent-primary: #06b6d4;
-  --accent-secondary: #3b82f6;
-  --accent-glow: rgba(6, 182, 212, 0.35);
-  --accent-subtle: rgba(6, 182, 212, 0.12);
-  --accent-border: rgba(6, 182, 212, 0.35);
-  --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --accent-primary: #38bdf8;
+  --accent-secondary: #6366f1;
+  --accent-glow: rgba(56, 189, 248, 0.25);
+  --accent-subtle: rgba(56, 189, 248, 0.08);
+  --accent-border: rgba(56, 189, 248, 0.35);
 }
 
 @theme {
-  --font-display: 'Outfit', sans-serif;
-  --font-serif: 'Outfit', sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --font-serif: 'Syne', sans-serif;
+  --font-accent: 'Bricolage Grotesque', sans-serif;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Midnight Obsidian Palette */
-  --color-paper: #080a11;
-  --color-paper-subtle: #0d101c;
-  --color-card: #111422;
-  --color-card-hover: #171c2e;
+  /* Architectural Pitch & Dark Surface Tokens */
+  --color-paper: #08090c;
+  --color-paper-subtle: #0d0f15;
+  --color-card: #0e1118;
+  --color-card-hover: #131722;
 
-  --color-ink: #f8fafc;
-  --color-body: #94a3b8;
-  --color-soft: #64748b;
-  --color-muted: #475569;
+  --color-ink: #f4f5f7;
+  --color-body: #9ca3af;
+  --color-soft: #6b7280;
+  --color-muted: #4b5563;
 
   --color-accent: var(--accent-primary);
   --color-accent-strong: var(--accent-secondary);
   --color-accent-subtle: var(--accent-subtle);
 
   --color-line: rgba(255, 255, 255, 0.08);
-  --color-edge: rgba(255, 255, 255, 0.12);
-  --color-hairline: rgba(255, 255, 255, 0.05);
-  --color-tint: rgba(255, 255, 255, 0.04);
+  --color-edge: rgba(255, 255, 255, 0.14);
+  --color-hairline: rgba(255, 255, 255, 0.04);
+  --color-tint: rgba(255, 255, 255, 0.03);
   --color-sand: rgba(255, 255, 255, 0.06);
-  --color-wash: rgba(255, 255, 255, 0.03);
+  --color-wash: rgba(255, 255, 255, 0.02);
   --color-clay: rgba(255, 255, 255, 0.2);
 
-  --color-footer: #05060a;
+  --color-footer: #040507;
   --color-footer-line: rgba(255, 255, 255, 0.08);
-  --color-footer-link: #94a3b8;
+  --color-footer-link: #9ca3af;
 
   --color-linkedin: #0a66c2;
   --color-linkedin-strong: #084e96;
 }
 
-/* Subtle modern grid overlay */
-@utility bg-grid {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 36px 36px;
+/* Architectural technical grid (48px precision grid) */
+@utility bg-arch-grid {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
+/* Subtle dot matrix */
 @utility bg-dots {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* Glassmorphic card styling with border highlight */
-@utility glass-card {
-  background-color: rgba(17, 20, 34, 0.7);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Anti-Slop Architectural Button */
+@utility btn-bracket {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0e1118;
+  color: #f4f5f7;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  cursor: pointer;
 }
 
-@utility glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* Architectural Card */
+@utility card-architectural {
+  background-color: #0e1118;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Lenis smooth scrolling integration */
@@ -115,39 +132,10 @@ html.lenis body {
     outline-offset: 3px;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2, h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
   }
-}
-
-/* Glow gradient animations */
-@keyframes pulse-slow {
-  0%, 100% {
-    transform: scale(1) translate(0px, 0px);
-    opacity: 0.45;
-  }
-  50% {
-    transform: scale(1.1) translate(20px, -20px);
-    opacity: 0.65;
-  }
-}
-
-@keyframes float-gentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 12s ease-in-out infinite;
-}
-
-.animate-float-gentle {
-  animation: float-gentle 6s ease-in-out infinite;
 }
 
 /* Accessible reduced motion */

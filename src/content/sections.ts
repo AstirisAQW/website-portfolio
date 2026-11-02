@@ -15,13 +15,13 @@ export interface SectionInfo {
   icon: IconComponent
 }
 
-/** Single source of truth for the portfolio sections */
+/** Single source of truth for portfolio section structure */
 export const SECTIONS = [
-  { id: 'about', label: 'about', number: '01', tagline: 'Profile & Overview', icon: UserIcon },
-  { id: 'spectrum', label: 'spectrum', number: '02', tagline: 'Architecture Spectrum', icon: CpuIcon },
-  { id: 'projects', label: 'projects', number: '03', tagline: 'Curated Work', icon: CodeIcon },
-  { id: 'credentials', label: 'credentials', number: '04', tagline: 'Honors & Education', icon: AwardIcon },
-  { id: 'resume', label: 'resume', number: '05', tagline: 'Curriculum Vitae', icon: FileTextIcon },
+  { id: 'about', label: 'ABOUT', number: '01', tagline: 'Profile & Manifesto', icon: UserIcon },
+  { id: 'projects', label: 'WORKS', number: '02', tagline: 'Selected Works', icon: CodeIcon },
+  { id: 'spectrum', label: 'SPECTRUM', number: '03', tagline: 'Architecture Matrix', icon: CpuIcon },
+  { id: 'credentials', label: 'CREDENTIALS', number: '04', tagline: 'Academic Accolades', icon: AwardIcon },
+  { id: 'resume', label: 'DOSSIER', number: '05', tagline: 'Curriculum Vitae', icon: FileTextIcon },
 ] as const satisfies readonly SectionInfo[]
 
 export type SectionId = (typeof SECTIONS)[number]['id']

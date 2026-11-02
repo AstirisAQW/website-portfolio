@@ -1,11 +1,11 @@
-import { ArrowUpIcon, GithubIcon, LinkedinIcon, TerminalIcon } from './Icons'
+import { ArrowUpIcon, GithubIcon, LinkedinIcon } from './Icons'
 import { SECTIONS, type SectionId } from '../content/sections'
 import { SITE } from '../content/site'
 import { smoothScrollTo } from '../utils/lenis'
 
 export function Footer() {
   const handleNavClick = (sectionId: SectionId) => {
-    smoothScrollTo(`#${sectionId}`, -68)
+    smoothScrollTo(`#${sectionId}`, -72)
   }
 
   const handleScrollToTop = () => {
@@ -13,64 +13,66 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-[#05060a] text-soft border-line relative z-10 border-t px-4 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl space-y-10">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
-          {/* Developer identity & Terminal line */}
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 font-mono text-xs text-[var(--accent-primary)]">
-              <TerminalIcon className="h-4 w-4" />
-              <span>joseph@ustp:~$ echo "Thanks for visiting!"</span>
+    <footer className="bg-[#050608] text-white/60 border-t border-white/10 relative z-10 px-4 py-20 sm:px-6 lg:px-8 font-mono text-xs">
+      <div className="mx-auto max-w-7xl space-y-12">
+        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+          {/* Identity & Technical Footprint */}
+          <div className="space-y-3 max-w-lg">
+            <div className="flex items-center gap-2 text-[var(--accent-primary)] font-bold">
+              <span>// COLOPHON & RECORD SPECIFICATION</span>
             </div>
-            <h3 className="text-ink font-display text-2xl font-bold tracking-tight">
+            <h3 className="text-white font-display text-2xl font-black uppercase tracking-tight">
               {SITE.name}
             </h3>
-            <p className="font-sans text-xs text-soft max-w-md leading-relaxed">
-              Computer Science Graduate (Cum Laude, DOST Scholar) • University of Science and
-              Technology of Southern Philippines. Open to Software Engineering, Graph ML, and Systems roles.
+            <p className="font-sans text-xs text-white/60 leading-relaxed">
+              B.S. in Computer Science (Cum Laude, DOST-SEI JLSS Scholar) • University of
+              Science and Technology of Southern Philippines. Specializing in bare-metal MIPS
+              architecture, graph kinematic anomaly detection, and production distributed systems.
             </p>
           </div>
 
-          {/* Social links & Back to Top */}
-          <div className="flex items-center gap-3">
+          {/* Social Profiles & Back to Top */}
+          <div className="flex flex-wrap items-center gap-3">
             <a
               href={SITE.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="glass-card hover:border-[var(--accent-border)] hover:text-ink text-soft rounded-xl p-2.5 transition-all"
+              className="group flex items-center gap-2 border border-white/15 bg-white/[0.02] px-3.5 py-2 text-white/70 hover:border-white hover:text-white transition-all"
             >
-              <GithubIcon className="h-4 w-4" />
+              <GithubIcon className="h-3.5 w-3.5" />
+              <span>[GITHUB]</span>
             </a>
+
             <a
               href={SITE.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              className="glass-card hover:border-[var(--accent-border)] hover:text-ink text-soft rounded-xl p-2.5 transition-all"
+              className="group flex items-center gap-2 border border-white/15 bg-white/[0.02] px-3.5 py-2 text-white/70 hover:border-white hover:text-white transition-all"
             >
-              <LinkedinIcon className="h-4 w-4" />
+              <LinkedinIcon className="h-3.5 w-3.5" />
+              <span>[LINKEDIN]</span>
             </a>
+
             <button
               type="button"
               onClick={handleScrollToTop}
-              className="glass-card hover:border-[var(--accent-border)] hover:text-ink text-soft inline-flex items-center gap-2 rounded-xl px-3.5 py-2 font-mono text-xs transition-all cursor-pointer"
-              title="Return to top"
+              className="group flex items-center gap-2 border border-white/20 bg-white/[0.04] px-4 py-2 uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all cursor-pointer"
             >
-              <span>Back to Top</span>
-              <ArrowUpIcon className="h-3.5 w-3.5 text-[var(--accent-primary)]" />
+              <span>[TOP]</span>
+              <ArrowUpIcon className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" />
             </button>
           </div>
         </div>
 
-        {/* Divider & Technical colophon */}
-        <div className="border-line flex flex-col justify-between gap-4 border-t pt-8 font-mono text-xs md:flex-row md:items-center text-muted">
+        {/* Lower Divider & Navigation Links */}
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 text-[11px] text-white/40">
           <div>
-            {SITE.years} © {SITE.name} • Built with React 19, TypeScript, GSAP & Lenis
+            {SITE.years} © {SITE.name} • ENGINEERED WITH REACT 19, TS, GSAP & LENIS
           </div>
 
-          {/* Navigation Links */}
-          <nav aria-label="Footer Navigation" className="flex flex-wrap items-center gap-6">
+          <nav aria-label="Footer Nav" className="flex flex-wrap items-center gap-5 uppercase tracking-wider">
             {SECTIONS.map((item) => (
               <a
                 key={item.id}
@@ -79,9 +81,9 @@ export function Footer() {
                   e.preventDefault()
                   handleNavClick(item.id as SectionId)
                 }}
-                className="capitalize hover:text-ink transition-colors"
+                className="hover:text-white transition-colors"
               >
-                {item.label}
+                [{item.label}]
               </a>
             ))}
           </nav>

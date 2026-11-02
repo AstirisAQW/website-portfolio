@@ -1,130 +1,129 @@
-import type { ReactNode } from 'react'
 import { Picture } from './Picture'
 import { AwardIcon, CheckCircleIcon } from './Icons'
 import { CERTIFICATIONS, EDUCATION, HONORS } from '../content/profile'
 
-function CredentialBlock({
-  title,
-  subtitle,
-  children,
-  className = '',
-}: {
-  title: string
-  subtitle?: string
-  children: ReactNode
-  className?: string
-}) {
-  return (
-    <div className={`space-y-4 ${className}`}>
-      <div className="border-line/70 border-b pb-2 flex items-baseline justify-between">
-        <h3 className="text-ink font-display text-xl sm:text-2xl font-bold tracking-tight">{title}</h3>
-        {subtitle && <span className="text-muted font-mono text-xs">{subtitle}</span>}
-      </div>
-      <div>{children}</div>
-    </div>
-  )
-}
-
 export function EducationList() {
   return (
-    <CredentialBlock title="Education & Academic Background" subtitle="Tertiary Studies">
-      <div className="space-y-4">
+    <div className="border border-white/10 bg-[#0c0e14] p-6 sm:p-8">
+      <div className="border-b border-white/10 pb-3 mb-6 flex items-baseline justify-between font-mono text-xs">
+        <span className="text-[var(--accent-primary)] font-bold">[LEDGER: TERTIARY EDUCATION]</span>
+        <span className="text-white/40">2022 — 2026</span>
+      </div>
+
+      <div className="space-y-6">
         {EDUCATION.map((item) => (
-          <div
-            key={item.id}
-            className="glass-card hover:border-[var(--accent-border)] relative rounded-2xl border border-line p-6 transition-all duration-300 shadow-sm"
-          >
-            <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline">
-              <div>
-                <h4 className="text-ink font-display text-lg sm:text-xl font-bold">{item.degree}</h4>
-                <p className="text-soft font-sans text-sm mt-0.5">
-                  University of Science and Technology of Southern Philippines (USTP)
-                </p>
-              </div>
-              <span className="glass-card text-[var(--accent-primary)] border border-[var(--accent-border)] rounded-md px-3 py-1 font-mono text-xs font-semibold shrink-0">
-                Class of 2026
+          <div key={item.id} className="space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <h4 className="text-ink font-display text-xl sm:text-2xl font-bold tracking-tight">
+                {item.degree}
+              </h4>
+              <span className="font-mono text-xs uppercase text-white/70">
+                USTP // CLASS OF 2026
               </span>
             </div>
-            <p className="text-body font-sans text-sm mt-3 leading-relaxed">
-              Curriculum focused on algorithms, automata theory, computer architecture,
-              database management systems, software engineering, and graph machine learning research.
+
+            <p className="font-sans text-sm text-white/70 max-w-2xl leading-relaxed">
+              University of Science and Technology of Southern Philippines. Core specialization in
+              algorithm design, automata theory, computer architecture, dynamic graph machine
+              learning, and full-stack software engineering.
             </p>
+
+            <div className="pt-2 flex flex-wrap gap-2 font-mono text-xs text-white/60">
+              <span className="border border-white/10 bg-white/[0.02] px-2.5 py-1">
+                [DISTINCTION: CUM LAUDE]
+              </span>
+              <span className="border border-white/10 bg-white/[0.02] px-2.5 py-1">
+                [SCHOLARSHIP: DOST-SEI JLSS]
+              </span>
+              <span className="border border-white/10 bg-white/[0.02] px-2.5 py-1">
+                [DEAN'S LISTER: 2022–2026]
+              </span>
+            </div>
           </div>
         ))}
       </div>
-    </CredentialBlock>
+    </div>
   )
 }
 
 export function HonorsList() {
   return (
-    <CredentialBlock title="Academic Distinctions & Scholarships" subtitle="Merit & Recognition">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {HONORS.map((honor) => (
+    <div className="border border-white/10 bg-[#0c0e14] p-6 sm:p-8">
+      <div className="border-b border-white/10 pb-3 mb-6 flex items-baseline justify-between font-mono text-xs">
+        <span className="text-[var(--accent-primary)] font-bold">[LEDGER: ACADEMIC HONORS]</span>
+        <span className="text-white/40">VERIFIED MERIT</span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {HONORS.map((honor, index) => (
           <div
             key={honor.id}
-            className="glass-card hover:border-[var(--accent-border)] group flex flex-col justify-between rounded-2xl border border-line p-5 transition-all duration-300 shadow-sm hover:shadow-lg"
+            className="border border-white/10 bg-white/[0.02] p-5 space-y-3 hover:border-white/30 transition-colors"
           >
-            <div className="space-y-3">
-              <div className="flex items-center gap-2.5">
-                <span
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-line"
-                  style={{ backgroundColor: 'var(--accent-subtle)' }}
-                >
-                  <AwardIcon className="h-4 w-4 text-[var(--accent-primary)]" />
-                </span>
-                <span className="text-ink font-display text-base sm:text-lg font-bold group-hover:text-white transition-colors">
-                  {honor.title}
-                </span>
-              </div>
-              <p className="text-soft font-sans text-xs leading-relaxed">{honor.description}</p>
+            <div className="flex items-center justify-between font-mono text-xs text-white/40">
+              <span>[№ 0{index + 1}]</span>
+              <AwardIcon className="h-4 w-4 text-[var(--accent-primary)]" />
+            </div>
+
+            <div>
+              <h5 className="text-ink font-display text-lg font-bold">
+                {honor.title}
+              </h5>
+              <p className="font-mono text-xs text-soft mt-1">
+                {honor.description}
+              </p>
             </div>
           </div>
         ))}
       </div>
-    </CredentialBlock>
+    </div>
   )
 }
 
 export function CertificationsList() {
   return (
-    <CredentialBlock
-      title="Verified Industry Certifications"
-      subtitle="Industry Standard Protocols"
-    >
+    <div className="border border-white/10 bg-[#0c0e14] p-6 sm:p-8">
+      <div className="border-b border-white/10 pb-3 mb-6 flex items-baseline justify-between font-mono text-xs">
+        <span className="text-[var(--accent-primary)] font-bold">[LEDGER: VERIFIED CREDENTIALS]</span>
+        <span className="text-white/40">CISCO NETWORKING ACADEMY</span>
+      </div>
+
       <div className="space-y-4">
         {CERTIFICATIONS.map((cert) => (
           <div
             key={cert.id}
-            className="glass-card hover:border-[var(--accent-border)] flex flex-col items-start gap-5 rounded-2xl border border-line p-5 sm:flex-row sm:items-center sm:gap-6 transition-all duration-300 shadow-sm"
+            className="border border-white/10 bg-white/[0.02] p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6"
           >
-            <div className="border-line bg-paper-subtle/80 flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border p-2 shadow-inner">
+            <div className="border border-white/15 bg-black/60 h-20 w-20 shrink-0 p-2 flex items-center justify-center">
               <Picture
                 {...cert.image}
                 className="h-full w-full object-contain"
                 imgClassName="object-contain h-full w-full"
               />
             </div>
-            <div className="flex-1 space-y-1">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <h4 className="text-ink font-display text-lg font-bold">{cert.title}</h4>
-                <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 font-mono text-[11px] font-semibold">
+
+            <div className="flex-1 space-y-1.5">
+              <div className="flex flex-wrap items-center gap-3">
+                <h4 className="text-ink font-display text-xl font-bold">{cert.title}</h4>
+                <span className="border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-[11px] px-2 py-0.5 inline-flex items-center gap-1">
                   <CheckCircleIcon className="h-3 w-3" />
-                  <span>Verified Credential</span>
+                  <span>VERIFIED RECORD</span>
                 </span>
               </div>
-              <p className="text-soft font-mono text-xs">
-                Issued by <strong className="text-ink font-semibold">{cert.issuer}</strong> •{' '}
-                <span className="text-muted">{cert.date}</span>
+
+              <p className="font-mono text-xs text-soft">
+                ISSUER: {cert.issuer} • DATE: {cert.date}
               </p>
-              <p className="text-body font-sans text-xs leading-relaxed pt-1">
-                Foundational proficiency in IPv4/IPv6 network addressing, packet delivery, subnet
-                calculation, routing protocols, and endpoint device security configurations.
+
+              <p className="font-sans text-xs text-body leading-relaxed pt-1 max-w-2xl">
+                Verified foundational competence in network architecture, IPv4/IPv6 address
+                allocation, packet switching, routing protocols, subnetting, and endpoint hardware
+                security.
               </p>
             </div>
           </div>
         ))}
       </div>
-    </CredentialBlock>
+    </div>
   )
 }

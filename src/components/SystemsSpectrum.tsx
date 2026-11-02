@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import { ArrowUpRightIcon, CpuIcon, LayersIcon, SparklesIcon, TerminalIcon } from './Icons'
+import { ArrowUpRightIcon, CpuIcon, LayersIcon, SparklesIcon } from './Icons'
 import { Section } from './Section'
 import { SectionHeading } from './SectionHeading'
 import { smoothScrollTo } from '../utils/lenis'
 
 interface DomainInfo {
   id: string
+  codePrefix: string
   label: string
   shortTitle: string
   icon: typeof CpuIcon
   headline: string
   summary: string
+  mathFormula?: string
   snippet: {
     lang: string
     code: string
@@ -26,73 +28,87 @@ interface DomainInfo {
 const DOMAINS: DomainInfo[] = [
   {
     id: 'systems',
-    label: 'Systems & Architecture',
-    shortTitle: 'Systems',
+    codePrefix: 'SYS-01',
+    label: 'SYSTEMS & BARE-METAL ARCHITECTURE',
+    shortTitle: 'SYSTEMS',
     icon: CpuIcon,
-    headline: 'Low-Level Computer Architecture & Stack Allocation',
+    headline: 'Low-Level MIPS Assembly & Stack Allocation',
     summary:
-      'Direct control over registers, stack frame allocations, and recursion limits. Experienced in designing deterministic assembly routines and empirical algorithmic complexity benchmarks.',
+      'Direct manipulation of CPU registers, activation record stack frame management, and recursion optimization. Eliminates runtime garbage collection overhead through deterministic memory layouts.',
+    mathFormula: 'T(n) = O(V + E) • Stack Allocation: 8 Bytes per Frame ($ra, $s0)',
     snippet: {
-      lang: 'MIPS Assembly',
-      code: `# MIPS Register Allocation & Stack Frame
-addi $sp, $sp, -8       # allocate stack frame
-sw   $ra, 4($sp)        # preserve return address
-sw   $s0, 0($sp)        # save preserved register
-jal  evaluate_hand      # compute blackjack state
-lw   $s0, 0($sp)        # restore state
-addi $sp, $sp, 8        # collapse frame`,
+      lang: 'MIPS_ASSEMBLY.s',
+      code: `evaluate_hand:
+    addi $sp, $sp, -8       # allocate activation frame
+    sw   $ra, 4($sp)        # preserve return address
+    sw   $s0, 0($sp)        # preserve saved register $s0
+    move $s0, $a0           # cache card hand base pointer
+    jal  calculate_score    # compute blackjack score
+    lw   $s0, 0($sp)        # restore state
+    addi $sp, $sp, 8        # deallocate activation frame
+    jr   $ra                # return to caller`,
     },
-    technologies: ['MIPS Assembly', 'C / C++', 'Stack Frames', 'MARS Simulator', 'Algorithmic Complexity'],
+    technologies: ['MIPS Assembly', 'C / C++', 'Stack Frames', 'MARS Simulator', 'Computer Architecture'],
     featuredProject: {
       id: 'blackjack-in-mips',
       title: 'BlackJack in MIPS',
-      description: 'Single-player game engine written purely in MIPS assembly without external runtimes.',
+      description: 'Single-player blackjack engine engineered purely in bare-metal MIPS assembly without runtimes.',
     },
   },
   {
     id: 'ml',
-    label: 'Graph ML & Research',
-    shortTitle: 'Graph ML',
+    codePrefix: 'ML-02',
+    label: 'TEMPORAL GRAPH ML & KINEMATICS',
+    shortTitle: 'GRAPH ML',
     icon: SparklesIcon,
-    headline: 'Temporal Graph Kinematics & Anomaly Detection',
+    headline: 'Node Embedding Kinematics & Anomaly Detection',
     summary:
-      'Investigating anomaly detection on dynamic networks by modeling node embedding trajectories through kinematic equations of motion (velocity, acceleration, and spatial variance).',
+      'Modeling dynamic graph evolution by treating node embedding trajectories as physical kinematic systems. Computes instantaneous velocity and acceleration vectors to identify topological anomalies.',
+    mathFormula: 'v(t) = (z_t - z_{t-1}) / Δt • a(t) = (v_t - v_{t-1}) / Δt',
     snippet: {
-      lang: 'Python (PyTorch)',
-      code: `# Node Embedding Velocity & Acceleration
-velocity = embeddings[t] - embeddings[t - 1]
-acceleration = velocity[t] - velocity[t - 1]
-kinetic_energy = 0.5 * torch.norm(velocity, dim=-1)**2
-anomaly_score = compute_kinematic_deviance(acceleration)`,
+      lang: 'KINEMATIC_DYMON.py',
+      code: `def compute_embedding_kinematics(embeddings_t, embeddings_prev, dt=1.0):
+    # Velocity vector in embedding manifold
+    velocity = (embeddings_t - embeddings_prev) / dt
+    # Kinetic energy proxy based on velocity magnitude
+    kinetic_energy = 0.5 * torch.sum(velocity ** 2, dim=-1)
+    # Deviation from expected topological trajectory
+    anomaly_indices = torch.where(kinetic_energy > threshold)
+    return anomaly_indices, kinetic_energy`,
     },
-    technologies: ['PyTorch', 'NetworkX', 'Temporal Graphs', 'Node Embeddings', 'Pandas'],
+    technologies: ['PyTorch', 'NetworkX', 'Dynamic Graphs', 'Embedding Kinematics', 'Pandas'],
     featuredProject: {
       id: 'dymon',
       title: 'DyMoN',
-      description: 'Post-hoc anomaly detection module tracking embedding kinematics on temporal graphs.',
+      description: 'Post-hoc anomaly detection module for temporal graphs tracking node embedding kinematics.',
     },
   },
   {
     id: 'web',
-    label: 'Full-Stack & Interactive',
-    shortTitle: 'Full-Stack',
+    codePrefix: 'WEB-03',
+    label: 'DETERMINISTIC AUTOMATA & PLATFORMS',
+    shortTitle: 'FULL-STACK',
     icon: LayersIcon,
-    headline: 'Modern Web Architectures & Interactive Automata',
+    headline: 'Finite State Automata & Reactive Runtimes',
     summary:
-      'Developing responsive full-stack applications with strict TypeScript typing, relational database persistence, and browser-based automata simulations.',
+      'Building state machines with verifiable formal language transitions, interactive browser-based graph visualizations, and production relational schema architectures.',
+    mathFormula: 'M = (Q, Σ, δ, q0, F) • δ: Q × Σ → P(Q)',
     snippet: {
-      lang: 'TypeScript / React 19',
-      code: `// Deterministic State Transition & Supabase Schema
-export function transition(current: State, input: Symbol): State {
-  const next = deltaMatrix[current.id]?.[input]
-  return next ? validateState(next) : State.TRAP
+      lang: 'AUTOMATA_ENGINE.ts',
+      code: `export function transition(current: State, symbol: Symbol): State[] {
+    const nextStates = transitionMatrix[current.id]?.[symbol]
+    if (!nextStates || nextStates.length === 0) {
+        return [State.DEAD]
+    }
+    // Epsilon closure computation for non-deterministic automata
+    return computeEpsilonClosure(nextStates)
 }`,
     },
     technologies: ['React 19', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Vis.js'],
     featuredProject: {
-      id: 'edelweiss-e-commerce',
-      title: 'Edelweiss E-commerce',
-      description: 'Full-stack storefront with authentication and relational data models on Supabase.',
+      id: 'dfa-nfa-simulator',
+      title: 'DFA-NFA Simulator',
+      description: 'Interactive browser-based finite automaton simulator using vanilla JS and Vis.js.',
     },
   },
 ]
@@ -100,36 +116,37 @@ export function transition(current: State, input: Symbol): State {
 export function SystemsSpectrum() {
   const [activeTab, setActiveTab] = useState(0)
   const current = DOMAINS[activeTab]
-  const Icon = current.icon
 
   return (
-    <Section id="spectrum" className="py-24">
+    <Section id="spectrum" className="py-28">
       <SectionHeading
-        number="02"
-        title="Interactive Engineering Spectrum"
-        subtitle="Exploring the computational continuum: from bare-metal register allocation to dynamic graph ML and reactive web architectures."
+        number="03"
+        title="Architecture Matrix & Disciplines"
+        subtitle="Deconstructing core technical competencies: from bare-metal instruction sets to kinematic graph neural algorithms and deterministic state engines."
       />
 
-      <div className="glass-card mt-10 overflow-hidden rounded-2xl border border-line shadow-2xl">
-        {/* Top Control Bar with Terminal Window Controls */}
-        <div className="border-line bg-paper-subtle/80 flex items-center justify-between border-b px-5 py-3.5">
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-red-500/80 inline-block" />
-            <span className="h-3 w-3 rounded-full bg-yellow-500/80 inline-block" />
-            <span className="h-3 w-3 rounded-full bg-emerald-500/80 inline-block" />
-            <span className="font-mono text-xs text-soft ml-3 hidden sm:inline flex items-center gap-1.5">
-              <TerminalIcon className="h-3.5 w-3.5 text-[var(--accent-primary)]" />
-              <span>spectrum_inspector.sh</span>
+      <div className="card-architectural mt-12 border border-white/10 shadow-2xl">
+        {/* Technical Top Header Bar */}
+        <div className="border-b border-white/10 bg-white/[0.02] px-6 py-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+          <div className="flex items-center gap-3">
+            <span className="text-[var(--accent-primary)] font-bold">
+              [{current.codePrefix}]
+            </span>
+            <span className="text-white/30">|</span>
+            <span className="text-white font-semibold tracking-wider">
+              PARADIGM MATRIX // SPECIFICATION SHEET
             </span>
           </div>
 
-          <span className="font-mono text-[11px] text-muted">
-            Architecture Matrix // Tab {activeTab + 1} of {DOMAINS.length}
-          </span>
+          <div className="flex items-center gap-3 text-soft text-[11px]">
+            <span>PRECISION: DETERMINISTIC</span>
+            <span className="text-white/20">•</span>
+            <span>SPEC: REVISION 2026.1</span>
+          </div>
         </div>
 
-        {/* Spectrum Mode Tabs */}
-        <div className="border-line grid grid-cols-3 border-b bg-paper-subtle/40">
+        {/* Paradigm Tab Switcher (Architectural Inverted Tabs) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10 bg-black/40">
           {DOMAINS.map((domain, index) => {
             const isSelected = activeTab === index
             return (
@@ -137,96 +154,103 @@ export function SystemsSpectrum() {
                 key={domain.id}
                 type="button"
                 onClick={() => setActiveTab(index)}
-                className={`relative flex items-center justify-center gap-2 px-3 py-4 font-mono text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`flex items-center justify-between p-4 sm:p-5 font-mono text-xs uppercase tracking-wider text-left transition-all border-b md:border-b-0 md:border-r border-white/10 last:border-r-0 cursor-pointer ${
                   isSelected
-                    ? 'text-ink bg-card/60 shadow-inner'
-                    : 'text-soft hover:text-ink hover:bg-tint'
+                    ? 'bg-white text-black font-bold'
+                    : 'text-white/60 hover:text-white hover:bg-white/[0.03]'
                 }`}
               >
-                <span className="hidden sm:inline">{domain.label}</span>
-                <span className="sm:hidden">{domain.shortTitle}</span>
-                {isSelected && (
-                  <span
-                    className="absolute bottom-0 left-0 right-0 h-[2px] transition-all"
-                    style={{
-                      backgroundColor: 'var(--accent-primary)',
-                      boxShadow: '0 0 10px var(--accent-primary)',
-                    }}
-                  />
-                )}
+                <span>{domain.label}</span>
+                <span className={`text-[10px] ${isSelected ? 'text-black/60' : 'text-white/30'}`}>
+                  0{index + 1}
+                </span>
               </button>
             )
           })}
         </div>
 
-        {/* Tab Content & Code Sandbox */}
-        <div className="p-6 sm:p-8 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            {/* Left: Domain Deep-Dive */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line"
-                  style={{ backgroundColor: 'var(--accent-subtle)' }}
-                >
-                  <Icon className="h-5 w-5 text-[var(--accent-primary)]" />
+        {/* Tab Content & Blueprint Code Grid */}
+        <div className="p-6 sm:p-8 lg:p-10 space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Left: Domain Analysis */}
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <div className="font-mono text-xs text-[var(--accent-primary)]">
+                  // {current.codePrefix} DEFINITION
                 </div>
-                <div>
-                  <h3 className="text-ink font-display text-xl sm:text-2xl font-bold">
-                    {current.headline}
-                  </h3>
-                </div>
+                <h3 className="text-ink font-display text-2xl sm:text-3xl font-bold tracking-tight">
+                  {current.headline}
+                </h3>
               </div>
 
               <p className="text-body font-sans text-sm sm:text-base leading-relaxed">
                 {current.summary}
               </p>
 
-              {/* Technologies Pills */}
-              <div className="space-y-2 pt-2">
-                <span className="text-muted font-mono text-xs uppercase tracking-wider block">
-                  Core Technologies & Concepts
+              {/* Mathematical Formula Callout */}
+              {current.mathFormula && (
+                <div className="border border-white/10 bg-white/[0.02] p-4 font-mono text-xs space-y-1">
+                  <span className="text-[10px] uppercase tracking-widest text-white/40 block">
+                    GOVERNING MODEL / COMPLEXITY
+                  </span>
+                  <div className="text-[var(--accent-primary)] font-medium pt-0.5">
+                    {current.mathFormula}
+                  </div>
+                </div>
+              )}
+
+              {/* Technologies Array */}
+              <div className="space-y-2">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-white/40 block">
+                  TECHNICAL COMPETENCIES
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {current.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="glass-card hover:border-[var(--accent-border)] text-ink rounded-md px-2.5 py-1 font-mono text-xs transition-colors"
+                      className="border border-white/10 bg-white/[0.02] px-2.5 py-1 font-mono text-xs text-white/80"
                     >
-                      {tech}
+                      [{tech}]
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Featured Project Link */}
-              <div className="border-line bg-paper-subtle/50 mt-4 flex flex-col justify-between gap-3 rounded-xl border p-4 sm:flex-row sm:items-center">
+              {/* Representative Project Jump Action */}
+              <div className="border border-white/10 bg-white/[0.02] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-0.5">
-                  <span className="text-[var(--accent-primary)] font-mono text-[10px] uppercase tracking-wider font-semibold">
-                    Representative Artifact
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--accent-primary)]">
+                    CONNECTED REPOSITORY
                   </span>
-                  <p className="text-ink font-display text-sm font-bold">{current.featuredProject.title}</p>
-                  <p className="text-soft font-sans text-xs">{current.featuredProject.description}</p>
+                  <p className="font-display text-sm font-bold text-white">
+                    {current.featuredProject.title}
+                  </p>
+                  <p className="font-sans text-xs text-soft max-w-sm">
+                    {current.featuredProject.description}
+                  </p>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => smoothScrollTo('#projects')}
-                  className="border border-[var(--accent-border)] hover:bg-[var(--accent-primary)] hover:text-white text-[var(--accent-primary)] inline-flex items-center gap-1.5 self-start rounded-lg px-3 py-1.5 font-mono text-xs font-semibold transition-all sm:self-center shrink-0 cursor-pointer"
+                  className="group inline-flex items-center gap-1.5 border border-white/30 bg-white/[0.05] px-4 py-2 font-mono text-xs uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all shrink-0 cursor-pointer"
                 >
-                  <span>Jump to Project</span>
-                  <ArrowUpRightIcon className="h-3 w-3" />
+                  <span>[ VIEW WORK ]</span>
+                  <ArrowUpRightIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </button>
               </div>
             </div>
 
-            {/* Right: Real Code / Architecture Snippet */}
-            <div className="border-line bg-[#05070c] rounded-xl border overflow-hidden shadow-inner">
-              <div className="border-line bg-[#090b14] flex items-center justify-between border-b px-4 py-2 font-mono text-xs text-soft">
-                <span>{current.snippet.lang}</span>
-                <span className="text-[10px] text-muted">UTF-8 // Readonly</span>
+            {/* Right: Real Code Implementation Frame */}
+            <div className="border border-white/15 bg-[#050609] overflow-hidden shadow-2xl">
+              <div className="border-b border-white/10 bg-[#090b10] px-4 py-2.5 flex items-center justify-between font-mono text-xs text-soft">
+                <div className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 bg-[var(--accent-primary)]" />
+                  <span className="text-white font-medium">{current.snippet.lang}</span>
+                </div>
+                <span className="text-[10px] text-white/30">READONLY // ARCHIVE</span>
               </div>
-              <pre className="p-4 overflow-x-auto font-mono text-xs text-emerald-400/90 leading-relaxed">
+              <pre className="p-5 overflow-x-auto font-mono text-xs text-emerald-400/90 leading-relaxed">
                 <code>{current.snippet.code}</code>
               </pre>
             </div>

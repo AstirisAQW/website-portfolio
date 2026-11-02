@@ -40,60 +40,44 @@ export function Navbar({ activeSection }: NavbarProps) {
 
   const handleNavClick = (sectionId: SectionId) => {
     setMenuOpen(false)
-    smoothScrollTo(`#${sectionId}`, -68)
+    smoothScrollTo(`#${sectionId}`, -72)
   }
 
   return (
     <header
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#080a11]/85 border-line border-b shadow-lg backdrop-blur-md'
-          : 'bg-transparent border-transparent border-b'
+          ? 'bg-[#08090c]/90 border-b border-white/10 shadow-2xl backdrop-blur-md'
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
-      {/* Scroll Progress Bar at the top edge */}
+      {/* Scroll Depth Line at the top edge */}
       <div
-        className="absolute top-0 left-0 h-[2.5px] transition-all duration-75 ease-out"
+        className="absolute top-0 left-0 h-[2px] transition-all duration-75 ease-out"
         style={{
           width: `${scrollProgress}%`,
-          background: 'var(--accent-gradient, var(--accent-primary))',
-          boxShadow: '0 0 10px var(--accent-glow)',
+          backgroundColor: 'var(--accent-primary)',
         }}
         aria-hidden="true"
       />
 
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        {/* Brand & Terminal Wordmark */}
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Brand Identification */}
         <a
           href="#about"
           onClick={(e) => {
             e.preventDefault()
             handleNavClick('about')
           }}
-          className="group flex items-center gap-3 cursor-pointer"
+          className="group flex items-center gap-2 cursor-pointer font-mono text-xs uppercase tracking-wider"
         >
-          <div className="flex items-center gap-2">
-            <span
-              className="h-2 w-2 rounded-full animate-pulse"
-              style={{
-                backgroundColor: 'var(--accent-primary)',
-                boxShadow: '0 0 8px var(--accent-primary)',
-              }}
-            />
-            <span className="text-ink group-hover:text-[var(--accent-primary)] font-display text-lg font-bold tracking-tight transition-colors">
-              {SITE.name}
-            </span>
-          </div>
-          <span className="border-line bg-sand/60 text-soft hidden items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-[10px] md:inline-flex">
-            <span>CS '26</span>
-            <span className="text-muted">•</span>
-            <span className="text-emerald-400">Available</span>
-          </span>
+          <span className="text-[var(--accent-primary)] font-bold">[{SITE.name}]</span>
+          <span className="text-white/30 hidden sm:inline">// CS '26</span>
         </a>
 
-        {/* Desktop Navigation & Actions */}
-        <div className="hidden items-center gap-6 md:flex">
-          <nav aria-label="Main" className="flex items-center gap-6">
+        {/* Desktop Navigation Links & Presets */}
+        <div className="hidden items-center gap-6 md:flex font-mono text-xs">
+          <nav aria-label="Main Navigation" className="flex items-center gap-5">
             {SECTIONS.map((item) => {
               const isActive = activeSection === item.id
               return (
@@ -105,19 +89,18 @@ export function Navbar({ activeSection }: NavbarProps) {
                     handleNavClick(item.id as SectionId)
                   }}
                   aria-current={isActive ? 'location' : undefined}
-                  className={`relative py-1 font-mono text-xs uppercase tracking-wider transition-colors ${
-                    isActive ? 'text-ink font-semibold' : 'text-soft hover:text-ink'
+                  className={`relative py-1 transition-colors uppercase tracking-wider ${
+                    isActive
+                      ? 'text-white font-bold'
+                      : 'text-white/50 hover:text-white'
                   }`}
                 >
-                  <span className="text-[10px] opacity-40 mr-1">{item.number}</span>
-                  <span>{item.label}</span>
+                  <span className="text-[10px] text-white/30 mr-1.5">{item.number}</span>
+                  <span>[{item.label}]</span>
                   {isActive && (
                     <span
-                      className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full transition-all"
-                      style={{
-                        backgroundColor: 'var(--accent-primary)',
-                        boxShadow: '0 0 8px var(--accent-primary)',
-                      }}
+                      className="absolute -bottom-1 left-0 right-0 h-[1.5px]"
+                      style={{ backgroundColor: 'var(--accent-primary)' }}
                     />
                   )}
                 </a>
@@ -125,32 +108,32 @@ export function Navbar({ activeSection }: NavbarProps) {
             })}
           </nav>
 
-          <div className="h-4 w-px bg-line" />
+          <div className="h-4 w-px bg-white/10" />
 
-          {/* Theme Palette Switcher */}
+          {/* Palette Selector */}
           <PaletteSwitcher />
 
-          {/* Resume Download Action */}
+          {/* CV Action */}
           <a
             href={SITE.resumeUrl}
             download
-            className="border-line glass-card hover:border-[var(--accent-border)] hover:text-ink text-soft inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-medium transition-all shadow-2xs"
+            className="group flex items-center gap-1.5 border border-white/20 bg-white/[0.04] px-3.5 py-1.5 font-mono text-xs uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all"
           >
-            <DownloadIcon className="h-3.5 w-3.5 text-[var(--accent-primary)]" />
-            <span>CV</span>
+            <DownloadIcon className="h-3 w-3" />
+            <span>[GET CV]</span>
           </a>
         </div>
 
-        {/* Mobile controls: Palette Switcher & Hamburger */}
+        {/* Mobile controls */}
         <div className="flex items-center gap-2 md:hidden">
           <PaletteSwitcher />
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
-            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
             aria-expanded={menuOpen}
             aria-controls={menuOpen ? 'mobile-menu' : undefined}
-            className="border-line glass-card text-ink rounded-lg p-2 transition-colors"
+            className="border border-white/15 bg-white/[0.03] text-white p-2"
           >
             {menuOpen ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
@@ -162,43 +145,45 @@ export function Navbar({ activeSection }: NavbarProps) {
         <nav
           id="mobile-menu"
           aria-label="Mobile Navigation"
-          className="bg-paper/95 border-line space-y-1.5 border-b px-4 pt-3 pb-5 shadow-2xl backdrop-blur-xl md:hidden animate-fade-in"
+          className="border-b border-white/10 bg-[#0c0e14] px-5 pt-4 pb-6 shadow-2xl md:hidden font-mono text-xs"
         >
-          {SECTIONS.map((item) => {
-            const Icon = item.icon
-            const isActive = activeSection === item.id
-            return (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavClick(item.id as SectionId)
-                }}
-                aria-current={isActive ? 'location' : undefined}
-                className={`flex w-full items-center justify-between rounded-lg px-3.5 py-2.5 font-mono text-xs uppercase tracking-wider transition-colors ${
-                  isActive
-                    ? 'bg-sand text-ink font-bold border border-line'
-                    : 'text-body hover:bg-tint'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Icon className="h-4 w-4 text-[var(--accent-primary)]" />
-                  <span>{item.label}</span>
-                </div>
-                <span className="text-[10px] text-muted">{item.number}</span>
-              </a>
-            )
-          })}
+          <div className="space-y-1">
+            {SECTIONS.map((item) => {
+              const Icon = item.icon
+              const isActive = activeSection === item.id
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavClick(item.id as SectionId)
+                  }}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={`flex w-full items-center justify-between p-3 uppercase tracking-wider transition-colors ${
+                    isActive
+                      ? 'border border-white bg-white text-black font-bold'
+                      : 'text-white/70 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-4 w-4" />
+                    <span>[{item.label}]</span>
+                  </div>
+                  <span className="text-[10px] text-white/40">{item.number}</span>
+                </a>
+              )
+            })}
+          </div>
 
-          <div className="pt-2">
+          <div className="pt-4 border-t border-white/10 mt-3">
             <a
               href={SITE.resumeUrl}
               download
-              className="border-line glass-card hover:border-[var(--accent-border)] flex w-full items-center justify-center gap-2 rounded-lg py-2.5 font-mono text-xs text-ink transition-colors"
+              className="flex w-full items-center justify-center gap-2 border border-white bg-white p-3 font-mono text-xs uppercase tracking-wider font-bold text-black"
             >
-              <DownloadIcon className="h-3.5 w-3.5 text-[var(--accent-primary)]" />
-              <span>Download Official Resume</span>
+              <DownloadIcon className="h-3.5 w-3.5" />
+              <span>[DOWNLOAD RESUME PDF]</span>
             </a>
           </div>
         </nav>

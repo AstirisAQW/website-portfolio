@@ -15,7 +15,7 @@ export function CredentialsSection() {
       return
     }
 
-    const blocks = containerRef.current?.querySelectorAll('.credential-card')
+    const blocks = containerRef.current?.querySelectorAll('.credential-record')
     if (!blocks || blocks.length === 0) return
 
     const ctx = gsap.context(() => {
@@ -37,25 +37,24 @@ export function CredentialsSection() {
   }, [])
 
   return (
-    <Section id="credentials" className="py-24">
+    <Section id="credentials" className="py-28">
       <SectionHeading
         number="04"
-        title="Academic Honors & Credentials"
-        subtitle="Scholarships, collegiate accolades from USTP, and verified industry networking certifications."
+        title="Institutional Records & Accolades"
+        subtitle="Formal tertiary graduation credentials from the University of Science and Technology of Southern Philippines, collegiate honors, and Cisco certifications."
       />
 
-      <div ref={containerRef} className="mt-12 space-y-12">
-        <div className="credential-card">
+      <div ref={containerRef} className="mt-12 space-y-8">
+        <div className="credential-record">
           <EducationList />
         </div>
-        <div className="credential-card">
+        <div className="credential-record">
           <HonorsList />
         </div>
-        <div className="credential-card">
+        <div className="credential-record">
           <CertificationsList />
         </div>
       </div>
     </Section>
   )
 }
-
