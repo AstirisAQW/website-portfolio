@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { Footer } from './components/Footer'
 import { Navbar } from './components/Navbar'
 import { SECTION_IDS } from './content/sections'
@@ -17,15 +18,13 @@ gsap.registerPlugin(ScrollTrigger)
 export default function App() {
   const activeSection = useActiveSection(SECTION_IDS)
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const appRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    // Initialize Lenis smooth scroll and synchronize with GSAP ScrollTrigger
-    const lenis = initSmoothScroll()
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
 
-    // Reusable, calm scroll-reveal pattern across sections
-    let ctx: gsap.Context | undefined
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      ctx = gsap.context(() => {
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
         gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
           gsap.from(el, {
             y: 24,
@@ -34,32 +33,48 @@ export default function App() {
             ease: 'power3.out',
             scrollTrigger: {
               trigger: el,
-              start: 'top 85%',
+              start: 'top 86%',
             },
           })
         })
       })
-    }
+    },
+    { scope: appRef }
+  )
+
+  useEffect(() => {
+    const lenis = initSmoothScroll()
 
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400)
     }
 
+    const handleLoad = () => {
+      ScrollTrigger.refresh()
+    }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('load', handleLoad)
+    document.fonts?.ready.then(() => {
+      ScrollTrigger.refresh()
+    })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      ctx?.revert()
+      window.removeEventListener('load', handleLoad)
       lenis?.destroy()
     }
   }, [])
 
   return (
-    <div className="bg-paper text-ink selection:bg-accent selection:text-paper relative min-h-screen font-sans antialiased">
-      {/* Clean, Fixed Editorial Header */}
+    <div
+      ref={appRef}
+      className="bg-paper text-ink selection:bg-accent selection:text-paper relative min-h-screen font-sans antialiased"
+    >
+      {/* Fixed Solid Dark Editorial Header */}
       <Navbar activeSection={activeSection} />
 
-      {/* Main Progression: Hero → Projects → Skills → Credentials+Resume */}
+      {/* Main Progression: Hero → Projects (Dark Inverted) → Skills → Credentials+Resume */}
       <main className="relative z-10">
         <AboutSection />
         <ProjectsSection />
@@ -70,13 +85,13 @@ export default function App() {
       {/* Footer & Contact */}
       <Footer />
 
-      {/* Subtle Floating Back-to-Top Button */}
+      {/* Floating Back-to-Top Button */}
       {showScrollTop && (
         <button
           type="button"
           onClick={() => smoothScrollTo('body', 0)}
           aria-label="Scroll back to top"
-          className="fixed right-6 bottom-6 z-40 flex h-10 w-10 items-center justify-center rounded-sm border border-line bg-card text-soft hover:text-ink hover:border-edge transition-colors cursor-pointer shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)] hover:bg-card-hover"
+          className="fixed right-6 bottom-6 z-40 flex h-11 w-11 items-center justify-center rounded-sm border border-edge bg-card text-ink hover:text-accent hover:border-accent transition-colors cursor-pointer shadow-[0_4px_16px_rgba(24,26,29,0.12)] hover:bg-card-hover"
         >
           <ArrowUpIcon className="h-4 w-4" />
         </button>

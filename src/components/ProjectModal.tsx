@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { ArrowUpRightIcon, CloseIcon, GithubIcon } from './Icons'
 import { Picture } from './Picture'
 import type { Project } from '../types/project'
+import { getLenis } from '../utils/lenis'
+import { useMagnetic } from '../hooks/useMagnetic'
 
 interface ProjectModalProps {
   project: Project | null
@@ -9,18 +11,25 @@ interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const githubBtnRef = useRef<HTMLAnchorElement>(null)
+  useMagnetic(githubBtnRef, 0.25)
+
   useEffect(() => {
     if (!project) return
+
+    const lenis = getLenis()
+    lenis?.stop()
+    document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
 
-    document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
       document.body.style.overflow = ''
+      lenis?.start()
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [project, onClose])
@@ -36,21 +45,24 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[rgba(35,38,43,0.6)] backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-stage/75 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Modal Dialog */}
-      <div className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-sm border border-line bg-card p-6 sm:p-10 shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)]">
+      {/* Scrollable Modal Dialog with data-lenis-prevent */}
+      <div
+        data-lenis-prevent
+        className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-sm border border-edge bg-card p-6 sm:p-10 text-ink shadow-[0_16px_48px_rgba(24,26,29,0.28)]"
+      >
         {/* Header */}
         <div className="border-b border-line pb-5 flex items-start justify-between gap-4">
           <div>
-            <h3 id="modal-title" className="text-ink font-display text-2xl sm:text-3xl font-bold">
+            <h3 id="modal-title" className="text-ink font-display text-3xl sm:text-4xl leading-tight">
               {project.title}
             </h3>
             {project.subtitle && (
-              <p className="text-[var(--accent-primary)] text-sm font-medium mt-1">
+              <p className="text-accent text-sm sm:text-base font-medium mt-1">
                 {project.subtitle}
               </p>
             )}
@@ -77,7 +89,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* Technical Specs & Description */}
         <div className="space-y-6">
-          <p className="text-body text-sm sm:text-base leading-[1.6] max-w-[65ch]">
+          <p className="text-body text-sm sm:text-base leading-[1.65] max-w-[65ch]">
             {project.description}
           </p>
 
@@ -86,7 +98,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-sm border border-line bg-paper px-2.5 py-1 text-xs text-body"
+                className="font-mono rounded-sm border border-line bg-paper px-2.5 py-1 text-xs text-body"
               >
                 {tag}
               </span>
@@ -94,12 +106,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Modal Actions */}
-          <div className="border-t border-line pt-6 flex flex-wrap items-center justify-between gap-4 text-xs">
+          <div className="border-t border-line pt-6 flex flex-wrap items-center justify-between gap-4">
             <a
+              ref={githubBtnRef}
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-sm bg-ink px-5 py-2.5 text-xs font-medium text-paper hover:bg-ink/90 transition-colors"
+              className="inline-flex items-center gap-2 rounded-sm bg-accent px-6 py-3 text-sm font-medium text-paper hover:bg-accent-hover transition-colors will-change-transform"
             >
               <GithubIcon className="h-4 w-4" />
               <span>View Source on GitHub</span>
@@ -109,7 +122,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="text-soft hover:text-ink transition-colors cursor-pointer text-xs"
+              className="text-soft hover:text-ink transition-colors cursor-pointer text-sm font-medium px-3 py-2"
             >
               Close
             </button>

@@ -27,7 +27,7 @@ export function Navbar({ activeSection }: NavbarProps) {
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 bg-nav border-b border-nav-muted/20 text-nav-ink">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-10 lg:px-16">
         {/* Brand Name */}
         <a
           href="#about"
@@ -35,7 +35,7 @@ export function Navbar({ activeSection }: NavbarProps) {
             e.preventDefault()
             handleNavClick('about')
           }}
-          className="text-nav-ink font-medium text-sm tracking-tight hover:text-nav-accent transition-colors"
+          className="text-nav-ink font-display text-2xl tracking-tight hover:text-nav-accent transition-colors"
         >
           {SITE.name}
         </a>
@@ -69,7 +69,7 @@ export function Navbar({ activeSection }: NavbarProps) {
           <a
             href={SITE.resumeUrl}
             download
-            className="text-xs font-medium text-nav-ink border border-nav-ink hover:bg-nav-ink hover:text-nav px-3.5 py-1.5 rounded-sm transition-colors"
+            className="text-sm font-medium text-nav-ink border border-nav-ink hover:bg-nav-ink hover:text-nav px-4 py-1.5 rounded-sm transition-colors"
           >
             Resume
           </a>
@@ -123,7 +123,7 @@ export function Navbar({ activeSection }: NavbarProps) {
             <a
               href={SITE.resumeUrl}
               download
-              className="block text-center rounded-sm border border-nav-ink px-4 py-2.5 text-xs font-medium text-nav-ink hover:bg-nav-ink hover:text-nav transition-colors"
+              className="block text-center rounded-sm border border-nav-ink px-4 py-2.5 text-sm font-medium text-nav-ink hover:bg-nav-ink hover:text-nav transition-colors"
             >
               Download Resume
             </a>

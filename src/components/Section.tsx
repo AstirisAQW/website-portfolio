@@ -4,13 +4,16 @@ import type { SectionId } from '../content/sections'
 interface SectionProps {
   id: SectionId
   className?: string
+  wrapperClassName?: string
   children: ReactNode
 }
 
-export function Section({ id, className = '', children }: SectionProps) {
+export function Section({ id, className = '', wrapperClassName = '', children }: SectionProps) {
   return (
-    <section id={id} className={`relative mx-auto max-w-6xl px-6 sm:px-8 lg:px-12 ${className}`}>
-      {children}
+    <section id={id} className={`relative w-full ${wrapperClassName}`}>
+      <div className={`relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 ${className}`}>
+        {children}
+      </div>
     </section>
   )
 }
