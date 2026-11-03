@@ -8,7 +8,7 @@ export function ProfileBio() {
       {/* Left Column: Essential Editorial Intro */}
       <div className="space-y-6 max-w-2xl">
         <div className="space-y-2">
-          <h1 className="text-white font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
+          <h1 className="text-ink font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
             {SITE.name}
           </h1>
           <p className="text-[var(--accent-primary)] text-lg sm:text-xl font-medium">
@@ -16,33 +16,25 @@ export function ProfileBio() {
           </p>
         </div>
 
-        <p className="text-body text-base sm:text-lg leading-relaxed">
+        <p className="text-body text-base sm:text-lg leading-[1.6] max-w-[65ch]">
           {SITE.shortBio}
         </p>
 
-        {/* Focal Actions: One Primary Button, One Secondary Text Link */}
-        <div className="flex items-center gap-6 pt-2">
+        {/* Focal Action: One Primary Button */}
+        <div className="pt-2">
           <button
             type="button"
             onClick={() => smoothScrollTo('#projects')}
-            className="inline-flex items-center justify-center rounded-sm bg-white px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-neutral-200 cursor-pointer"
+            className="inline-flex items-center justify-center rounded-sm bg-ink px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-ink/90 cursor-pointer shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)]"
           >
             View Projects
           </button>
-
-          <a
-            href={SITE.resumeUrl}
-            download
-            className="text-sm font-medium text-white/70 hover:text-white transition-colors underline-offset-4 hover:underline"
-          >
-            Download Resume &darr;
-          </a>
         </div>
       </div>
 
       {/* Right Column: Clean, Unadorned 4:5 Portrait */}
       <div className="flex justify-start lg:justify-end">
-        <div className="relative aspect-[4/5] w-full max-w-xs sm:max-w-sm overflow-hidden rounded-sm shadow-xl">
+        <div className="relative aspect-[4/5] w-full max-w-xs sm:max-w-sm overflow-hidden rounded-sm border border-line shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)] bg-card">
           <Picture
             {...SITE.portrait}
             className="h-full w-full"

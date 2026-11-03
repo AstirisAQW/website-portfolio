@@ -9,11 +9,7 @@ export const PROJECTS: Project[] = [
     description:
       'Post-hoc anomaly detection module for temporal graphs tracking node embedding kinematics, built with PyTorch and NetworkX.',
     githubUrl: 'https://github.com/Ofen-Lovers/DyMoN',
-    category: 'ml',
-    categoryLabel: 'Graph ML & Research',
     tags: ['PyTorch', 'NetworkX', 'Graph Kinematics', 'Temporal Graphs', 'Python'],
-    year: '2025',
-    highlights: ['Node Embedding Kinematics', 'Post-hoc Anomaly Detection'],
     image: { src: asset('Dymon.png'), alt: 'Screenshot of DyMoN Temporal Graph Anomaly Detection' },
   },
   {
@@ -23,11 +19,7 @@ export const PROJECTS: Project[] = [
     description:
       'Interactive browser-based finite automaton simulator using vanilla JavaScript and Vis.js for real-time state transition graph visualization.',
     githubUrl: 'https://github.com/Ofen-Lovers/DFA-and-NFA-Simulator',
-    category: 'simulation',
-    categoryLabel: 'Automata & Theory',
     tags: ['JavaScript', 'Vis.js', 'Theory of Computation', 'Graph Simulation'],
-    year: '2024',
-    highlights: ['Epsilon-NFA to DFA Conversion', 'State Transition Simulation'],
     image: { src: asset('DFA-NFA Simulator.png'), alt: 'Screenshot of DFA-NFA Simulator' },
   },
   {
@@ -37,11 +29,7 @@ export const PROJECTS: Project[] = [
     description:
       'Single-player Blackjack game implemented entirely in MIPS assembly language, demonstrating register allocation, stack memory management, and low-level computer architecture.',
     githubUrl: 'https://github.com/AstirisAQW/BlackJack-MIPS-Assembly',
-    category: 'systems',
-    categoryLabel: 'Systems & Architecture',
     tags: ['MIPS Assembly', 'Computer Architecture', 'MARS Simulator', 'Low-Level'],
-    year: '2024',
-    highlights: ['Register Allocation & Stack Frames', 'Pure Assembly Logic'],
     image: { src: asset('BlackJack-in-MIPS.png'), alt: 'Screenshot of BlackJack in MIPS' },
   },
   {
@@ -51,11 +39,7 @@ export const PROJECTS: Project[] = [
     description:
       'Full-stack e-commerce web platform engineered with React, TypeScript, and Supabase for authentication and relational database persistence.',
     githubUrl: 'https://github.com/Ofen-Lovers/Edelweiss',
-    category: 'web',
-    categoryLabel: 'Full-Stack Web',
     tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Vercel'],
-    year: '2024',
-    highlights: ['Relational Schema & Auth', 'Type-Safe Storefront'],
     image: { src: asset('Edelweiss E-commerce.png'), alt: 'Screenshot of Edelweiss E-commerce' },
   },
   {
@@ -65,11 +49,7 @@ export const PROJECTS: Project[] = [
     description:
       'Research paper and empirical benchmarks evaluating a Hybrid Merge Sort algorithm that integrates Bubble Sort for small sub-arrays to minimize recursive call-stack overhead.',
     githubUrl: 'https://github.com/HarV1821/BubbleMergeHybridSort',
-    category: 'systems',
-    categoryLabel: 'Algorithms & Research',
     tags: ['Algorithms', 'Data Structures', 'C++', 'Benchmarking', 'Complexity'],
-    year: '2023',
-    highlights: ['Sub-array Threshold Optimization', 'Recursion Overhead Reduction'],
     image: { src: asset('Bubble Merge Hybrid Sort.png'), alt: 'Screenshot of Hybrid Merge Sort' },
   },
   {
@@ -79,11 +59,7 @@ export const PROJECTS: Project[] = [
     description:
       'Custom NPC mod for Stardew Valley featuring original backstory, branching dialogue states, scheduled heart events, and marriage integration engineered in C# with SMAPI.',
     githubUrl: 'https://github.com/Ofen-Lovers/Stardew-Valley-Mod',
-    category: 'simulation',
-    categoryLabel: 'Game Development',
     tags: ['C#', '.NET', 'SMAPI', 'Game Scripting', 'Event Systems'],
-    year: '2024',
-    highlights: ['Event Scheduling Engine', 'Branching Dialogue Trees'],
     image: { src: asset('Stardew Valley Mod.png'), alt: 'Screenshot of Stardew Valley Mod' },
   },
   {
@@ -93,11 +69,7 @@ export const PROJECTS: Project[] = [
     description:
       'Machine learning pipeline predicting video game popularity and ownership distributions on Steam by analyzing release metadata and historical engagement trends.',
     githubUrl: 'https://github.com/Ofen-Lovers/ForecaSteam',
-    category: 'ml',
-    categoryLabel: 'Machine Learning',
     tags: ['Python', 'Scikit-Learn', 'Pandas', 'Data Mining', 'Predictive Modeling'],
-    year: '2024',
-    highlights: ['Metadata Feature Extraction', 'Ownership Distribution Estimator'],
     image: { src: asset('ForecaSteam.png'), alt: 'Screenshot of ForecaSteam' },
   },
 ]

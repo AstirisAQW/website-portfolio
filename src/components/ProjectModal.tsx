@@ -36,24 +36,17 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-[rgba(35,38,43,0.6)] backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Modal Dialog */}
-      <div className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-sm border border-white/15 bg-[#0f1118] p-6 sm:p-10 shadow-2xl">
+      <div className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-sm border border-line bg-card p-6 sm:p-10 shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)]">
         {/* Header */}
-        <div className="border-b border-white/10 pb-5 flex items-start justify-between gap-4">
+        <div className="border-b border-line pb-5 flex items-start justify-between gap-4">
           <div>
-            <div className="flex items-center gap-3 text-xs">
-              <span className="text-[var(--accent-primary)] font-medium">
-                {project.categoryLabel}
-              </span>
-              <span className="text-white/30">•</span>
-              <span className="text-white/50">{project.year}</span>
-            </div>
-            <h3 id="modal-title" className="text-white font-display text-2xl sm:text-3xl font-bold mt-2">
+            <h3 id="modal-title" className="text-ink font-display text-2xl sm:text-3xl font-bold">
               {project.title}
             </h3>
             {project.subtitle && (
@@ -67,14 +60,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="text-white/60 hover:text-white p-2 rounded-sm transition-colors cursor-pointer"
+            className="text-soft hover:text-ink p-2 rounded-sm transition-colors cursor-pointer"
           >
             <CloseIcon className="h-5 w-5" />
           </button>
         </div>
 
         {/* Screenshot Viewport */}
-        <div className="rounded-sm border border-white/10 bg-black/40 my-6 p-2 overflow-hidden">
+        <div className="rounded-sm border border-line bg-paper-subtle my-6 p-2 overflow-hidden">
           <Picture
             {...project.image}
             className="w-full max-h-[55vh] object-contain"
@@ -84,33 +77,16 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* Technical Specs & Description */}
         <div className="space-y-6">
-          <p className="text-body text-sm sm:text-base leading-relaxed max-w-3xl">
+          <p className="text-body text-sm sm:text-base leading-[1.6] max-w-[65ch]">
             {project.description}
           </p>
-
-          {/* Highlights */}
-          {project.highlights && (
-            <div className="rounded-sm border border-white/10 bg-white/[0.01] p-4 text-xs space-y-2">
-              <div className="text-[10px] uppercase font-mono tracking-wider text-white/40 border-b border-white/5 pb-1">
-                Key Highlights
-              </div>
-              <ul className="space-y-1.5 pt-1">
-                {project.highlights.map((item, i) => (
-                  <li key={item} className="flex items-center gap-2.5 text-white/90">
-                    <span className="text-[var(--accent-primary)] font-mono">0{i + 1}</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
 
           {/* Stack Tags */}
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-sm border border-white/10 bg-white/[0.02] px-2.5 py-1 text-xs text-white/70"
+                className="rounded-sm border border-line bg-paper px-2.5 py-1 text-xs text-body"
               >
                 {tag}
               </span>
@@ -118,12 +94,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Modal Actions */}
-          <div className="border-t border-white/10 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs">
+          <div className="border-t border-line pt-6 flex flex-wrap items-center justify-between gap-4 text-xs">
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-sm bg-white px-5 py-2.5 text-xs font-medium text-black hover:bg-neutral-200 transition-colors"
+              className="inline-flex items-center gap-2 rounded-sm bg-ink px-5 py-2.5 text-xs font-medium text-paper hover:bg-ink/90 transition-colors"
             >
               <GithubIcon className="h-4 w-4" />
               <span>View Source on GitHub</span>
@@ -133,7 +109,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="text-white/60 hover:text-white transition-colors cursor-pointer text-xs"
+              className="text-soft hover:text-ink transition-colors cursor-pointer text-xs"
             >
               Close
             </button>

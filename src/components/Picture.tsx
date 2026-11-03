@@ -21,7 +21,7 @@ export function Picture({ src, alt, caption, className = '', imgClassName = '' }
       aria-label={alt}
       className={`${className} bg-card/60 border-edge grid place-items-center overflow-hidden border border-dashed p-2 text-center`}
     >
-      <span aria-hidden="true" className="text-soft font-mono text-[11px] leading-snug break-words italic">
+      <span aria-hidden="true" className="text-soft font-mono text-xs leading-snug break-words italic">
         {caption ?? alt}
       </span>
     </div>

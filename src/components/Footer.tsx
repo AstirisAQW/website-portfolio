@@ -13,7 +13,7 @@ export function Footer() {
   }
 
   return (
-    <footer id="contact" className="border-t border-white/10 bg-[#07080b] text-body text-xs py-20 px-6 sm:px-8 lg:px-12">
+    <footer id="contact" className="border-t border-line bg-paper-subtle text-body text-xs py-20 px-6 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-6xl space-y-12">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           {/* Contact & Identity */}
@@ -21,21 +21,21 @@ export function Footer() {
             <span className="text-[var(--accent-primary)] font-medium text-xs">
               Get in Touch
             </span>
-            <h3 className="text-white font-display text-2xl font-bold tracking-tight">
+            <h3 className="text-ink font-display text-2xl font-bold tracking-tight">
               {SITE.name}
             </h3>
-            <p className="text-body text-sm leading-relaxed">
+            <p className="text-body text-sm leading-[1.6] max-w-[65ch]">
               Available for software engineering and systems research opportunities.
             </p>
           </div>
 
-          {/* Social Links (Moved from hero) */}
+          {/* Social Links */}
           <div className="flex flex-wrap items-center gap-3">
             <a
               href={SITE.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/80 hover:text-white hover:border-white transition-colors"
+              className="inline-flex items-center gap-2 rounded-sm border border-line bg-card px-4 py-2.5 text-xs text-ink hover:border-edge hover:bg-card-hover transition-colors shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)]"
             >
               <GithubIcon className="h-4 w-4" />
               <span>GitHub</span>
@@ -45,7 +45,7 @@ export function Footer() {
               href={SITE.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/80 hover:text-white hover:border-white transition-colors"
+              className="inline-flex items-center gap-2 rounded-sm border border-line bg-card px-4 py-2.5 text-xs text-ink hover:border-edge hover:bg-card-hover transition-colors shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)]"
             >
               <LinkedinIcon className="h-4 w-4" />
               <span>LinkedIn</span>
@@ -53,7 +53,7 @@ export function Footer() {
 
             <a
               href={SITE.email}
-              className="inline-flex items-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/80 hover:text-white hover:border-white transition-colors"
+              className="inline-flex items-center gap-2 rounded-sm border border-line bg-card px-4 py-2.5 text-xs text-ink hover:border-edge hover:bg-card-hover transition-colors shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)]"
             >
               <MailIcon className="h-4 w-4" />
               <span>Email</span>
@@ -63,7 +63,7 @@ export function Footer() {
               type="button"
               onClick={handleScrollToTop}
               aria-label="Back to top"
-              className="inline-flex items-center gap-1.5 rounded-sm border border-white/10 bg-white/[0.02] px-3.5 py-2.5 text-xs text-white/60 hover:text-white hover:border-white transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-sm border border-line bg-card px-3.5 py-2.5 text-xs text-soft hover:text-ink hover:border-edge hover:bg-card-hover transition-colors cursor-pointer shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)]"
             >
               <span>Back to top</span>
               <ArrowUpIcon className="h-3 w-3" />
@@ -72,7 +72,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Nav & Copyright */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 text-xs text-soft">
+        <div className="border-t border-line pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 text-xs text-muted">
           <div>
             © {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </div>
@@ -86,7 +86,7 @@ export function Footer() {
                   e.preventDefault()
                   handleNavClick(item.id as SectionId)
                 }}
-                className="hover:text-white transition-colors"
+                className="hover:text-[var(--accent-primary)] transition-colors hover:underline"
               >
                 {item.label}
               </a>

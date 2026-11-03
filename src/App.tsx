@@ -7,7 +7,7 @@ import { SECTION_IDS } from './content/sections'
 import { useActiveSection } from './hooks/useActiveSection'
 import { AboutSection } from './components/AboutSection'
 import { ProjectsSection } from './components/ProjectsSection'
-import { SystemsSpectrum } from './components/SystemsSpectrum'
+import { SkillsSection } from './components/SkillsSection'
 import { CredentialsSection } from './components/CredentialsSection'
 import { ArrowUpIcon } from './components/Icons'
 import { initSmoothScroll, smoothScrollTo } from './utils/lenis'
@@ -55,26 +55,19 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bg-[#090a0d] text-[#e2e4e9] selection:bg-white selection:text-black relative min-h-screen font-sans antialiased">
+    <div className="bg-paper text-ink selection:bg-accent selection:text-paper relative min-h-screen font-sans antialiased">
       {/* Clean, Fixed Editorial Header */}
       <Navbar activeSection={activeSection} />
 
-      {/* Main Progression: Hero → Projects → Skills/Systems → Credentials+Resume */}
+      {/* Main Progression: Hero → Projects → Skills → Credentials+Resume */}
       <main className="relative z-10">
-        {/* 01: Hero */}
         <AboutSection />
-
-        {/* 02: Selected Projects */}
         <ProjectsSection />
-
-        {/* 03: Systems & Core Disciplines */}
-        <SystemsSpectrum />
-
-        {/* 04: Credentials & Resume */}
+        <SkillsSection />
         <CredentialsSection />
       </main>
 
-      {/* 05: Contact & Footer */}
+      {/* Footer & Contact */}
       <Footer />
 
       {/* Subtle Floating Back-to-Top Button */}
@@ -83,7 +76,7 @@ export default function App() {
           type="button"
           onClick={() => smoothScrollTo('body', 0)}
           aria-label="Scroll back to top"
-          className="fixed right-6 bottom-6 z-40 flex h-10 w-10 items-center justify-center rounded-sm border border-white/15 bg-[#11141c] text-white/70 hover:text-white hover:border-white transition-colors cursor-pointer shadow-xl"
+          className="fixed right-6 bottom-6 z-40 flex h-10 w-10 items-center justify-center rounded-sm border border-line bg-card text-soft hover:text-ink hover:border-edge transition-colors cursor-pointer shadow-[0_1px_2px_rgba(35,38,43,0.06),0_8px_24px_rgba(35,38,43,0.06)] hover:bg-card-hover"
         >
           <ArrowUpIcon className="h-4 w-4" />
         </button>

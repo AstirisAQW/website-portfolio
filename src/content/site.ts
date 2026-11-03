@@ -17,9 +17,8 @@ export const SITE = {
     alt: 'Joseph Deysolong in graduation attire',
   } satisfies ImageRef,
   skills: {
-    systems: ['MIPS Assembly', 'C / C++', 'Algorithm Design', 'Automata Theory', 'Memory & Stack Frames'],
-    ml: ['PyTorch', 'NetworkX', 'Graph Kinematics', 'Temporal Graphs', 'Pandas & Scikit-Learn'],
-    web: ['React 19', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Node.js', 'REST APIs'],
-    tools: ['Git / GitHub', 'Cisco Packet Tracer', 'MARS Simulator', 'Linux', 'Vite'],
+    languages: ['MIPS Assembly', 'C / C++', 'Python', 'TypeScript', 'JavaScript'],
+    frameworks: ['React 19', 'PyTorch', 'NetworkX', 'Tailwind CSS', 'Vis.js'],
+    tools: ['Git / GitHub', 'Linux', 'Vite', 'Supabase', 'Cisco Packet Tracer'],
   },
 }

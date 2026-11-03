@@ -120,39 +120,10 @@ export const TerminalIcon = make(
   </>,
 )
 
-export const CpuIcon = make(
-  <>
-    <rect width="16" height="16" x="4" y="4" rx="2" />
-    <rect width="6" height="6" x="9" y="9" />
-    <path d="M9 1v3" />
-    <path d="M15 1v3" />
-    <path d="M9 20v3" />
-    <path d="M15 20v3" />
-    <path d="M20 9h3" />
-    <path d="M20 14h3" />
-    <path d="M1 9h3" />
-    <path d="M1 14h3" />
-  </>,
-)
-
-export const LayersIcon = make(
-  <>
-    <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
-    <path d="m22 12.5-8.58 3.91a2 2 0 0 1-1.66 0L2 12.5" />
-    <path d="m22 17.5-8.58 3.91a2 2 0 0 1-1.66 0L2 17.5" />
-  </>,
-)
-
 export const EyeIcon = make(
   <>
     <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
     <circle cx="12" cy="12" r="3" />
-  </>,
-)
-
-export const SparklesIcon = make(
-  <>
-    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
   </>,
 )
 
