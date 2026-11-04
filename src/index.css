@@ -1,46 +1,19 @@
 @import 'tailwindcss';
 
-:root {
-  --accent-primary: #c83e2b;
-  --accent-hover: #a63020;
-  --accent-subtle: rgba(200, 62, 43, 0.08);
-  --accent-stage: #ff6b52;
-}
-
 @theme {
-  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --breakpoint-desk: 860px;
 
-  --color-paper: #f4f0e6;
-  --color-paper-subtle: #eae4d6;
-  --color-card: #faf8f2;
-  --color-card-hover: #f0ece1;
-  --color-ink: #181a1d;
-  --color-body: #3d4148;
-  --color-soft: #5e646e;
-  --color-muted: #7a818c;
-  --color-line: rgba(24, 26, 29, 0.12);
-  --color-edge: rgba(24, 26, 29, 0.22);
+  --font-display: 'Tomorrow', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  --color-stage: #14171a;
-  --color-stage-card: #1c2026;
-  --color-stage-card-hover: #232830;
-  --color-stage-ink: #f4f0e6;
-  --color-stage-body: #c9cfd8;
-  --color-stage-muted: #939aa6;
-  --color-stage-line: rgba(244, 240, 230, 0.12);
-  --color-stage-edge: rgba(244, 240, 230, 0.24);
-
-  --color-nav: #14171a;
-  --color-nav-ink: #f4f0e6;
-  --color-nav-muted: #a0a7b2;
-  --color-nav-accent: #ff6b52;
-
-  --color-accent: var(--accent-primary);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-subtle: var(--accent-subtle);
-  --color-accent-stage: var(--accent-stage);
+  --color-paper: #f7f6f2;
+  --color-card: #efede6;
+  --color-ink: #2b3745;
+  --color-body: #444e5a;
+  --color-soft: #66707c;
+  --color-line: #d4d1c7;
+  --color-accent: #a8322a;
+  --color-accent-hover: #8a2822;
 }
 
 /* Lenis smooth scrolling integration */
@@ -68,9 +41,10 @@ html.lenis body {
 @layer base {
   html {
     background-color: var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-    font-size: 16px;
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -79,20 +53,25 @@ html.lenis body {
 
   body {
     background-color: var(--color-paper);
-    color: var(--color-ink);
+    color: var(--color-body);
+    font-family: var(--font-body);
     min-height: 100vh;
     overflow-x: hidden;
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent-primary);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink);
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    font-weight: 400;
+    font-weight: 500;
+    line-height: 1.15;
   }
 }
 

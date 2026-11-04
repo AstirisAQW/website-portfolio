@@ -53,16 +53,6 @@ export const PROJECTS: Project[] = [
     image: { src: asset('Bubble Merge Hybrid Sort.png'), alt: 'Screenshot of Hybrid Merge Sort' },
   },
   {
-    id: 'stardew-valley-mod',
-    title: 'Stardew Valley Mod',
-    subtitle: 'Game Engine Extension & Custom NPC',
-    description:
-      'Custom NPC mod for Stardew Valley featuring original backstory, branching dialogue states, scheduled heart events, and marriage integration engineered in C# with SMAPI.',
-    githubUrl: 'https://github.com/Ofen-Lovers/Stardew-Valley-Mod',
-    tags: ['C#', '.NET', 'SMAPI', 'Game Scripting', 'Event Systems'],
-    image: { src: asset('Stardew Valley Mod.png'), alt: 'Screenshot of Stardew Valley Mod' },
-  },
-  {
     id: 'forecasteam',
     title: 'ForecaSteam',
     subtitle: 'Steam Game Popularity ML Pipeline',

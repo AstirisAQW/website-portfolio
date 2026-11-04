@@ -1,21 +1,18 @@
-import type { ImageRef } from './image'
-
 export interface Education {
   id: string
-  degree: string
-  description: string
-}
-
-export interface Honor {
-  id: string
-  title: string
-  description: string
+  name: string
+  logo: string
+  group: 'Education'
+  school: string
+  year: string
+  honors: string
 }
 
 export interface Certification {
   id: string
-  title: string
+  name: string
+  logo: string
+  group: 'Certificates'
   issuer: string
-  date: string
-  image: ImageRef
+  year: string
 }

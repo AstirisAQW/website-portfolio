@@ -36,9 +36,9 @@ export function Picture({ src, alt, caption, className = '', imgClassName = '' }
     <div
       role="img"
       aria-label={alt}
-      className={`${className} bg-card/60 border-edge grid place-items-center overflow-hidden border border-dashed p-2 text-center`}
+      className={`${className} bg-card border-line grid place-items-center overflow-hidden border p-4 text-center`}
     >
-      <span aria-hidden="true" className="text-soft font-mono text-xs leading-snug break-words italic">
+      <span aria-hidden="true" className="text-soft font-display text-xs leading-snug break-words">
         {caption ?? alt}
       </span>
     </div>

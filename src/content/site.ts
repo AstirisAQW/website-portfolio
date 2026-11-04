@@ -3,22 +3,22 @@ import { asset } from '../utils/asset'
 
 export const SITE = {
   name: 'Joseph Deysolong',
-  role: 'Software Engineer & Researcher',
-  shortBio: 'Building software across low-level computer architecture, graph machine learning kinematics, and modern web platforms.',
-  university: 'University of Science and Technology of Southern Philippines',
-  location: 'Philippines',
-  years: '2024–2026',
-  resumeUrl: asset('Resume v3.1-1.pdf'),
+  tagline: 'Software Engineer',
+  shortBio:
+    'Software engineer working across low-level computer architecture, graph machine learning, and modern web platforms.',
+  resumeUrl: asset('resume v3.2.pdf'),
+  resumeSummary: 'A one-page summary of my education, projects, and skills.',
   githubUrl: 'https://github.com/AstirisAQW',
+  githubIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
   linkedinUrl: 'https://www.linkedin.com/in/joseph-deysolong/',
+  linkedinIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
   email: 'mailto:deysolongjoseph@gmail.com',
   portrait: {
     src: asset('JosephDeysolong-GradPortrait.png'),
-    alt: 'Joseph Deysolong in graduation attire',
+    alt: 'portrait',
   } satisfies ImageRef,
-  skills: {
-    languages: ['MIPS Assembly', 'C / C++', 'Python', 'TypeScript', 'JavaScript'],
-    frameworks: ['React 19', 'PyTorch', 'NetworkX', 'Tailwind CSS', 'Vis.js'],
-    tools: ['Git / GitHub', 'Linux', 'Vite', 'Supabase', 'Cisco Packet Tracer'],
-  },
+  sidebarStar: {
+    src: asset('logo-transparent.png'),
+    alt: 'logo',
+  } satisfies ImageRef,
 }

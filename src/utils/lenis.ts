@@ -9,7 +9,6 @@ let lenisInstance: Lenis | null = null
 export function initSmoothScroll(): Lenis | null {
   if (typeof window === 'undefined') return null
 
-  // If already initialized, return it
   if (lenisInstance) return lenisInstance
 
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -29,10 +28,8 @@ export function initSmoothScroll(): Lenis | null {
 
   lenisInstance = lenis
 
-  // Synchronize Lenis scroll with GSAP ScrollTrigger
   lenis.on('scroll', ScrollTrigger.update)
 
-  // Use GSAP's ticker to drive Lenis requestAnimationFrame
   const tickerCallback = (time: number) => {
     lenis.raf(time * 1000)
   }
@@ -40,7 +37,6 @@ export function initSmoothScroll(): Lenis | null {
   gsap.ticker.add(tickerCallback)
   gsap.ticker.lagSmoothing(0)
 
-  // Store cleanup handler
   window.addEventListener(
     'unload',
     () => {
@@ -54,15 +50,11 @@ export function initSmoothScroll(): Lenis | null {
   return lenis
 }
 
-export function getLenis(): Lenis | null {
-  return lenisInstance
-}
-
-export function smoothScrollTo(target: string | HTMLElement, offset: number = -68) {
+export function smoothScrollTo(target: string | HTMLElement, offset: number = -24) {
   if (lenisInstance) {
     lenisInstance.scrollTo(target, {
       offset,
-      duration: 1.1,
+      duration: 1.0,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     })
   } else {
@@ -73,4 +65,3 @@ export function smoothScrollTo(target: string | HTMLElement, offset: number = -6
     }
   }
 }
-

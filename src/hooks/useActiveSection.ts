@@ -11,7 +11,7 @@ export function useActiveSection(ids: readonly string[]): string {
           if (entry.isIntersecting) setActive(entry.target.id)
         }
       },
-      { rootMargin: '-45% 0px -50% 0px' },
+      { rootMargin: '-40% 0px -55% 0px' },
     )
 
     for (const id of ids) {

@@ -6,7 +6,6 @@ export interface Project {
   subtitle?: string
   description: string
   githubUrl: string
-  liveUrl?: string
   tags: string[]
   image: ImageRef
 }
