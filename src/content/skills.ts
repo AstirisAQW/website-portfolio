@@ -1,5 +1,3 @@
-import { asset } from '../utils/asset'
-
 export type SkillGroup =
   | 'Programming languages'
   | 'Frameworks and libraries'
