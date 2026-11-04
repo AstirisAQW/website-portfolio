@@ -2,8 +2,10 @@ import { SITE } from '../content/site'
 
 export function Footer() {
   return (
-    <footer className="border-t border-line py-8 px-6 text-center text-soft">
-      <p className="mx-auto mb-0">{SITE.name}</p>
+    <footer className="py-5 px-6 text-center text-[0.9rem] text-soft">
+      <p className="mx-auto mb-0">
+        © {SITE.copyrightYear} {SITE.name}
+      </p>
     </footer>
   )
 }

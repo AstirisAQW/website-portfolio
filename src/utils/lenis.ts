@@ -6,6 +6,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 let lenisInstance: Lenis | null = null
 
+const tickerCallback = (time: number) => {
+  lenisInstance?.raf(time * 1000)
+}
+
 export function initSmoothScroll(): Lenis | null {
   if (typeof window === 'undefined') return null
 
@@ -30,34 +34,28 @@ export function initSmoothScroll(): Lenis | null {
 
   lenis.on('scroll', ScrollTrigger.update)
 
-  const tickerCallback = (time: number) => {
-    lenis.raf(time * 1000)
-  }
-
   gsap.ticker.add(tickerCallback)
   gsap.ticker.lagSmoothing(0)
-
-  window.addEventListener(
-    'unload',
-    () => {
-      gsap.ticker.remove(tickerCallback)
-      lenis.destroy()
-      lenisInstance = null
-    },
-    { once: true }
-  )
 
   return lenis
 }
 
-export function smoothScrollTo(target: string | HTMLElement, offset: number = -24) {
+export function destroySmoothScroll(): void {
+  gsap.ticker.remove(tickerCallback)
+  if (lenisInstance) {
+    lenisInstance.destroy()
+    lenisInstance = null
+  }
+}
+
+export function smoothScrollTo(target: string | HTMLElement, offset: number = -16) {
   if (lenisInstance) {
     lenisInstance.scrollTo(target, {
       offset,
       duration: 1.0,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     })
-  } else {
+  } else if (typeof window !== 'undefined') {
     const el = typeof target === 'string' ? document.querySelector(target) : target
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY + offset

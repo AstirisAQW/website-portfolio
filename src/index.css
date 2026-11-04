@@ -3,17 +3,34 @@
 @theme {
   --breakpoint-desk: 860px;
 
-  --font-display: 'Tomorrow', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Tomorrow', system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --color-paper: #f7f6f2;
-  --color-card: #efede6;
+  --color-ground: #f9f9f7;
+  --color-panel: #ffffff;
+  --color-card: #f3f2ee;
+  --color-sand: #ece4cf;
   --color-ink: #2b3745;
   --color-body: #444e5a;
   --color-soft: #66707c;
+  --color-faint: #aab1ba;
   --color-line: #d4d1c7;
   --color-accent: #a8322a;
   --color-accent-hover: #8a2822;
+  --color-ok: #10b981;
+
+  --spacing-portrait: 260px;
+  --spacing-side: 150px;
+  --spacing-content: 652px;
+  --spacing-gap: 3rem;
+  --spacing-pad: 2.5rem;
+  --spacing-pad-sm: 1.5rem;
+
+  --radius-panel: 28px;
+  --radius-panel-sm: 20px;
+  --radius-strip: 10px;
+  --radius-btn: 4px;
 }
 
 /* Lenis smooth scrolling integration */
@@ -39,8 +56,12 @@ html.lenis body {
 }
 
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
+
   html {
-    background-color: var(--color-paper);
+    background-color: var(--color-ground);
     color: var(--color-body);
     font-family: var(--font-body);
     font-size: 17px;
@@ -52,7 +73,8 @@ html.lenis body {
   }
 
   body {
-    background-color: var(--color-paper);
+    margin: 0;
+    background-color: var(--color-ground);
     color: var(--color-body);
     font-family: var(--font-body);
     min-height: 100vh;
@@ -72,6 +94,25 @@ html.lenis body {
     font-family: var(--font-display);
     font-weight: 500;
     line-height: 1.15;
+    margin: 0;
+  }
+
+  p {
+    margin: 0 0 1rem;
+    max-width: 62ch;
+  }
+
+  a {
+    color: var(--color-accent);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
   }
 }
 

@@ -40,15 +40,21 @@ export function ProjectsSection() {
     <section
       ref={sectionRef}
       id="projects"
-      className="py-[4.5rem] border-b border-line scroll-mt-4"
+      className="pt-[4.5rem] pb-0 scroll-mt-4"
     >
-      <h2 className="reveal text-[2.2rem] mb-6">Projects</h2>
+      <h2 className="reveal text-[2.1rem] mb-4">Projects</h2>
 
       <div>
         {PROJECTS.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
+
+      {/* Section Divider */}
+      <div
+        aria-hidden="true"
+        className="section-divider mt-[4.5rem] h-[1px] w-full origin-left bg-line will-change-transform"
+      />
     </section>
   )
 }

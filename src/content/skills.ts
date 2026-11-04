@@ -63,10 +63,5 @@ export const SKILLS: readonly SkillItem[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
     group: 'Tools',
   },
-  {
-    name: 'Paint.NET',
-    logo: asset('logos/paintnet.png'),
-    group: 'Tools',
-  },
 ]
 

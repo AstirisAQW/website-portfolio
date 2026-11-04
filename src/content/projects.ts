@@ -10,7 +10,7 @@ export const PROJECTS: Project[] = [
       'Post-hoc anomaly detection module for temporal graphs tracking node embedding kinematics, built with PyTorch and NetworkX.',
     githubUrl: 'https://github.com/Ofen-Lovers/DyMoN',
     tags: ['PyTorch', 'NetworkX', 'Graph Kinematics', 'Temporal Graphs', 'Python'],
-    image: { src: asset('Dymon.png'), alt: 'Screenshot of DyMoN Temporal Graph Anomaly Detection' },
+    image: { src: asset('Dymon.png'), alt: 'Screenshot of DyMoN Temporal Graph Anomaly Detection', width: 819, height: 440 },
   },
   {
     id: 'dfa-nfa-simulator',
@@ -20,7 +20,7 @@ export const PROJECTS: Project[] = [
       'Interactive browser-based finite automaton simulator using vanilla JavaScript and Vis.js for real-time state transition graph visualization.',
     githubUrl: 'https://github.com/Ofen-Lovers/DFA-and-NFA-Simulator',
     tags: ['JavaScript', 'Vis.js', 'Theory of Computation', 'Graph Simulation'],
-    image: { src: asset('DFA-NFA Simulator.png'), alt: 'Screenshot of DFA-NFA Simulator' },
+    image: { src: asset('DFA-NFA Simulator.png'), alt: 'Screenshot of DFA-NFA Simulator', width: 1920, height: 1080 },
   },
   {
     id: 'blackjack-in-mips',
@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
       'Single-player Blackjack game implemented entirely in MIPS assembly language, demonstrating register allocation, stack memory management, and low-level computer architecture.',
     githubUrl: 'https://github.com/AstirisAQW/BlackJack-MIPS-Assembly',
     tags: ['MIPS Assembly', 'Computer Architecture', 'MARS Simulator', 'Low-Level'],
-    image: { src: asset('BlackJack-in-MIPS.png'), alt: 'Screenshot of BlackJack in MIPS' },
+    image: { src: asset('BlackJack-in-MIPS.png'), alt: 'Screenshot of BlackJack in MIPS', width: 1920, height: 1030 },
   },
   {
     id: 'edelweiss-e-commerce',
@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
       'Full-stack e-commerce web platform engineered with React, TypeScript, and Supabase for authentication and relational database persistence.',
     githubUrl: 'https://github.com/Ofen-Lovers/Edelweiss',
     tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Vercel'],
-    image: { src: asset('Edelweiss E-commerce.png'), alt: 'Screenshot of Edelweiss E-commerce' },
+    image: { src: asset('Edelweiss E-commerce.png'), alt: 'Screenshot of Edelweiss E-commerce', width: 1584, height: 762 },
   },
   {
     id: 'bubble-merge-hybrid-sort',
@@ -50,7 +50,7 @@ export const PROJECTS: Project[] = [
       'Research paper and empirical benchmarks evaluating a Hybrid Merge Sort algorithm that integrates Bubble Sort for small sub-arrays to minimize recursive call-stack overhead.',
     githubUrl: 'https://github.com/HarV1821/BubbleMergeHybridSort',
     tags: ['Algorithms', 'Data Structures', 'C++', 'Benchmarking', 'Complexity'],
-    image: { src: asset('Bubble Merge Hybrid Sort.png'), alt: 'Screenshot of Hybrid Merge Sort' },
+    image: { src: asset('Bubble Merge Hybrid Sort.png'), alt: 'Screenshot of Hybrid Merge Sort', width: 1920, height: 1080 },
   },
   {
     id: 'forecasteam',
@@ -60,6 +60,6 @@ export const PROJECTS: Project[] = [
       'Machine learning pipeline predicting video game popularity and ownership distributions on Steam by analyzing release metadata and historical engagement trends.',
     githubUrl: 'https://github.com/Ofen-Lovers/ForecaSteam',
     tags: ['Python', 'Scikit-Learn', 'Pandas', 'Data Mining', 'Predictive Modeling'],
-    image: { src: asset('ForecaSteam.png'), alt: 'Screenshot of ForecaSteam' },
+    image: { src: asset('ForecaSteam.png'), alt: 'Screenshot of ForecaSteam', width: 1606, height: 945 },
   },
 ]

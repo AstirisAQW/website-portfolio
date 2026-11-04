@@ -5,8 +5,15 @@ export const SITE = {
   name: 'Joseph Deysolong',
   tagline: 'Software Engineer',
   shortBio:
-    'Software engineer working across low-level computer architecture, graph machine learning, and modern web platforms.',
-  resumeUrl: asset('resume v3.2.pdf'),
+    'Software engineer working across low-level computer architecture, graph machine learning, and modern web platforms. Specialized in low-level computer architecture (MIPS, C++), temporal graph anomaly detection (PyTorch, DyMoN), and modern full-stack web platforms.',
+  statusText: 'Available for Software Engineering Roles',
+  location: 'Cagayan de Oro, Philippines',
+  clockLabel: 'Local Time (UTC+8):',
+  timeZone: 'Asia/Manila',
+  captionPill: "USTP '26 · Cum Laude · DOST Scholar",
+  textureUrl: asset('/background-1.png'),
+  resumeUrl: asset('Joseph-Deysolong-Resume.pdf'),
+  resumeFileName: 'Joseph-Deysolong-Resume.pdf',
   resumeSummary: 'A one-page summary of my education, projects, and skills.',
   githubUrl: 'https://github.com/AstirisAQW',
   githubIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
@@ -14,11 +21,12 @@ export const SITE = {
   linkedinIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
   email: 'mailto:deysolongjoseph@gmail.com',
   portrait: {
-    src: asset('JosephDeysolong-GradPortrait.png'),
-    alt: 'portrait',
+    src: asset('JosephDeysolong-GradPortrait-transparent.png'),
+    alt: 'Joseph Deysolong in graduation attire',
   } satisfies ImageRef,
   sidebarStar: {
     src: asset('logo-transparent.png'),
-    alt: 'logo',
+    alt: 'Gold eight-pointed star',
   } satisfies ImageRef,
+  copyrightYear: '2026',
 }

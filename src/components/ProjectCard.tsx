@@ -1,61 +1,62 @@
-import { useRef } from 'react'
-import { Picture } from './Picture'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { Project } from '../types/project'
-import { useMagnetic } from '../hooks/useMagnetic'
 
 interface ProjectCardProps {
   project: Project
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const btnRef = useRef<HTMLAnchorElement>(null)
-  useMagnetic(btnRef, 0.25)
+  const visibleTags = project.tags.slice(0, 4)
 
   return (
-    <article className="reveal mb-14 last:mb-0">
-      {/* 16:10 Frame Showing Whole Image (object-contain, no zoom, no parallax) */}
-      <div className="project-image-frame aspect-[16/10] w-full overflow-hidden border border-line bg-card flex items-center justify-center will-change-transform">
-        <Picture
-          {...project.image}
-          className="h-full w-full object-contain"
-          imgClassName="h-full w-full object-contain"
-        />
+    <article className="reveal group/project mb-14 last:mb-0">
+      {/* Bordered Image Frame (shown whole at its own aspect ratio) */}
+      <div className="project-image-frame overflow-hidden bg-card border border-line text-soft">        {project.image.src ? (
+          <img
+            src={project.image.src}
+            alt={project.image.alt}
+            width={project.image.width}
+            height={project.image.height}
+            onLoad={() => ScrollTrigger.refresh()}
+            className="block w-full h-auto"
+          />
+        ) : (
+          <div className="min-h-[260px] flex items-center justify-center p-4">
+            {project.image.alt}
+          </div>
+        )}
       </div>
 
-      {/* Title & One-Line Accent Subtitle */}
-      <h3 className="mt-4 text-[1.7rem] text-ink">{project.title}</h3>
+      <h3 className="mt-4 text-[1.6rem] text-ink">{project.title}</h3>
       {project.subtitle && (
-        <p className="mt-1 mb-2 text-accent truncate">
-          {project.subtitle}
-        </p>
+        <p className="text-accent mb-2">{project.subtitle}</p>
       )}
+      <p>{project.description}</p>
 
-      {/* Description */}
-      <p className="mb-4 max-w-[62ch] text-body">
-        {project.description}
-      </p>
-
-      {/* Tag Chips */}
       <ul className="flex flex-wrap gap-2 mb-4">
-        {project.tags.map((tag) => (
+        {visibleTags.map((tag) => (
           <li
             key={tag}
-            className="border border-line px-2.5 py-0.5 text-[0.9rem] text-soft"
+            className="border border-line py-[0.15rem] px-[0.6rem] text-[0.9rem] text-soft"
           >
             {tag}
           </li>
         ))}
       </ul>
 
-      {/* Single "View source" Button (Tomorrow font-display) */}
       <p className="mb-0">
         <a
-          ref={btnRef}
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block border border-accent bg-accent px-5 py-2.5 font-display text-paper hover:bg-accent-hover hover:border-accent-hover transition-colors will-change-transform"
+          className="group/link font-display font-medium text-ink no-underline hover:underline hover:underline-offset-4"
         >
+          <span
+            aria-hidden="true"
+            className="inline-block text-accent transition-transform duration-150 ease-out group-hover/link:translate-x-[4px]"
+          >
+            &gt;
+          </span>{' '}
           View source
         </a>
       </p>
