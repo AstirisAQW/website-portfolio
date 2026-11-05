@@ -51,10 +51,6 @@ html.lenis body {
   overflow: hidden;
 }
 
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
 @layer base {
   * {
     box-sizing: border-box;
@@ -88,8 +84,7 @@ html.lenis body {
 
   h1,
   h2,
-  h3,
-  h4 {
+  h3 {
     color: var(--color-ink);
     font-family: var(--font-display);
     font-weight: 500;
