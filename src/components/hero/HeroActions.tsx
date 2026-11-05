@@ -11,6 +11,28 @@ const SOCIAL_ICONS = [
   { label: 'LinkedIn', href: SITE.linkedinUrl, src: SITE.linkedinIconUrl },
 ]
 
+function SocialActionLinks() {
+  return (
+    <>
+      {SOCIAL_ICONS.map((item) => (
+        <LinkButton
+          key={item.label}
+          variant="icon"
+          href={item.href}
+          external
+          ariaLabel={item.label}
+          className={HERO_PARTS.action}
+        >
+          <img src={item.src} alt={item.label} className="w-[22px] h-[22px] object-contain" />
+        </LinkButton>
+      ))}
+      <LinkButton variant="icon" href={SITE.email} ariaLabel="Email" className={HERO_PARTS.action}>
+        <MailIcon />
+      </LinkButton>
+    </>
+  )
+}
+
 export function HeroActions() {
   const primaryBtnRef = useRef<HTMLAnchorElement>(null)
   useMagnetic(primaryBtnRef, 0.25)
@@ -27,7 +49,6 @@ export function HeroActions() {
         <EyeIcon />
         <span>View resume</span>
       </LinkButton>
-
       <LinkButton
         variant="outline"
         href="#projects"
@@ -40,23 +61,7 @@ export function HeroActions() {
         <span>View projects</span>
         <ArrowDownIcon />
       </LinkButton>
-
-      {SOCIAL_ICONS.map((item) => (
-        <LinkButton
-          key={item.label}
-          variant="icon"
-          href={item.href}
-          external
-          ariaLabel={item.label}
-          className={HERO_PARTS.action}
-        >
-          <img src={item.src} alt={item.label} className="w-[22px] h-[22px] object-contain" />
-        </LinkButton>
-      ))}
-
-      <LinkButton variant="icon" href={SITE.email} ariaLabel="Email" className={HERO_PARTS.action}>
-        <MailIcon />
-      </LinkButton>
+      <SocialActionLinks />
     </div>
   )
 }

@@ -12,6 +12,26 @@ const BRACKET_POSITIONS = [
   '-bottom-3 -right-3 border-b-[1.5px] border-r-[1.5px]',
 ]
 
+function PortraitOverlay() {
+  return (
+    <>
+      {BRACKET_POSITIONS.map((pos) => (
+        <span
+          key={pos}
+          aria-hidden="true"
+          className={`${HERO_PARTS.bracket} absolute w-[18px] h-[18px] border-accent will-change-transform ${pos}`}
+        />
+      ))}
+      <div
+        className={`${HERO_PARTS.pill} absolute left-1/2 -bottom-[14px] -translate-x-1/2 flex items-center gap-[0.4rem] py-[0.2rem] px-3 bg-panel border border-line rounded-full font-mono text-[11px] text-soft whitespace-nowrap will-change-transform`}
+      >
+        <AwardIcon />
+        <span>{SITE.captionPill}</span>
+      </div>
+    </>
+  )
+}
+
 interface PortraitFrameProps {
   headerRef: RefObject<HTMLElement | null>
 }
@@ -42,21 +62,7 @@ export function PortraitFrame({ headerRef }: PortraitFrameProps) {
           className="absolute inset-0 w-full h-full object-cover object-bottom will-change-transform"
         />
       </div>
-
-      {BRACKET_POSITIONS.map((pos) => (
-        <span
-          key={pos}
-          aria-hidden="true"
-          className={`${HERO_PARTS.bracket} absolute w-[18px] h-[18px] border-accent will-change-transform ${pos}`}
-        />
-      ))}
-
-      <div
-        className={`${HERO_PARTS.pill} absolute left-1/2 -bottom-[14px] -translate-x-1/2 flex items-center gap-[0.4rem] py-[0.2rem] px-3 bg-panel border border-line rounded-full font-mono text-[11px] text-soft whitespace-nowrap will-change-transform`}
-      >
-        <AwardIcon />
-        <span>{SITE.captionPill}</span>
-      </div>
+      <PortraitOverlay />
     </div>
   )
 }
