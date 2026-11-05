@@ -16,6 +16,7 @@ import { scrollToSection } from '../motion/smoothScroll'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { Card } from './ui/Card'
+import { ArrowDownIcon, AwardIcon, EyeIcon, MailIcon } from './ui/Icons'
 
 const CLOCK_INTERVAL_MS = 1000
 const CUTOUT_DRIFT_PX = 6
@@ -214,19 +215,7 @@ export function Hero() {
           />
 
           <div className="hero-pill absolute left-1/2 -bottom-[14px] -translate-x-1/2 flex items-center gap-[0.4rem] py-[0.2rem] px-3 bg-panel border border-line rounded-full font-mono text-[11px] text-soft whitespace-nowrap will-change-transform">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className="w-[13px] h-[13px] text-accent"
-            >
-              <circle cx="12" cy="9" r="5" />
-              <path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5" />
-            </svg>
+            <AwardIcon />
             <span>{SITE.captionPill}</span>
           </div>
         </div>
@@ -261,19 +250,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className="hero-action inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-accent rounded-btn font-display font-medium text-[0.95rem] bg-accent text-panel hover:bg-accent-hover hover:border-accent-hover transition-colors no-underline will-change-transform"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="w-[18px] h-[18px]"
-              >
-                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
+              <EyeIcon />
               <span>View resume</span>
             </a>
 
@@ -286,18 +263,7 @@ export function Hero() {
               className="hero-action inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline will-change-transform"
             >
               <span>View projects</span>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="w-[18px] h-[18px]"
-              >
-                <path d="M12 5v14M6 13l6 6 6-6" />
-              </svg>
+              <ArrowDownIcon />
             </a>
 
             <a
@@ -333,19 +299,7 @@ export function Hero() {
               aria-label="Email"
               className="hero-action w-[44px] h-[44px] inline-flex items-center justify-center bg-panel border border-line rounded-btn text-ink hover:border-ink transition-colors will-change-transform"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="w-[22px] h-[22px]"
-              >
-                <rect x="3" y="5" width="18" height="14" rx="2" />
-                <path d="M3.5 7l8.5 6 8.5-6" />
-              </svg>
+              <MailIcon />
             </a>
           </div>
         </div>

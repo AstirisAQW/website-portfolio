@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
+import { DownloadIcon, ExternalLinkIcon } from './ui/Icons'
 
 export function ResumeSection() {
   const openBtnRef = useRef<HTMLAnchorElement>(null)
@@ -44,18 +45,7 @@ export function ResumeSection() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-accent rounded-btn font-display font-medium text-[0.95rem] bg-accent text-panel hover:bg-accent-hover hover:border-accent-hover transition-colors no-underline will-change-transform"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            className="w-[18px] h-[18px]"
-          >
-            <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-          </svg>
+          <ExternalLinkIcon />
           <span>Open in new tab</span>
         </a>
 
@@ -64,18 +54,7 @@ export function ResumeSection() {
           download={SITE.resumeFileName}
           className="inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            className="w-[18px] h-[18px]"
-          >
-            <path d="M12 3v12M7 11l5 5 5-5M5 20h14" />
-          </svg>
+          <DownloadIcon />
           <span>Download</span>
         </a>
       </div>
