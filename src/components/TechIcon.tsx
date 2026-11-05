@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-interface LogoProps {
+interface TechIconProps {
   src: string
   name: string
   size?: 'sm' | 'lg'
@@ -17,7 +17,7 @@ function scheduleRefresh() {
   }, 120)
 }
 
-export function Logo({ src, name, size = 'sm' }: LogoProps) {
+export function TechIcon({ src, name, size = 'sm' }: TechIconProps) {
   const [failed, setFailed] = useState(false)
 
   const dimensions = size === 'lg' ? 'h-12 w-12 text-xs' : 'h-7 w-7 text-[11px]'

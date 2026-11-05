@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import { Logo } from './Logo'
+import { TechIcon } from './TechIcon'
 import { CERTIFICATIONS, EDUCATION } from '../content/profile'
 import { SKILL_GROUPS, SKILLS } from '../content/skills'
 
@@ -50,7 +50,7 @@ export function AboutSection() {
             key={edu.id}
             className="logo-list-item flex items-center gap-3 py-[0.35rem] will-change-transform"
           >
-            <Logo src={edu.logo} name="USTP" size="lg" />
+            <TechIcon src={edu.logo} name="USTP" size="lg" />
             <span>
               <strong className="font-semibold text-ink">{edu.name}</strong>
               <br />
@@ -74,7 +74,7 @@ export function AboutSection() {
                   key={skill.name}
                   className="logo-list-item flex items-center gap-[0.6rem] py-[0.35rem] will-change-transform"
                 >
-                  <Logo src={skill.logo} name={skill.name} size="sm" />
+                  <TechIcon src={skill.logo} name={skill.name} size="sm" />
                   <span>{skill.name}</span>
                 </li>
               ))}
@@ -91,7 +91,7 @@ export function AboutSection() {
             key={cert.id}
             className="logo-list-item flex items-center gap-3 py-[0.35rem] will-change-transform"
           >
-            <Logo src={cert.logo} name={cert.issuer} size="lg" />
+            <TechIcon src={cert.logo} name={cert.issuer} size="lg" />
             <span>
               <strong className="font-semibold text-ink">{cert.name}</strong>
               <br />
