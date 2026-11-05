@@ -15,10 +15,9 @@ import { SECTION_IDS } from './content/sections'
 import { useActiveSection } from './hooks/useActiveSection'
 
 export default function App() {
+  useSmoothScroll()
   const activeSection = useActiveSection(SECTION_IDS)
   const appRef = useRef<HTMLDivElement>(null)
-
-  useSmoothScroll()
 
   useMotion(appRef, () => {
     // Shared .reveal fade-up
