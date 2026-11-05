@@ -22,6 +22,7 @@ export function ResumeSection() {
         <object
           data={`${SITE.resume.url}#view=FitH`}
           type="application/pdf"
+          aria-label={`${SITE.hero.name} resume PDF`}
           className="block w-full h-[70vh]"
         >
           <div className="p-6 text-center text-soft">

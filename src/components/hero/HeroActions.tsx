@@ -23,7 +23,7 @@ function SocialActionLinks() {
           ariaLabel={item.label}
           className={HERO_PARTS.action}
         >
-          <img src={item.src} alt={item.label} className="w-[22px] h-[22px] object-contain" />
+          <img src={item.src} alt="" className="w-[22px] h-[22px] object-contain" />
         </LinkButton>
       ))}
       <LinkButton

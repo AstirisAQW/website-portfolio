@@ -16,7 +16,7 @@ export function TechIcon({ src, name, size = 'sm' }: TechIconProps) {
     return (
       <img
         src={src}
-        alt={name}
+        alt=""
         onLoad={scheduleScrollRefresh}
         onError={() => setFailed(true)}
         className={`${dimensions} shrink-0 object-contain`}

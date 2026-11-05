@@ -41,7 +41,7 @@ export const SITE: SiteConfig = {
     },
     star: {
       src: asset('astiris-star.png'),
-      alt: 'Gold eight-pointed star',
+      alt: '',
     },
     texture: asset('/background-1.png'),
   },
