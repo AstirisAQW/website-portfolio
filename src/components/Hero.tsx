@@ -9,20 +9,14 @@ import {
   EASE_EXPO,
 } from '../motion/constants'
 import { useMotion } from '../motion/useMotion'
-import { scrollToSection } from '../motion/smoothScroll'
 import { SITE } from '../content/site'
-import { useMagnetic } from '../hooks/useMagnetic'
+import { HeroActions } from './hero/HeroActions'
 import { PortraitFrame } from './hero/PortraitFrame'
 import { StatusStrip } from './hero/StatusStrip'
 import { Card } from './ui/Card'
-import { ArrowDownIcon, EyeIcon, MailIcon } from './ui/Icons'
-import { LinkButton } from './ui/LinkButton'
 
 export function Hero() {
   const headerRef = useRef<HTMLElement>(null)
-  const primaryBtnRef = useRef<HTMLAnchorElement>(null)
-
-  useMagnetic(primaryBtnRef, 0.25)
 
   useMotion(headerRef, () => {
     const tl = gsap.timeline({ defaults: { ease: EASE_EXPO } })
@@ -123,63 +117,7 @@ export function Hero() {
           </p>
 
           {/* Actions */}
-          <div className="flex flex-wrap items-center justify-center desk:justify-start gap-3 mt-7">
-            <LinkButton
-              ref={primaryBtnRef}
-              variant="primary"
-              href={SITE.resumeUrl}
-              external
-              className="hero-action"
-            >
-              <EyeIcon />
-              <span>View resume</span>
-            </LinkButton>
-
-            <LinkButton
-              variant="outline"
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToSection('projects')
-              }}
-              className="hero-action"
-            >
-              <span>View projects</span>
-              <ArrowDownIcon />
-            </LinkButton>
-
-            <LinkButton
-              variant="icon"
-              href={SITE.githubUrl}
-              external
-              ariaLabel="GitHub"
-              className="hero-action"
-            >
-              <img
-                src={SITE.githubIconUrl}
-                alt="GitHub"
-                className="w-[22px] h-[22px] object-contain"
-              />
-            </LinkButton>
-
-            <LinkButton
-              variant="icon"
-              href={SITE.linkedinUrl}
-              external
-              ariaLabel="LinkedIn"
-              className="hero-action"
-            >
-              <img
-                src={SITE.linkedinIconUrl}
-                alt="LinkedIn"
-                className="w-[22px] h-[22px] object-contain"
-              />
-            </LinkButton>
-
-            <LinkButton variant="icon" href={SITE.email} ariaLabel="Email" className="hero-action">
-              <MailIcon />
-            </LinkButton>
-          </div>
+          <HeroActions />
         </div>
       </div>
     </Card>
