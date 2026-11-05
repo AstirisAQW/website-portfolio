@@ -1,33 +1,26 @@
 import { useRef } from 'react'
 import { gsap } from '../motion/gsap'
-import { scheduleScrollRefresh } from '../motion/scrollRefresh'
 import {
   DURATION_BASE,
-  DURATION_FAST,
   DURATION_MEDIUM,
   DURATION_REVEAL,
   DURATION_SLOW,
   DURATION_WIPE,
   EASE_EXPO,
-  EASE_OUT,
 } from '../motion/constants'
 import { useMotion } from '../motion/useMotion'
 import { scrollToSection } from '../motion/smoothScroll'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
+import { PortraitFrame } from './hero/PortraitFrame'
 import { StatusStrip } from './hero/StatusStrip'
 import { Card } from './ui/Card'
-import { ArrowDownIcon, AwardIcon, EyeIcon, MailIcon } from './ui/Icons'
+import { ArrowDownIcon, EyeIcon, MailIcon } from './ui/Icons'
 import { LinkButton } from './ui/LinkButton'
-
-const CUTOUT_DRIFT_PX = 6
-const ARCH_DRIFT_PX = -3
 
 export function Hero() {
   const headerRef = useRef<HTMLElement>(null)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null)
-  const cutoutRef = useRef<HTMLImageElement>(null)
-  const archRef = useRef<HTMLDivElement>(null)
 
   useMagnetic(primaryBtnRef, 0.25)
 
@@ -92,49 +85,6 @@ export function Hero() {
       )
   })
 
-  useMotion(
-    headerRef,
-    () => {
-      const headerEl = headerRef.current
-      const cutoutEl = cutoutRef.current
-      const archEl = archRef.current
-      if (!headerEl || !cutoutEl || !archEl) return
-
-      const cutX = gsap.quickTo(cutoutEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
-      const cutY = gsap.quickTo(cutoutEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
-      const archX = gsap.quickTo(archEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
-      const archY = gsap.quickTo(archEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
-
-      const handleMove = (e: MouseEvent) => {
-        const rect = headerEl.getBoundingClientRect()
-        const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
-        const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2
-
-        cutX(nx * CUTOUT_DRIFT_PX)
-        cutY(ny * CUTOUT_DRIFT_PX)
-        archX(nx * ARCH_DRIFT_PX)
-        archY(ny * ARCH_DRIFT_PX)
-      }
-
-      const handleLeave = () => {
-        cutX(0)
-        cutY(0)
-        archX(0)
-        archY(0)
-      }
-
-      headerEl.addEventListener('mousemove', handleMove)
-      headerEl.addEventListener('mouseleave', handleLeave)
-
-      return () => {
-        headerEl.removeEventListener('mousemove', handleMove)
-        headerEl.removeEventListener('mouseleave', handleLeave)
-        gsap.set([cutoutEl, archEl], { x: 0, y: 0 })
-      }
-    },
-    { finePointer: true },
-  )
-
   const words = SITE.name.split(' ')
 
   return (
@@ -149,49 +99,7 @@ export function Hero() {
 
       {/* Hero Grid */}
       <div className="relative grid grid-cols-1 desk:grid-cols-[var(--spacing-portrait)_1fr] justify-items-center desk:justify-items-stretch text-center desk:text-left gap-10 desk:gap-16 items-center pt-10 desk:pt-12">
-        {/* Portrait: Glow, Arch, Cutout, Brackets, Pill */}
-        <div className="relative w-[240px] desk:w-portrait aspect-[1414/1700] mb-6">
-          <div className="hero-portrait-wipe relative h-full w-full will-change-[clip-path]">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-1/2 w-[380px] h-[380px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,color-mix(in_srgb,var(--color-sand)_80%,transparent)_0%,transparent_70%)] blur-[10px]"
-            />
-            <div
-              ref={archRef}
-              aria-hidden="true"
-              className="absolute left-[4%] right-[4%] bottom-0 h-[80%] bg-sand rounded-t-full will-change-transform"
-            />
-            <img
-              ref={cutoutRef}
-              src={SITE.portrait.src}
-              alt={SITE.portrait.alt}
-              onLoad={scheduleScrollRefresh}
-              className="absolute inset-0 w-full h-full object-cover object-bottom will-change-transform"
-            />
-          </div>
-
-          <span
-            aria-hidden="true"
-            className="hero-bracket absolute -top-3 -left-3 w-[18px] h-[18px] border-t-[1.5px] border-l-[1.5px] border-accent will-change-transform"
-          />
-          <span
-            aria-hidden="true"
-            className="hero-bracket absolute -top-3 -right-3 w-[18px] h-[18px] border-t-[1.5px] border-r-[1.5px] border-accent will-change-transform"
-          />
-          <span
-            aria-hidden="true"
-            className="hero-bracket absolute -bottom-3 -left-3 w-[18px] h-[18px] border-b-[1.5px] border-l-[1.5px] border-accent will-change-transform"
-          />
-          <span
-            aria-hidden="true"
-            className="hero-bracket absolute -bottom-3 -right-3 w-[18px] h-[18px] border-b-[1.5px] border-r-[1.5px] border-accent will-change-transform"
-          />
-
-          <div className="hero-pill absolute left-1/2 -bottom-[14px] -translate-x-1/2 flex items-center gap-[0.4rem] py-[0.2rem] px-3 bg-panel border border-line rounded-full font-mono text-[11px] text-soft whitespace-nowrap will-change-transform">
-            <AwardIcon />
-            <span>{SITE.captionPill}</span>
-          </div>
-        </div>
+        <PortraitFrame headerRef={headerRef} />
 
         {/* Hero Text */}
         <div>
