@@ -15,7 +15,7 @@ import { useMotion } from '../motion/useMotion'
 import { scrollToSection } from '../motion/smoothScroll'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
-import { LiveClock } from './hero/LiveClock'
+import { StatusStrip } from './hero/StatusStrip'
 import { Card } from './ui/Card'
 import { ArrowDownIcon, AwardIcon, EyeIcon, MailIcon } from './ui/Icons'
 import { LinkButton } from './ui/LinkButton'
@@ -145,17 +145,7 @@ export function Hero() {
       className="relative overflow-hidden mb-5 desk:mb-8 pb-10 desk:pb-14"
     >
       {/* Status Strip */}
-      <div className="hero-strip relative flex justify-between items-center gap-4 py-2 px-4 bg-panel border border-line rounded-strip font-mono text-[12px] leading-[1.4] will-change-transform">
-        <span className="flex items-center flex-wrap gap-2">
-          <span className="h-[10px] w-[10px] rounded-full bg-ok" aria-hidden="true" />
-          <strong className="text-ink font-semibold">{SITE.statusText}</strong>
-          <span className="text-faint" aria-hidden="true">
-            ·
-          </span>
-          <span className="text-soft">{SITE.location}</span>
-        </span>
-        <LiveClock />
-      </div>
+      <StatusStrip />
 
       {/* Hero Grid */}
       <div className="relative grid grid-cols-1 desk:grid-cols-[var(--spacing-portrait)_1fr] justify-items-center desk:justify-items-stretch text-center desk:text-left gap-10 desk:gap-16 items-center pt-10 desk:pt-12">
