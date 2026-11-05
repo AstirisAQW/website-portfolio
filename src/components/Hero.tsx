@@ -1,12 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
+import { gsap, ScrollTrigger, useGSAP } from '../motion/gsap'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { smoothScrollTo } from '../utils/lenis'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const SCROLL_OFFSET = -16
 const CLOCK_INTERVAL_MS = 1000

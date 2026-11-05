@@ -1,12 +1,8 @@
 import { useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
+import { gsap, ScrollTrigger, useGSAP } from '../motion/gsap'
 import { SECTIONS, type SectionId } from '../content/sections'
 import { SITE } from '../content/site'
 import { smoothScrollTo } from '../utils/lenis'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const SCROLL_OFFSET = -16
 

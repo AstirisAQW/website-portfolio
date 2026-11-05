@@ -1,4 +1,4 @@
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from '../motion/gsap'
 import type { Project } from '../types/project'
 
 interface ProjectCardProps {

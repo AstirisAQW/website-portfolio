@@ -1,12 +1,8 @@
 import { useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
+import { gsap, useGSAP } from '../motion/gsap'
 import { TechIcon } from './TechIcon'
 import { CERTIFICATIONS, EDUCATION } from '../content/profile'
 import { SKILL_GROUPS, SKILLS } from '../content/skills'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null)

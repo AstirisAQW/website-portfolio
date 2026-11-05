@@ -1,6 +1,5 @@
 import { type RefObject } from 'react'
-import { gsap } from 'gsap'
-import { useGSAP } from '@gsap/react'
+import { gsap, useGSAP } from '../motion/gsap'
 
 export function useMagnetic<T extends HTMLElement>(ref: RefObject<T | null>, strength = 0.28) {
   useGSAP(

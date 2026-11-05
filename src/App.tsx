@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
+import { gsap, ScrollTrigger, useGSAP } from './motion/gsap'
 import { Hero } from './components/Hero'
 import { Sidebar } from './components/Sidebar'
 import { AboutSection } from './components/AboutSection'
@@ -12,8 +10,6 @@ import { SECTION_IDS } from './content/sections'
 import { SITE } from './content/site'
 import { useActiveSection } from './hooks/useActiveSection'
 import { destroySmoothScroll, initSmoothScroll } from './utils/lenis'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   const activeSection = useActiveSection(SECTION_IDS)

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from '../motion/gsap'
 
 interface TechIconProps {
   src: string
