@@ -40,6 +40,7 @@ export function useSmoothScroll(): void {
     return () => {
       window.removeEventListener('load', scheduleScrollRefresh)
       gsap.ticker.remove(tickerCallback)
+      gsap.ticker.lagSmoothing(500, 33)
       if (lenisInstance) {
         lenisInstance.destroy()
         lenisInstance = null
