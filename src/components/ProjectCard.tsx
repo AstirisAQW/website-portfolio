@@ -1,4 +1,4 @@
-import { ScrollTrigger } from '../motion/gsap'
+import { scheduleScrollRefresh } from '../motion/scrollRefresh'
 import type { Project } from '../types/project'
 
 interface ProjectCardProps {
@@ -19,7 +19,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             alt={project.image.alt}
             width={project.image.width}
             height={project.image.height}
-            onLoad={() => ScrollTrigger.refresh()}
+            onLoad={scheduleScrollRefresh}
             className="block w-full h-auto"
           />
         ) : (

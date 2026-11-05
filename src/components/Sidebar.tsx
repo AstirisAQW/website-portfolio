@@ -1,5 +1,6 @@
 import { useRef } from 'react'
-import { gsap, ScrollTrigger, useGSAP } from '../motion/gsap'
+import { gsap, useGSAP } from '../motion/gsap'
+import { scheduleScrollRefresh } from '../motion/scrollRefresh'
 import {
   DURATION_FAST,
   EASE_NONE,
@@ -78,7 +79,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
           <img
             src={SITE.sidebarStar.src}
             alt={SITE.sidebarStar.alt}
-            onLoad={() => ScrollTrigger.refresh()}
+            onLoad={scheduleScrollRefresh}
             className="sidebar-star w-[140px] max-w-full h-auto block select-none will-change-transform"
           />
         </div>

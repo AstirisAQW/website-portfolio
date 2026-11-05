@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { gsap, ScrollTrigger, useGSAP } from './motion/gsap'
+import { gsap, useGSAP } from './motion/gsap'
+import { scheduleScrollRefresh } from './motion/scrollRefresh'
 import {
   DURATION_DIVIDER,
   DURATION_SLOW,
@@ -84,17 +85,13 @@ export default function App() {
   useEffect(() => {
     initSmoothScroll()
 
-    const handleLoad = () => {
-      ScrollTrigger.refresh()
-    }
-
-    window.addEventListener('load', handleLoad)
+    window.addEventListener('load', scheduleScrollRefresh)
     document.fonts?.ready.then(() => {
-      ScrollTrigger.refresh()
+      scheduleScrollRefresh()
     })
 
     return () => {
-      window.removeEventListener('load', handleLoad)
+      window.removeEventListener('load', scheduleScrollRefresh)
       destroySmoothScroll()
     }
   }, [])

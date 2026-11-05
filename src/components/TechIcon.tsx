@@ -1,20 +1,10 @@
 import { useState } from 'react'
-import { ScrollTrigger } from '../motion/gsap'
+import { scheduleScrollRefresh } from '../motion/scrollRefresh'
 
 interface TechIconProps {
   src: string
   name: string
   size?: 'sm' | 'lg'
-}
-
-let refreshTimeout: number | undefined
-
-function scheduleRefresh() {
-  if (typeof window === 'undefined') return
-  if (refreshTimeout) window.clearTimeout(refreshTimeout)
-  refreshTimeout = window.setTimeout(() => {
-    ScrollTrigger.refresh()
-  }, 120)
 }
 
 export function TechIcon({ src, name, size = 'sm' }: TechIconProps) {
@@ -27,7 +17,7 @@ export function TechIcon({ src, name, size = 'sm' }: TechIconProps) {
       <img
         src={src}
         alt={name}
-        onLoad={scheduleRefresh}
+        onLoad={scheduleScrollRefresh}
         onError={() => setFailed(true)}
         className={`${dimensions} shrink-0 object-contain`}
       />

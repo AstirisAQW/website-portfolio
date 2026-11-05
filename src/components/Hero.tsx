@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, ScrollTrigger, useGSAP } from '../motion/gsap'
+import { gsap, useGSAP } from '../motion/gsap'
+import { scheduleScrollRefresh } from '../motion/scrollRefresh'
 import {
   DURATION_BASE,
   DURATION_FAST,
@@ -193,7 +194,7 @@ export function Hero() {
               ref={cutoutRef}
               src={SITE.portrait.src}
               alt={SITE.portrait.alt}
-              onLoad={() => ScrollTrigger.refresh()}
+              onLoad={scheduleScrollRefresh}
               className="absolute inset-0 w-full h-full object-cover object-bottom will-change-transform"
             />
           </div>
