@@ -19,4 +19,17 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    ignores: ['src/motion/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: ['gsap', 'lenis', '@gsap/react'],
+          patterns: ['gsap/*'],
+        },
+      ],
+    },
+  },
 ])
