@@ -26,7 +26,7 @@ export const SITE = {
     alt: 'Joseph Deysolong in graduation attire',
   } satisfies ImageRef,
   sidebarStar: {
-    src: asset('logo-transparent.png'),
+    src: asset('astiris-star.png'),
     alt: 'Gold eight-pointed star',
   } satisfies ImageRef,
   copyrightYear: '2026',
