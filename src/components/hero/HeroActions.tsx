@@ -4,6 +4,7 @@ import { useMagnetic } from '../../hooks/useMagnetic'
 import { scrollToSection } from '../../motion/smoothScroll'
 import { ArrowDownIcon, EyeIcon, MailIcon } from '../ui/Icons'
 import { LinkButton } from '../ui/LinkButton'
+import { HERO_PARTS } from './heroParts'
 
 const SOCIAL_ICONS = [
   { label: 'GitHub', href: SITE.githubUrl, src: SITE.githubIconUrl },
@@ -21,7 +22,7 @@ export function HeroActions() {
         variant="primary"
         href={SITE.resumeUrl}
         external
-        className="hero-action"
+        className={HERO_PARTS.action}
       >
         <EyeIcon />
         <span>View resume</span>
@@ -34,7 +35,7 @@ export function HeroActions() {
           e.preventDefault()
           scrollToSection('projects')
         }}
-        className="hero-action"
+        className={HERO_PARTS.action}
       >
         <span>View projects</span>
         <ArrowDownIcon />
@@ -47,13 +48,13 @@ export function HeroActions() {
           href={item.href}
           external
           ariaLabel={item.label}
-          className="hero-action"
+          className={HERO_PARTS.action}
         >
           <img src={item.src} alt={item.label} className="w-[22px] h-[22px] object-contain" />
         </LinkButton>
       ))}
 
-      <LinkButton variant="icon" href={SITE.email} ariaLabel="Email" className="hero-action">
+      <LinkButton variant="icon" href={SITE.email} ariaLabel="Email" className={HERO_PARTS.action}>
         <MailIcon />
       </LinkButton>
     </div>
