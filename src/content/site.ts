@@ -30,13 +30,13 @@ export const SITE: SiteConfig = {
       'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
   },
   resume: {
-    url: asset('Joseph-Deysolong-Resume.pdf'),
-    fileName: 'Joseph-Deysolong-Resume.pdf',
+    url: asset('joseph-deysolong-resume.pdf'),
+    fileName: 'joseph-deysolong-resume.pdf',
     summary: 'A one-page summary of my education, projects, and skills.',
   },
   images: {
     portrait: {
-      src: asset('JosephDeysolong-GradPortrait-transparent.png'),
+      src: asset('joseph-deysolong-grad-portrait-transparent.png'),
       alt: 'Joseph Deysolong in graduation attire',
     },
     star: {
