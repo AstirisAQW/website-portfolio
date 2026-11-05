@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 import { gsap } from './motion/gsap'
-import { DURATION_DIVIDER, DURATION_SLOW, EASE_NONE, EASE_OUT } from './motion/constants'
+import { DURATION_DIVIDER, DURATION_SLOW, EASE_OUT } from './motion/constants'
 import { useMotion } from './motion/useMotion'
 import { useSmoothScroll } from './motion/smoothScroll'
+import { BackgroundTexture } from './components/BackgroundTexture'
 import { Hero } from './components/Hero'
 import { Sidebar } from './components/Sidebar'
 import { AboutSection } from './components/AboutSection'
@@ -11,13 +12,11 @@ import { ResumeSection } from './components/ResumeSection'
 import { Footer } from './components/Footer'
 import { Card } from './components/ui/Card'
 import { SECTION_IDS } from './content/sections'
-import { SITE } from './content/site'
 import { useActiveSection } from './hooks/useActiveSection'
 
 export default function App() {
   const activeSection = useActiveSection(SECTION_IDS)
   const appRef = useRef<HTMLDivElement>(null)
-  const bgTextureRef = useRef<HTMLDivElement>(null)
 
   useSmoothScroll()
 
@@ -52,35 +51,11 @@ export default function App() {
         },
       )
     })
-
-    // Texture layer parallax: scrub yPercent 0 to -6 across the whole page
-    if (bgTextureRef.current) {
-      gsap.fromTo(
-        bgTextureRef.current,
-        { yPercent: 0 },
-        {
-          yPercent: -6,
-          ease: EASE_NONE,
-          scrollTrigger: {
-            trigger: document.documentElement,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: true,
-          },
-        },
-      )
-    }
   })
 
   return (
     <div ref={appRef} className="relative isolate min-h-screen font-body text-body antialiased">
-      {/* Page Texture Layer (fixed, moves slightly while scrolling) */}
-      <div
-        ref={bgTextureRef}
-        aria-hidden="true"
-        style={{ backgroundImage: `url("${SITE.textureUrl}")` }}
-        className="pointer-events-none fixed inset-x-0 -inset-y-[10vh] -z-10 bg-ground bg-cover bg-top bg-no-repeat will-change-transform"
-      />
+      <BackgroundTexture />
 
       <div className="w-full max-w-[calc(1040px+3rem)] mx-auto px-6 pt-8">
         {/* HERO CARD */}
