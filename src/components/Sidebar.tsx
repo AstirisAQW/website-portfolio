@@ -1,14 +1,8 @@
 import { useRef } from 'react'
-import { gsap, useGSAP } from '../motion/gsap'
+import { gsap } from '../motion/gsap'
 import { scheduleScrollRefresh } from '../motion/scrollRefresh'
-import {
-  DURATION_FAST,
-  EASE_NONE,
-  EASE_OUT,
-  MQ_DESKTOP,
-  MQ_NO_REDUCED_MOTION,
-  SCROLL_OFFSET,
-} from '../motion/constants'
+import { DURATION_FAST, EASE_NONE, EASE_OUT, SCROLL_OFFSET } from '../motion/constants'
+import { useMotion } from '../motion/useMotion'
 import { SECTIONS, type SectionId } from '../content/sections'
 import { SITE } from '../content/site'
 import { smoothScrollTo } from '../utils/lenis'
@@ -20,48 +14,42 @@ interface SidebarProps {
 export function Sidebar({ activeSection }: SidebarProps) {
   const sidebarRef = useRef<HTMLElement>(null)
 
-  useGSAP(
+  useMotion(
+    sidebarRef,
     () => {
-      const mm = gsap.matchMedia()
-
-      mm.add(`${MQ_DESKTOP} and ${MQ_NO_REDUCED_MOTION}`, () => {
-        gsap.fromTo(
-          '.sidebar-star',
-          { rotation: 0 },
-          {
-            rotation: 90,
-            ease: EASE_NONE,
-            scrollTrigger: {
-              trigger: document.documentElement,
-              start: 'top top',
-              end: 'bottom bottom',
-              scrub: true,
-            },
+      gsap.fromTo(
+        '.sidebar-star',
+        { rotation: 0 },
+        {
+          rotation: 90,
+          ease: EASE_NONE,
+          scrollTrigger: {
+            trigger: document.documentElement,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true,
           },
-        )
-      })
+        },
+      )
     },
-    { scope: sidebarRef },
+    { desktopOnly: true },
   )
 
-  useGSAP(
+  useMotion(
+    sidebarRef,
     () => {
-      const mm = gsap.matchMedia()
-
-      mm.add(MQ_NO_REDUCED_MOTION, () => {
-        const activeChev = sidebarRef.current?.querySelector<HTMLElement>(
-          `[data-section-chev="${activeSection}"]`,
+      const activeChev = sidebarRef.current?.querySelector<HTMLElement>(
+        `[data-section-chev="${activeSection}"]`,
+      )
+      if (activeChev) {
+        gsap.fromTo(
+          activeChev,
+          { x: -6, opacity: 0 },
+          { x: 0, opacity: 1, duration: DURATION_FAST, ease: EASE_OUT },
         )
-        if (activeChev) {
-          gsap.fromTo(
-            activeChev,
-            { x: -6, opacity: 0 },
-            { x: 0, opacity: 1, duration: DURATION_FAST, ease: EASE_OUT },
-          )
-        }
-      })
+      }
     },
-    { dependencies: [activeSection], scope: sidebarRef },
+    { dependencies: [activeSection] },
   )
 
   const handleNavClick = (sectionId: SectionId) => {
