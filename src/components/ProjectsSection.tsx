@@ -3,6 +3,7 @@ import { gsap } from '../motion/gsap'
 import { DURATION_DIVIDER, EASE_OUT } from '../motion/constants'
 import { useMotion } from '../motion/useMotion'
 import { PROJECTS } from '../content/projects'
+import { getSectionLabel } from '../content/sections'
 import { ProjectCard } from './ProjectCard'
 
 export function ProjectsSection() {
@@ -29,7 +30,7 @@ export function ProjectsSection() {
 
   return (
     <section ref={sectionRef} id="projects" className="pt-[4.5rem] pb-0 scroll-mt-4">
-      <h2 className="reveal text-[2.1rem] mb-4">Projects</h2>
+      <h2 className="reveal text-[2.1rem] mb-4">{getSectionLabel('projects')}</h2>
 
       <div>
         {PROJECTS.map((project) => (

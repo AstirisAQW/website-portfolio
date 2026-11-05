@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { getSectionLabel } from '../content/sections'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { DownloadIcon, ExternalLinkIcon } from './ui/Icons'
@@ -10,7 +11,7 @@ export function ResumeSection() {
 
   return (
     <section id="resume" className="pt-[4.5rem] pb-4 scroll-mt-4">
-      <h2 className="reveal text-[2.1rem] mb-4">Resume</h2>
+      <h2 className="reveal text-[2.1rem] mb-4">{getSectionLabel('resume')}</h2>
       <p className="reveal">{SITE.resumeSummary}</p>
 
       {/* Inline PDF Preview (shown only from 860px up) */}

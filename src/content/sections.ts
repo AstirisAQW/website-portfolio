@@ -12,3 +12,7 @@ export const SECTIONS = [
 export type SectionId = (typeof SECTIONS)[number]['id']
 
 export const SECTION_IDS: readonly SectionId[] = SECTIONS.map((s) => s.id)
+
+export function getSectionLabel(id: SectionId): string {
+  return SECTIONS.find((s) => s.id === id)?.label ?? id
+}

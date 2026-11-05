@@ -2,8 +2,10 @@ import { useRef } from 'react'
 import { gsap } from '../motion/gsap'
 import { DURATION_BASE, EASE_OUT } from '../motion/constants'
 import { useMotion } from '../motion/useMotion'
+import { CredentialRow } from './CredentialRow'
 import { TechIcon } from './TechIcon'
 import { CERTIFICATIONS, EDUCATION } from '../content/profile'
+import { getSectionLabel } from '../content/sections'
 import { SKILL_GROUPS, SKILLS } from '../content/skills'
 
 export function AboutSection() {
@@ -31,25 +33,21 @@ export function AboutSection() {
 
   return (
     <section ref={sectionRef} id="about" className="pt-8 pb-0 scroll-mt-4">
-      <h2 className="reveal text-[2.1rem] mb-4">About</h2>
+      <h2 className="reveal text-[2.1rem] mb-4">{getSectionLabel('about')}</h2>
 
       {/* Education */}
       <h3 className="reveal text-[1.25rem] mt-9 mb-3">Education</h3>
       <ul className="logo-list-group">
         {EDUCATION.map((edu) => (
-          <li
+          <CredentialRow
             key={edu.id}
-            className="logo-list-item flex items-center gap-3 py-[0.35rem] will-change-transform"
-          >
-            <TechIcon src={edu.logo} name="USTP" size="lg" />
-            <span>
-              <strong className="font-semibold text-ink">{edu.name}</strong>
-              <br />
-              {edu.school}, {edu.year}
-              <br />
-              {edu.honors}
-            </span>
-          </li>
+            name={edu.name}
+            logo={edu.logo}
+            institution={edu.institution}
+            organization={edu.school}
+            year={edu.year}
+            honors={edu.honors}
+          />
         ))}
       </ul>
 
@@ -78,17 +76,14 @@ export function AboutSection() {
       <h3 className="reveal text-[1.25rem] mt-9 mb-3">Certificates</h3>
       <ul className="logo-list-group">
         {CERTIFICATIONS.map((cert) => (
-          <li
+          <CredentialRow
             key={cert.id}
-            className="logo-list-item flex items-center gap-3 py-[0.35rem] will-change-transform"
-          >
-            <TechIcon src={cert.logo} name={cert.issuer} size="lg" />
-            <span>
-              <strong className="font-semibold text-ink">{cert.name}</strong>
-              <br />
-              {cert.issuer}, {cert.year}
-            </span>
-          </li>
+            name={cert.name}
+            logo={cert.logo}
+            institution={cert.institution}
+            organization={cert.issuer}
+            year={cert.year}
+          />
         ))}
       </ul>
 

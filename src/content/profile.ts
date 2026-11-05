@@ -5,6 +5,7 @@ export const EDUCATION: readonly Education[] = [
   {
     id: 'bs-cs',
     name: 'BS in Computer Science',
+    institution: 'USTP',
     logo: asset('USTP_for_light_bg-1398x1536.png'),
     school: 'University of Science and Technology of Southern Philippines',
     year: '2026',
@@ -16,6 +17,7 @@ export const CERTIFICATIONS: readonly Certification[] = [
   {
     id: 'cisco-networking',
     name: 'Networking Basics',
+    institution: 'Cisco',
     logo: asset('Cisco_NetworkingBasics_Badge.png'),
     issuer: 'Cisco',
     year: '2024',
