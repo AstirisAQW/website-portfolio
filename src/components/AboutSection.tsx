@@ -1,6 +1,7 @@
 import { useRef } from 'react'
-import { gsap, useGSAP } from '../motion/gsap'
-import { DURATION_BASE, EASE_OUT, MQ_NO_REDUCED_MOTION } from '../motion/constants'
+import { gsap } from '../motion/gsap'
+import { DURATION_BASE, EASE_OUT } from '../motion/constants'
+import { useMotion } from '../motion/useMotion'
 import { TechIcon } from './TechIcon'
 import { CERTIFICATIONS, EDUCATION } from '../content/profile'
 import { SKILL_GROUPS, SKILLS } from '../content/skills'
@@ -8,32 +9,25 @@ import { SKILL_GROUPS, SKILLS } from '../content/skills'
 export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null)
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
+  useMotion(sectionRef, () => {
+    const groups = gsap.utils.toArray<HTMLElement>('.logo-list-group')
+    groups.forEach((group) => {
+      const items = group.querySelectorAll<HTMLElement>('.logo-list-item')
+      if (!items.length) return
 
-      mm.add(MQ_NO_REDUCED_MOTION, () => {
-        const groups = gsap.utils.toArray<HTMLElement>('.logo-list-group')
-        groups.forEach((group) => {
-          const items = group.querySelectorAll<HTMLElement>('.logo-list-item')
-          if (!items.length) return
-
-          gsap.from(items, {
-            y: 18,
-            opacity: 0,
-            duration: DURATION_BASE,
-            stagger: 0.04,
-            ease: EASE_OUT,
-            scrollTrigger: {
-              trigger: group,
-              start: 'top 85%',
-            },
-          })
-        })
+      gsap.from(items, {
+        y: 18,
+        opacity: 0,
+        duration: DURATION_BASE,
+        stagger: 0.04,
+        ease: EASE_OUT,
+        scrollTrigger: {
+          trigger: group,
+          start: 'top 85%',
+        },
       })
-    },
-    { scope: sectionRef },
-  )
+    })
+  })
 
   return (
     <section ref={sectionRef} id="about" className="pt-8 pb-0 scroll-mt-4">
