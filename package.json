@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/image-sizes.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/image-sizes.mjs",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write .",

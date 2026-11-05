@@ -5,14 +5,14 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const publicDir = path.join(rootDir, 'public')
-const projectsFile = path.join(rootDir, 'src', 'content', 'projects.ts')
+const outputFile = path.join(rootDir, 'src', 'content', 'imageSizes.generated.json')
+
+const PNG_SIGNATURE = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]
 
 function readPngSize(filePath) {
   const buf = fs.readFileSync(filePath)
-  // PNG signature is 8 bytes, followed by IHDR chunk (4 bytes length, 4 bytes 'IHDR', 4 bytes width, 4 bytes height)
-  const signature = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]
-  for (let i = 0; i < signature.length; i++) {
-    if (buf[i] !== signature[i]) {
+  for (let i = 0; i < PNG_SIGNATURE.length; i++) {
+    if (buf[i] !== PNG_SIGNATURE[i]) {
       throw new Error(`Not a valid PNG file: ${filePath}`)
     }
   }
@@ -25,17 +25,14 @@ function readPngSize(filePath) {
   return { width, height }
 }
 
-let content = fs.readFileSync(projectsFile, 'utf8')
+const files = fs
+  .readdirSync(publicDir)
+  .filter((name) => name.toLowerCase().endsWith('.png'))
+  .sort((a, b) => a.localeCompare(b))
 
-// Match image objects referencing asset('...png')
-content = content.replace(
-  /image:\s*\{\s*src:\s*asset\(['"]([^'"]+\.png)['"]\),\s*alt:\s*(['"][^'"]+['"])(?:\s*,\s*width:\s*\d+\s*,\s*height:\s*\d+)?\s*\}/g,
-  (match, fileName, altLiteral) => {
-    const pngPath = path.join(publicDir, fileName)
-    const { width, height } = readPngSize(pngPath)
-    return `image: { src: asset('${fileName}'), alt: ${altLiteral}, width: ${width}, height: ${height} }`
-  },
-)
+const sizes = {}
+for (const fileName of files) {
+  sizes[fileName] = readPngSize(path.join(publicDir, fileName))
+}
 
-fs.writeFileSync(projectsFile, content, 'utf8')
-console.log('Updated project image dimensions in src/content/projects.ts')
+fs.writeFileSync(outputFile, `${JSON.stringify(sizes, null, 2)}\n`, 'utf8')
