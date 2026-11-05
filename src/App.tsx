@@ -1,13 +1,8 @@
 import { useEffect, useRef } from 'react'
-import { gsap, useGSAP } from './motion/gsap'
+import { gsap } from './motion/gsap'
 import { scheduleScrollRefresh } from './motion/scrollRefresh'
-import {
-  DURATION_DIVIDER,
-  DURATION_SLOW,
-  EASE_NONE,
-  EASE_OUT,
-  MQ_NO_REDUCED_MOTION,
-} from './motion/constants'
+import { DURATION_DIVIDER, DURATION_SLOW, EASE_NONE, EASE_OUT } from './motion/constants'
+import { useMotion } from './motion/useMotion'
 import { Hero } from './components/Hero'
 import { Sidebar } from './components/Sidebar'
 import { AboutSection } from './components/AboutSection'
@@ -24,63 +19,56 @@ export default function App() {
   const appRef = useRef<HTMLDivElement>(null)
   const bgTextureRef = useRef<HTMLDivElement>(null)
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-
-      mm.add(MQ_NO_REDUCED_MOTION, () => {
-        // Shared .reveal fade-up
-        gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
-          gsap.from(el, {
-            y: 24,
-            opacity: 0,
-            duration: DURATION_SLOW,
-            ease: EASE_OUT,
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 85%',
-            },
-          })
-        })
-
-        // 1px section dividers scale in from left
-        gsap.utils.toArray<HTMLElement>('.section-divider').forEach((line) => {
-          gsap.fromTo(
-            line,
-            { scaleX: 0 },
-            {
-              scaleX: 1,
-              duration: DURATION_DIVIDER,
-              ease: EASE_OUT,
-              scrollTrigger: {
-                trigger: line,
-                start: 'top 90%',
-              },
-            },
-          )
-        })
-
-        // Texture layer parallax: scrub yPercent 0 to -6 across the whole page
-        if (bgTextureRef.current) {
-          gsap.fromTo(
-            bgTextureRef.current,
-            { yPercent: 0 },
-            {
-              yPercent: -6,
-              ease: EASE_NONE,
-              scrollTrigger: {
-                trigger: document.documentElement,
-                start: 'top top',
-                end: 'bottom bottom',
-                scrub: true,
-              },
-            },
-          )
-        }
+  useMotion(appRef, () => {
+    // Shared .reveal fade-up
+    gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
+      gsap.from(el, {
+        y: 24,
+        opacity: 0,
+        duration: DURATION_SLOW,
+        ease: EASE_OUT,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+        },
       })
-    },
-    { scope: appRef },
-  )
+    })
+
+    // 1px section dividers scale in from left
+    gsap.utils.toArray<HTMLElement>('.section-divider').forEach((line) => {
+      gsap.fromTo(
+        line,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: DURATION_DIVIDER,
+          ease: EASE_OUT,
+          scrollTrigger: {
+            trigger: line,
+            start: 'top 90%',
+          },
+        },
+      )
+    })
+
+    // Texture layer parallax: scrub yPercent 0 to -6 across the whole page
+    if (bgTextureRef.current) {
+      gsap.fromTo(
+        bgTextureRef.current,
+        { yPercent: 0 },
+        {
+          yPercent: -6,
+          ease: EASE_NONE,
+          scrollTrigger: {
+            trigger: document.documentElement,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true,
+          },
+        },
+      )
+    }
+  })
 
   useEffect(() => {
     initSmoothScroll()
