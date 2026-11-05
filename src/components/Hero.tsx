@@ -17,6 +17,7 @@ import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { Card } from './ui/Card'
 import { ArrowDownIcon, AwardIcon, EyeIcon, MailIcon } from './ui/Icons'
+import { LinkButton } from './ui/LinkButton'
 
 const CLOCK_INTERVAL_MS = 1000
 const CUTOUT_DRIFT_PX = 6
@@ -243,64 +244,61 @@ export function Hero() {
 
           {/* Actions */}
           <div className="flex flex-wrap items-center justify-center desk:justify-start gap-3 mt-7">
-            <a
+            <LinkButton
               ref={primaryBtnRef}
+              variant="primary"
               href={SITE.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hero-action inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-accent rounded-btn font-display font-medium text-[0.95rem] bg-accent text-panel hover:bg-accent-hover hover:border-accent-hover transition-colors no-underline will-change-transform"
+              external
+              className="hero-action"
             >
               <EyeIcon />
               <span>View resume</span>
-            </a>
+            </LinkButton>
 
-            <a
+            <LinkButton
+              variant="outline"
               href="#projects"
               onClick={(e) => {
                 e.preventDefault()
                 scrollToSection('projects')
               }}
-              className="hero-action inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline will-change-transform"
+              className="hero-action"
             >
               <span>View projects</span>
               <ArrowDownIcon />
-            </a>
+            </LinkButton>
 
-            <a
+            <LinkButton
+              variant="icon"
               href={SITE.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="hero-action w-[44px] h-[44px] inline-flex items-center justify-center bg-panel border border-line rounded-btn text-ink hover:border-ink transition-colors will-change-transform"
+              external
+              ariaLabel="GitHub"
+              className="hero-action"
             >
               <img
                 src={SITE.githubIconUrl}
                 alt="GitHub"
                 className="w-[22px] h-[22px] object-contain"
               />
-            </a>
+            </LinkButton>
 
-            <a
+            <LinkButton
+              variant="icon"
               href={SITE.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="hero-action w-[44px] h-[44px] inline-flex items-center justify-center bg-panel border border-line rounded-btn text-ink hover:border-ink transition-colors will-change-transform"
+              external
+              ariaLabel="LinkedIn"
+              className="hero-action"
             >
               <img
                 src={SITE.linkedinIconUrl}
                 alt="LinkedIn"
                 className="w-[22px] h-[22px] object-contain"
               />
-            </a>
+            </LinkButton>
 
-            <a
-              href={SITE.email}
-              aria-label="Email"
-              className="hero-action w-[44px] h-[44px] inline-flex items-center justify-center bg-panel border border-line rounded-btn text-ink hover:border-ink transition-colors will-change-transform"
-            >
+            <LinkButton variant="icon" href={SITE.email} ariaLabel="Email" className="hero-action">
               <MailIcon />
-            </a>
+            </LinkButton>
           </div>
         </div>
       </div>

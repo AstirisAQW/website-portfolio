@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { DownloadIcon, ExternalLinkIcon } from './ui/Icons'
+import { LinkButton } from './ui/LinkButton'
 
 export function ResumeSection() {
   const openBtnRef = useRef<HTMLAnchorElement>(null)
@@ -38,25 +39,15 @@ export function ResumeSection() {
 
       {/* Action Buttons */}
       <div className="reveal flex flex-wrap items-center gap-3 mt-4">
-        <a
-          ref={openBtnRef}
-          href={SITE.resumeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-accent rounded-btn font-display font-medium text-[0.95rem] bg-accent text-panel hover:bg-accent-hover hover:border-accent-hover transition-colors no-underline will-change-transform"
-        >
+        <LinkButton ref={openBtnRef} variant="primary" href={SITE.resumeUrl} external>
           <ExternalLinkIcon />
           <span>Open in new tab</span>
-        </a>
+        </LinkButton>
 
-        <a
-          href={SITE.resumeUrl}
-          download={SITE.resumeFileName}
-          className="inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline"
-        >
+        <LinkButton variant="outline" href={SITE.resumeUrl} download={SITE.resumeFileName}>
           <DownloadIcon />
           <span>Download</span>
-        </a>
+        </LinkButton>
       </div>
     </section>
   )
