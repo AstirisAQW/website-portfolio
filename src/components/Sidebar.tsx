@@ -48,8 +48,8 @@ export function Sidebar({ activeSection }: SidebarProps) {
         {/* Star Image (Desktop Only) */}
         <div className="hidden desk:flex justify-center pb-6">
           <img
-            src={SITE.sidebarStar.src}
-            alt={SITE.sidebarStar.alt}
+            src={SITE.images.star.src}
+            alt={SITE.images.star.alt}
             onLoad={scheduleScrollRefresh}
             className="sidebar-star w-[140px] max-w-full h-auto block select-none will-change-transform"
           />

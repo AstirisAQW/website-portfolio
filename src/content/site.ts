@@ -1,33 +1,49 @@
-import type { ImageRef } from '../types/image'
+import type { SiteConfig } from '../types/site'
 import { asset } from '../utils/asset'
 
-export const SITE = {
-  name: 'Joseph Deysolong',
-  role: 'Software Engineer',
-  shortBio:
-    'Software engineer working across low-level computer architecture, graph machine learning, and modern web platforms. Specialized in low-level computer architecture (MIPS, C++), temporal graph anomaly detection (PyTorch, DyMoN), and modern full-stack web platforms.',
-  statusText: 'Available for Software Engineering Roles',
-  location: 'Cagayan de Oro, Philippines',
-  clockLabel: 'Local Time (UTC+8):',
-  timeZone: 'Asia/Manila',
-  captionPill: "USTP '26 · Cum Laude · DOST Scholar",
-  textureUrl: asset('/background-1.png'),
-  resumeUrl: asset('Joseph-Deysolong-Resume.pdf'),
-  resumeFileName: 'Joseph-Deysolong-Resume.pdf',
-  resumeSummary: 'A one-page summary of my education, projects, and skills.',
-  githubUrl: 'https://github.com/AstirisAQW',
-  githubIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
-  linkedinUrl: 'https://www.linkedin.com/in/joseph-deysolong/',
-  linkedinIconUrl:
-    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
-  email: 'mailto:deysolongjoseph@gmail.com',
-  portrait: {
-    src: asset('JosephDeysolong-GradPortrait-transparent.png'),
-    alt: 'Joseph Deysolong in graduation attire',
-  } satisfies ImageRef,
-  sidebarStar: {
-    src: asset('astiris-star.png'),
-    alt: 'Gold eight-pointed star',
-  } satisfies ImageRef,
+export function getClockLabel(timeZone: string): string {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    timeZoneName: 'shortOffset',
+  }).formatToParts(new Date())
+  const offset = parts.find((p) => p.type === 'timeZoneName')?.value ?? 'GMT'
+  return `Local Time (${offset.replace('GMT', 'UTC')}):`
+}
+
+export const SITE: SiteConfig = {
+  hero: {
+    name: 'Joseph Deysolong',
+    role: 'Software Engineer',
+    shortBio:
+      'Software engineer working across low-level computer architecture, graph machine learning, and modern web platforms. Specialized in low-level computer architecture (MIPS, C++), temporal graph anomaly detection (PyTorch, DyMoN), and modern full-stack web platforms.',
+    availability: 'Available for Software Engineering Roles',
+    location: 'Cagayan de Oro, Philippines',
+    timeZone: 'Asia/Manila',
+    badge: "USTP '26 · Cum Laude · DOST Scholar",
+  },
+  links: {
+    github: 'https://github.com/AstirisAQW',
+    linkedin: 'https://www.linkedin.com/in/joseph-deysolong/',
+    email: 'mailto:deysolongjoseph@gmail.com',
+    githubIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    linkedinIconUrl:
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
+  },
+  resume: {
+    url: asset('Joseph-Deysolong-Resume.pdf'),
+    fileName: 'Joseph-Deysolong-Resume.pdf',
+    summary: 'A one-page summary of my education, projects, and skills.',
+  },
+  images: {
+    portrait: {
+      src: asset('JosephDeysolong-GradPortrait-transparent.png'),
+      alt: 'Joseph Deysolong in graduation attire',
+    },
+    star: {
+      src: asset('astiris-star.png'),
+      alt: 'Gold eight-pointed star',
+    },
+    texture: asset('/background-1.png'),
+  },
   copyrightYear: '2026',
 }

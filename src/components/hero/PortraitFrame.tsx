@@ -26,7 +26,7 @@ function PortraitOverlay() {
         className={`${HERO_PARTS.pill} absolute left-1/2 -bottom-[14px] -translate-x-1/2 flex items-center gap-[0.4rem] py-[0.2rem] px-3 bg-panel border border-line rounded-full font-mono text-[11px] text-soft whitespace-nowrap will-change-transform`}
       >
         <AwardIcon />
-        <span>{SITE.captionPill}</span>
+        <span>{SITE.hero.badge}</span>
       </div>
     </>
   )
@@ -56,8 +56,8 @@ export function PortraitFrame({ headerRef }: PortraitFrameProps) {
         />
         <img
           ref={cutoutRef}
-          src={SITE.portrait.src}
-          alt={SITE.portrait.alt}
+          src={SITE.images.portrait.src}
+          alt={SITE.images.portrait.alt}
           onLoad={scheduleScrollRefresh}
           className="absolute inset-0 w-full h-full object-cover object-bottom will-change-transform"
         />

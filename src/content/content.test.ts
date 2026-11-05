@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { PROJECTS } from './projects'
 import { SECTIONS } from './sections'
+import { getClockLabel, SITE } from './site'
 import { SKILL_GROUPS, SKILLS } from './skills'
 
 describe('content integrity', () => {
@@ -28,5 +29,9 @@ describe('content integrity', () => {
   it('ensures each id in SECTIONS is unique', () => {
     const ids = SECTIONS.map((s) => s.id)
     expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('derives the UTC offset label from timeZone', () => {
+    expect(getClockLabel(SITE.hero.timeZone)).toBe('Local Time (UTC+8):')
   })
 })

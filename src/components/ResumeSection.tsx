@@ -12,7 +12,7 @@ export function ResumeSection() {
   return (
     <section id="resume" className="pt-[4.5rem] pb-4 scroll-mt-4">
       <h2 className="reveal text-[2.1rem] mb-4">{getSectionLabel('resume')}</h2>
-      <p className="reveal">{SITE.resumeSummary}</p>
+      <p className="reveal">{SITE.resume.summary}</p>
 
       {/* Inline PDF Preview (shown only from 860px up) */}
       <div
@@ -20,14 +20,14 @@ export function ResumeSection() {
         className="reveal hidden desk:block my-5 overflow-hidden rounded-strip border border-line bg-card"
       >
         <object
-          data={`${SITE.resumeUrl}#view=FitH`}
+          data={`${SITE.resume.url}#view=FitH`}
           type="application/pdf"
           className="block w-full h-[70vh]"
         >
           <div className="p-6 text-center text-soft">
             <p className="mx-auto mb-3">Inline PDF preview is not available in this browser.</p>
             <a
-              href={SITE.resumeUrl}
+              href={SITE.resume.url}
               target="_blank"
               rel="noopener noreferrer"
               className="font-display font-medium text-accent underline underline-offset-4"
@@ -40,12 +40,12 @@ export function ResumeSection() {
 
       {/* Action Buttons */}
       <div className="reveal flex flex-wrap items-center gap-3 mt-4">
-        <LinkButton ref={openBtnRef} variant="primary" href={SITE.resumeUrl} external>
+        <LinkButton ref={openBtnRef} variant="primary" href={SITE.resume.url} external>
           <ExternalLinkIcon />
           <span>Open in new tab</span>
         </LinkButton>
 
-        <LinkButton variant="outline" href={SITE.resumeUrl} download={SITE.resumeFileName}>
+        <LinkButton variant="outline" href={SITE.resume.url} download={SITE.resume.fileName}>
           <DownloadIcon />
           <span>Download</span>
         </LinkButton>

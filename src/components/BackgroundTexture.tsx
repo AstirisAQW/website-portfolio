@@ -30,7 +30,7 @@ export function BackgroundTexture() {
     <div
       ref={bgTextureRef}
       aria-hidden="true"
-      style={{ backgroundImage: `url("${SITE.textureUrl}")` }}
+      style={{ backgroundImage: `url("${SITE.images.texture}")` }}
       className="pointer-events-none fixed inset-x-0 -inset-y-[10vh] -z-10 bg-ground bg-cover bg-top bg-no-repeat will-change-transform"
     />
   )

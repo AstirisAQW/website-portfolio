@@ -7,8 +7,8 @@ import { LinkButton } from '../ui/LinkButton'
 import { HERO_PARTS } from './heroParts'
 
 const SOCIAL_ICONS = [
-  { label: 'GitHub', href: SITE.githubUrl, src: SITE.githubIconUrl },
-  { label: 'LinkedIn', href: SITE.linkedinUrl, src: SITE.linkedinIconUrl },
+  { label: 'GitHub', href: SITE.links.github, src: SITE.links.githubIconUrl },
+  { label: 'LinkedIn', href: SITE.links.linkedin, src: SITE.links.linkedinIconUrl },
 ]
 
 function SocialActionLinks() {
@@ -26,7 +26,12 @@ function SocialActionLinks() {
           <img src={item.src} alt={item.label} className="w-[22px] h-[22px] object-contain" />
         </LinkButton>
       ))}
-      <LinkButton variant="icon" href={SITE.email} ariaLabel="Email" className={HERO_PARTS.action}>
+      <LinkButton
+        variant="icon"
+        href={SITE.links.email}
+        ariaLabel="Email"
+        className={HERO_PARTS.action}
+      >
         <MailIcon />
       </LinkButton>
     </>
@@ -42,7 +47,7 @@ export function HeroActions() {
       <LinkButton
         ref={primaryBtnRef}
         variant="primary"
-        href={SITE.resumeUrl}
+        href={SITE.resume.url}
         external
         className={HERO_PARTS.action}
       >

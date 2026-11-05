@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
-import { SITE } from '../../content/site'
+import { getClockLabel, SITE } from '../../content/site'
 
 const CLOCK_INTERVAL_MS = 1000
 
 const timeFormatter = new Intl.DateTimeFormat('en-US', {
-  timeZone: SITE.timeZone,
+  timeZone: SITE.hero.timeZone,
   hour: '2-digit',
   minute: '2-digit',
   second: '2-digit',
 })
+
+const clockLabel = getClockLabel(SITE.hero.timeZone)
 
 export function LiveClock() {
   const [clock, setClock] = useState<string>(() => timeFormatter.format(new Date()))
@@ -22,7 +24,7 @@ export function LiveClock() {
 
   return (
     <span className="hidden desk:inline whitespace-nowrap" aria-hidden="true">
-      <span className="text-soft">{SITE.clockLabel} </span>
+      <span className="text-soft">{clockLabel} </span>
       <strong className="text-ink font-semibold tabular-nums">{clock}</strong>
     </span>
   )

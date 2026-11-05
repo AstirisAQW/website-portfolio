@@ -9,11 +9,11 @@ export function StatusStrip() {
     >
       <span className="flex items-center flex-wrap gap-2">
         <span className="h-[10px] w-[10px] rounded-full bg-ok" aria-hidden="true" />
-        <strong className="text-ink font-semibold">{SITE.statusText}</strong>
+        <strong className="text-ink font-semibold">{SITE.hero.availability}</strong>
         <span className="text-faint" aria-hidden="true">
           ·
         </span>
-        <span className="text-soft">{SITE.location}</span>
+        <span className="text-soft">{SITE.hero.location}</span>
       </span>
       <LiveClock />
     </div>

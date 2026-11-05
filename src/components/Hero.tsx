@@ -12,7 +12,7 @@ export function Hero() {
 
   useHeroIntro(headerRef)
 
-  const words = SITE.name.split(' ')
+  const words = SITE.hero.name.split(' ')
 
   return (
     <Card
@@ -31,7 +31,7 @@ export function Hero() {
         {/* Hero Text */}
         <div>
           <h1
-            aria-label={SITE.name}
+            aria-label={SITE.hero.name}
             className="text-[2.6rem] desk:text-[3.9rem] font-bold leading-[1.1] text-ink"
           >
             {words.map((word) => (
@@ -46,13 +46,13 @@ export function Hero() {
           <p
             className={`${HERO_PARTS.role} font-display font-medium text-[1.5rem] desk:text-[1.9rem] text-soft mt-3 mb-5 will-change-transform`}
           >
-            {SITE.role}
+            {SITE.hero.role}
           </p>
 
           <p
             className={`${HERO_PARTS.lead} text-[1.1rem] max-w-[34rem] text-body mx-auto desk:mx-0 mb-0 will-change-transform`}
           >
-            {SITE.shortBio}
+            {SITE.hero.shortBio}
           </p>
 
           {/* Actions */}
