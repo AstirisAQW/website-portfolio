@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { gsap } from '../motion/gsap'
 import { scheduleScrollRefresh } from '../motion/scrollRefresh'
 import {
@@ -15,36 +15,21 @@ import { useMotion } from '../motion/useMotion'
 import { scrollToSection } from '../motion/smoothScroll'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
+import { LiveClock } from './hero/LiveClock'
 import { Card } from './ui/Card'
 import { ArrowDownIcon, AwardIcon, EyeIcon, MailIcon } from './ui/Icons'
 import { LinkButton } from './ui/LinkButton'
 
-const CLOCK_INTERVAL_MS = 1000
 const CUTOUT_DRIFT_PX = 6
 const ARCH_DRIFT_PX = -3
-
-const timeFormatter = new Intl.DateTimeFormat('en-US', {
-  timeZone: SITE.timeZone,
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-})
 
 export function Hero() {
   const headerRef = useRef<HTMLElement>(null)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null)
   const cutoutRef = useRef<HTMLImageElement>(null)
   const archRef = useRef<HTMLDivElement>(null)
-  const [clock, setClock] = useState<string>(() => timeFormatter.format(new Date()))
 
   useMagnetic(primaryBtnRef, 0.25)
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setClock(timeFormatter.format(new Date()))
-    }, CLOCK_INTERVAL_MS)
-    return () => window.clearInterval(id)
-  }, [])
 
   useMotion(headerRef, () => {
     const tl = gsap.timeline({ defaults: { ease: EASE_EXPO } })
@@ -169,10 +154,7 @@ export function Hero() {
           </span>
           <span className="text-soft">{SITE.location}</span>
         </span>
-        <span className="hidden desk:inline whitespace-nowrap" aria-hidden="true">
-          <span className="text-soft">{SITE.clockLabel} </span>
-          <strong className="text-ink font-semibold tabular-nums">{clock}</strong>
-        </span>
+        <LiveClock />
       </div>
 
       {/* Hero Grid */}
