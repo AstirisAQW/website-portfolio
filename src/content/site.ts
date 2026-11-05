@@ -25,9 +25,8 @@ export const SITE: SiteConfig = {
     github: 'https://github.com/AstirisAQW',
     linkedin: 'https://www.linkedin.com/in/joseph-deysolong/',
     email: 'mailto:deysolongjoseph@gmail.com',
-    githubIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
-    linkedinIconUrl:
-      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
+    githubIconUrl: asset('logos/github.svg'),
+    linkedinIconUrl: asset('logos/linkedin.svg'),
   },
   resume: {
     url: asset('joseph-deysolong-resume.pdf'),
