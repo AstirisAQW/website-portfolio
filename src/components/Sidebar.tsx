@@ -51,7 +51,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
             src={SITE.images.star.src}
             alt=""
             onLoad={scheduleScrollRefresh}
-            className="sidebar-star w-[140px] max-w-full h-auto block select-none will-change-transform"
+            className="sidebar-star w-[140px] max-w-full h-auto block select-none"
           />
         </div>
 
@@ -78,7 +78,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
                 <span className="relative">
                   <span
                     aria-hidden="true"
-                    className={`absolute right-full mr-[0.6rem] text-accent font-semibold transition-[transform,opacity] duration-300 will-change-transform ${
+                    className={`absolute right-full mr-[0.6rem] text-accent font-semibold transition-[transform,opacity] duration-300 ${
                       isActive
                         ? 'translate-x-0 opacity-100'
                         : '-translate-x-[6px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100'

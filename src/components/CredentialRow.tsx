@@ -18,7 +18,7 @@ export function CredentialRow({
   honors,
 }: CredentialRowProps) {
   return (
-    <li className="logo-list-item flex items-center gap-3 py-[0.35rem] will-change-transform">
+    <li className="logo-list-item flex items-center gap-3 py-[0.35rem]">
       <TechIcon src={logo} name={institution} size="lg" />
       <span>
         <strong className="font-semibold text-ink">{name}</strong>

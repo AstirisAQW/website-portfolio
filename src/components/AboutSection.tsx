@@ -61,7 +61,7 @@ export function AboutSection() {
               {items.map((skill) => (
                 <li
                   key={skill.name}
-                  className="logo-list-item flex items-center gap-[0.6rem] py-[0.35rem] will-change-transform"
+                  className="logo-list-item flex items-center gap-[0.6rem] py-[0.35rem]"
                 >
                   <TechIcon src={skill.logo} name={skill.name} size="sm" />
                   <span>{skill.name}</span>
@@ -90,7 +90,7 @@ export function AboutSection() {
       {/* Section Divider */}
       <div
         aria-hidden="true"
-        className="section-divider mt-[4.5rem] h-[1px] w-full origin-left bg-line will-change-transform"
+        className="section-divider mt-[4.5rem] h-[1px] w-full origin-left bg-line"
       />
     </section>
   )

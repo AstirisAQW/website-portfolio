@@ -41,7 +41,7 @@ export function ProjectsSection() {
       {/* Section Divider */}
       <div
         aria-hidden="true"
-        className="section-divider mt-[4.5rem] h-[1px] w-full origin-left bg-line will-change-transform"
+        className="section-divider mt-[4.5rem] h-[1px] w-full origin-left bg-line"
       />
     </section>
   )

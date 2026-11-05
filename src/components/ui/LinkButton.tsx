@@ -16,10 +16,10 @@ interface LinkButtonProps {
 
 const VARIANT_CLASSES: Record<LinkButtonVariant, string> = {
   primary:
-    'inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-accent rounded-btn font-display font-medium text-[0.95rem] bg-accent text-panel hover:bg-accent-hover hover:border-accent-hover transition-colors no-underline will-change-transform',
+    'inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-accent rounded-btn font-display font-medium text-[0.95rem] bg-accent text-panel hover:bg-accent-hover hover:border-accent-hover transition-colors no-underline',
   outline:
-    'inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline will-change-transform',
-  icon: 'w-[44px] h-[44px] inline-flex items-center justify-center bg-panel border border-line rounded-btn text-ink hover:border-ink transition-colors will-change-transform',
+    'inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline',
+  icon: 'w-[44px] h-[44px] inline-flex items-center justify-center bg-panel border border-line rounded-btn text-ink hover:border-ink transition-colors',
 }
 
 export function LinkButton({

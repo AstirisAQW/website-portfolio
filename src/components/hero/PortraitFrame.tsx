@@ -19,11 +19,11 @@ function PortraitOverlay() {
         <span
           key={pos}
           aria-hidden="true"
-          className={`${HERO_PARTS.bracket} absolute w-[18px] h-[18px] border-accent will-change-transform ${pos}`}
+          className={`${HERO_PARTS.bracket} absolute w-[18px] h-[18px] border-accent ${pos}`}
         />
       ))}
       <div
-        className={`${HERO_PARTS.pill} absolute left-1/2 -bottom-[14px] -translate-x-1/2 flex items-center gap-[0.4rem] py-[0.2rem] px-3 bg-panel border border-line rounded-full font-mono text-[11px] text-soft whitespace-nowrap will-change-transform`}
+        className={`${HERO_PARTS.pill} absolute left-1/2 -bottom-[14px] -translate-x-1/2 flex items-center gap-[0.4rem] py-[0.2rem] px-3 bg-panel border border-line rounded-full font-mono text-[11px] text-soft whitespace-nowrap`}
       >
         <AwardIcon />
         <span>{SITE.hero.badge}</span>
@@ -44,7 +44,7 @@ export function PortraitFrame({ headerRef }: PortraitFrameProps) {
 
   return (
     <div className="relative w-[240px] desk:w-portrait aspect-[1414/1700] mb-6">
-      <div className={`${HERO_PARTS.portraitWipe} relative h-full w-full will-change-[clip-path]`}>
+      <div className={`${HERO_PARTS.portraitWipe} relative h-full w-full`}>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/2 w-[380px] h-[380px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,color-mix(in_srgb,var(--color-sand)_80%,transparent)_0%,transparent_70%)] blur-[10px]"
