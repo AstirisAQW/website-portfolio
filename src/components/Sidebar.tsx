@@ -1,14 +1,14 @@
 import { useRef } from 'react'
 import { gsap } from '../motion/gsap'
 import { scheduleScrollRefresh } from '../motion/scrollRefresh'
-import { DURATION_FAST, EASE_NONE, EASE_OUT } from '../motion/constants'
+import { EASE_NONE } from '../motion/constants'
 import { useMotion } from '../motion/useMotion'
 import { scrollToSection } from '../motion/smoothScroll'
 import { SECTIONS, type SectionId } from '../content/sections'
 import { SITE } from '../content/site'
 
 interface SidebarProps {
-  activeSection: string
+  activeSection: SectionId
 }
 
 export function Sidebar({ activeSection }: SidebarProps) {
@@ -33,23 +33,6 @@ export function Sidebar({ activeSection }: SidebarProps) {
       )
     },
     { desktopOnly: true },
-  )
-
-  useMotion(
-    sidebarRef,
-    () => {
-      const activeChev = sidebarRef.current?.querySelector<HTMLElement>(
-        `[data-section-chev="${activeSection}"]`,
-      )
-      if (activeChev) {
-        gsap.fromTo(
-          activeChev,
-          { x: -6, opacity: 0 },
-          { x: 0, opacity: 1, duration: DURATION_FAST, ease: EASE_OUT },
-        )
-      }
-    },
-    { dependencies: [activeSection] },
   )
 
   const handleNavClick = (sectionId: SectionId) => {
@@ -94,7 +77,6 @@ export function Sidebar({ activeSection }: SidebarProps) {
               >
                 <span className="relative">
                   <span
-                    data-section-chev={item.id}
                     aria-hidden="true"
                     className={`absolute right-full mr-[0.6rem] text-accent font-semibold transition-[transform,opacity] duration-300 will-change-transform ${
                       isActive
