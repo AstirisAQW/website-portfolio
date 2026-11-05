@@ -1,5 +1,11 @@
 import Lenis from 'lenis'
 import { gsap, ScrollTrigger } from '../motion/gsap'
+import {
+  DURATION_LENIS,
+  DURATION_SCROLL,
+  MQ_REDUCED_MOTION,
+  SCROLL_OFFSET,
+} from '../motion/constants'
 
 let lenisInstance: Lenis | null = null
 
@@ -12,14 +18,14 @@ export function initSmoothScroll(): Lenis | null {
 
   if (lenisInstance) return lenisInstance
 
-  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const isReducedMotion = window.matchMedia(MQ_REDUCED_MOTION).matches
 
   if (isReducedMotion) {
     return null
   }
 
   const lenis = new Lenis({
-    duration: 1.2,
+    duration: DURATION_LENIS,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     orientation: 'vertical',
     gestureOrientation: 'vertical',
@@ -45,16 +51,11 @@ export function destroySmoothScroll(): void {
   }
 }
 
-const DEFAULT_SCROLL_OFFSET = -16
-
-export function smoothScrollTo(
-  target: string | HTMLElement,
-  offset: number = DEFAULT_SCROLL_OFFSET,
-) {
+export function smoothScrollTo(target: string | HTMLElement, offset: number = SCROLL_OFFSET) {
   if (lenisInstance) {
     lenisInstance.scrollTo(target, {
       offset,
-      duration: 1.0,
+      duration: DURATION_SCROLL,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     })
   } else if (typeof window !== 'undefined') {

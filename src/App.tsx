@@ -1,5 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from './motion/gsap'
+import {
+  DURATION_DIVIDER,
+  DURATION_SLOW,
+  EASE_NONE,
+  EASE_OUT,
+  MQ_NO_REDUCED_MOTION,
+} from './motion/constants'
 import { Hero } from './components/Hero'
 import { Sidebar } from './components/Sidebar'
 import { AboutSection } from './components/AboutSection'
@@ -20,14 +27,14 @@ export default function App() {
     () => {
       const mm = gsap.matchMedia()
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
+      mm.add(MQ_NO_REDUCED_MOTION, () => {
         // Shared .reveal fade-up
         gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
           gsap.from(el, {
             y: 24,
             opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out',
+            duration: DURATION_SLOW,
+            ease: EASE_OUT,
             scrollTrigger: {
               trigger: el,
               start: 'top 85%',
@@ -42,8 +49,8 @@ export default function App() {
             { scaleX: 0 },
             {
               scaleX: 1,
-              duration: 0.85,
-              ease: 'power3.out',
+              duration: DURATION_DIVIDER,
+              ease: EASE_OUT,
               scrollTrigger: {
                 trigger: line,
                 start: 'top 90%',
@@ -59,7 +66,7 @@ export default function App() {
             { yPercent: 0 },
             {
               yPercent: -6,
-              ease: 'none',
+              ease: EASE_NONE,
               scrollTrigger: {
                 trigger: document.documentElement,
                 start: 'top top',

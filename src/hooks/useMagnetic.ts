@@ -1,5 +1,6 @@
 import { type RefObject } from 'react'
 import { gsap, useGSAP } from '../motion/gsap'
+import { DURATION_FAST, EASE_OUT, MQ_FINE_POINTER, MQ_NO_REDUCED_MOTION } from '../motion/constants'
 
 export function useMagnetic<T extends HTMLElement>(ref: RefObject<T | null>, strength = 0.28) {
   useGSAP(
@@ -9,9 +10,9 @@ export function useMagnetic<T extends HTMLElement>(ref: RefObject<T | null>, str
 
       const mm = gsap.matchMedia()
 
-      mm.add('(prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
-        const xTo = gsap.quickTo(el, 'x', { duration: 0.6, ease: 'power3.out' })
-        const yTo = gsap.quickTo(el, 'y', { duration: 0.6, ease: 'power3.out' })
+      mm.add(`${MQ_NO_REDUCED_MOTION} and ${MQ_FINE_POINTER}`, () => {
+        const xTo = gsap.quickTo(el, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
+        const yTo = gsap.quickTo(el, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
 
         const handleMove = (e: MouseEvent) => {
           const rect = el.getBoundingClientRect()

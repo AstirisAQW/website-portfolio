@@ -1,10 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../motion/gsap'
+import {
+  DURATION_BASE,
+  DURATION_FAST,
+  DURATION_MEDIUM,
+  DURATION_REVEAL,
+  DURATION_SLOW,
+  DURATION_WIPE,
+  EASE_EXPO,
+  EASE_OUT,
+  MQ_FINE_POINTER,
+  MQ_NO_REDUCED_MOTION,
+  SCROLL_OFFSET,
+} from '../motion/constants'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { smoothScrollTo } from '../utils/lenis'
 
-const SCROLL_OFFSET = -16
 const CLOCK_INTERVAL_MS = 1000
 const CUTOUT_DRIFT_PX = 6
 const ARCH_DRIFT_PX = -3
@@ -36,18 +48,18 @@ export function Hero() {
     () => {
       const mm = gsap.matchMedia()
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
+      mm.add(MQ_NO_REDUCED_MOTION, () => {
+        const tl = gsap.timeline({ defaults: { ease: EASE_EXPO } })
 
         tl.from('.hero-strip', {
           y: -16,
           opacity: 0,
-          duration: 0.7,
+          duration: DURATION_MEDIUM,
         })
           .fromTo(
             '.hero-portrait-wipe',
             { clipPath: 'inset(100% 0% 0% 0%)' },
-            { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.95 },
+            { clipPath: 'inset(0% 0% 0% 0%)', duration: DURATION_WIPE },
             0.1,
           )
           .from(
@@ -55,7 +67,7 @@ export function Hero() {
             {
               yPercent: 110,
               opacity: 0,
-              duration: 0.8,
+              duration: DURATION_SLOW,
               stagger: 0.08,
             },
             0.2,
@@ -65,7 +77,7 @@ export function Hero() {
             {
               y: 20,
               opacity: 0,
-              duration: 0.75,
+              duration: DURATION_REVEAL,
               stagger: 0.08,
             },
             '-=0.5',
@@ -75,7 +87,7 @@ export function Hero() {
             {
               y: 16,
               opacity: 0,
-              duration: 0.65,
+              duration: DURATION_BASE,
               stagger: 0.07,
             },
             '-=0.45',
@@ -83,7 +95,7 @@ export function Hero() {
           .fromTo(
             '.hero-bracket',
             { scale: 0.9, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.65, stagger: 0.04 },
+            { scale: 1, opacity: 1, duration: DURATION_BASE, stagger: 0.04 },
             '-=0.5',
           )
           .from(
@@ -91,22 +103,22 @@ export function Hero() {
             {
               y: 14,
               opacity: 0,
-              duration: 0.65,
+              duration: DURATION_BASE,
             },
             '-=0.4',
           )
       })
 
-      mm.add('(prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
+      mm.add(`${MQ_NO_REDUCED_MOTION} and ${MQ_FINE_POINTER}`, () => {
         const headerEl = headerRef.current
         const cutoutEl = cutoutRef.current
         const archEl = archRef.current
         if (!headerEl || !cutoutEl || !archEl) return
 
-        const cutX = gsap.quickTo(cutoutEl, 'x', { duration: 0.6, ease: 'power3.out' })
-        const cutY = gsap.quickTo(cutoutEl, 'y', { duration: 0.6, ease: 'power3.out' })
-        const archX = gsap.quickTo(archEl, 'x', { duration: 0.6, ease: 'power3.out' })
-        const archY = gsap.quickTo(archEl, 'y', { duration: 0.6, ease: 'power3.out' })
+        const cutX = gsap.quickTo(cutoutEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
+        const cutY = gsap.quickTo(cutoutEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
+        const archX = gsap.quickTo(archEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
+        const archY = gsap.quickTo(archEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
 
         const handleMove = (e: MouseEvent) => {
           const rect = headerEl.getBoundingClientRect()

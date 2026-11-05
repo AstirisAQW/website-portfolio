@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { gsap, useGSAP } from '../motion/gsap'
+import { DURATION_DIVIDER, EASE_OUT, MQ_NO_REDUCED_MOTION } from '../motion/constants'
 import { PROJECTS } from '../content/projects'
 import { ProjectCard } from './ProjectCard'
 
@@ -10,7 +11,7 @@ export function ProjectsSection() {
     () => {
       const mm = gsap.matchMedia()
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
+      mm.add(MQ_NO_REDUCED_MOTION, () => {
         const frames = gsap.utils.toArray<HTMLElement>('.project-image-frame')
         frames.forEach((frame) => {
           gsap.fromTo(
@@ -18,8 +19,8 @@ export function ProjectsSection() {
             { clipPath: 'inset(12% 0% 12% 0%)' },
             {
               clipPath: 'inset(0% 0% 0% 0%)',
-              duration: 0.85,
-              ease: 'power3.out',
+              duration: DURATION_DIVIDER,
+              ease: EASE_OUT,
               scrollTrigger: {
                 trigger: frame,
                 start: 'top 85%',

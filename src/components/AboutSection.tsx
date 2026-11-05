@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { gsap, useGSAP } from '../motion/gsap'
+import { DURATION_BASE, EASE_OUT, MQ_NO_REDUCED_MOTION } from '../motion/constants'
 import { TechIcon } from './TechIcon'
 import { CERTIFICATIONS, EDUCATION } from '../content/profile'
 import { SKILL_GROUPS, SKILLS } from '../content/skills'
@@ -11,7 +12,7 @@ export function AboutSection() {
     () => {
       const mm = gsap.matchMedia()
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
+      mm.add(MQ_NO_REDUCED_MOTION, () => {
         const groups = gsap.utils.toArray<HTMLElement>('.logo-list-group')
         groups.forEach((group) => {
           const items = group.querySelectorAll<HTMLElement>('.logo-list-item')
@@ -20,9 +21,9 @@ export function AboutSection() {
           gsap.from(items, {
             y: 18,
             opacity: 0,
-            duration: 0.65,
+            duration: DURATION_BASE,
             stagger: 0.04,
-            ease: 'power3.out',
+            ease: EASE_OUT,
             scrollTrigger: {
               trigger: group,
               start: 'top 85%',

@@ -1,10 +1,16 @@
 import { useRef } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../motion/gsap'
+import {
+  DURATION_FAST,
+  EASE_NONE,
+  EASE_OUT,
+  MQ_DESKTOP,
+  MQ_NO_REDUCED_MOTION,
+  SCROLL_OFFSET,
+} from '../motion/constants'
 import { SECTIONS, type SectionId } from '../content/sections'
 import { SITE } from '../content/site'
 import { smoothScrollTo } from '../utils/lenis'
-
-const SCROLL_OFFSET = -16
 
 interface SidebarProps {
   activeSection: string
@@ -17,13 +23,13 @@ export function Sidebar({ activeSection }: SidebarProps) {
     () => {
       const mm = gsap.matchMedia()
 
-      mm.add('(min-width: 860px) and (prefers-reduced-motion: no-preference)', () => {
+      mm.add(`${MQ_DESKTOP} and ${MQ_NO_REDUCED_MOTION}`, () => {
         gsap.fromTo(
           '.sidebar-star',
           { rotation: 0 },
           {
             rotation: 90,
-            ease: 'none',
+            ease: EASE_NONE,
             scrollTrigger: {
               trigger: document.documentElement,
               start: 'top top',
@@ -41,7 +47,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
     () => {
       const mm = gsap.matchMedia()
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
+      mm.add(MQ_NO_REDUCED_MOTION, () => {
         const activeChev = sidebarRef.current?.querySelector<HTMLElement>(
           `[data-section-chev="${activeSection}"]`,
         )
@@ -49,7 +55,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
           gsap.fromTo(
             activeChev,
             { x: -6, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+            { x: 0, opacity: 1, duration: DURATION_FAST, ease: EASE_OUT },
           )
         }
       })
