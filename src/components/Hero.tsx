@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, useGSAP } from '../motion/gsap'
+import { gsap } from '../motion/gsap'
 import { scheduleScrollRefresh } from '../motion/scrollRefresh'
 import {
   DURATION_BASE,
@@ -10,10 +10,9 @@ import {
   DURATION_WIPE,
   EASE_EXPO,
   EASE_OUT,
-  MQ_FINE_POINTER,
-  MQ_NO_REDUCED_MOTION,
   SCROLL_OFFSET,
 } from '../motion/constants'
+import { useMotion } from '../motion/useMotion'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { smoothScrollTo } from '../utils/lenis'
@@ -45,111 +44,108 @@ export function Hero() {
     return () => window.clearInterval(id)
   }, [])
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
+  useMotion(headerRef, () => {
+    const tl = gsap.timeline({ defaults: { ease: EASE_EXPO } })
 
-      mm.add(MQ_NO_REDUCED_MOTION, () => {
-        const tl = gsap.timeline({ defaults: { ease: EASE_EXPO } })
-
-        tl.from('.hero-strip', {
-          y: -16,
+    tl.from('.hero-strip', {
+      y: -16,
+      opacity: 0,
+      duration: DURATION_MEDIUM,
+    })
+      .fromTo(
+        '.hero-portrait-wipe',
+        { clipPath: 'inset(100% 0% 0% 0%)' },
+        { clipPath: 'inset(0% 0% 0% 0%)', duration: DURATION_WIPE },
+        0.1,
+      )
+      .from(
+        '.hero-word',
+        {
+          yPercent: 110,
           opacity: 0,
-          duration: DURATION_MEDIUM,
-        })
-          .fromTo(
-            '.hero-portrait-wipe',
-            { clipPath: 'inset(100% 0% 0% 0%)' },
-            { clipPath: 'inset(0% 0% 0% 0%)', duration: DURATION_WIPE },
-            0.1,
-          )
-          .from(
-            '.hero-word',
-            {
-              yPercent: 110,
-              opacity: 0,
-              duration: DURATION_SLOW,
-              stagger: 0.08,
-            },
-            0.2,
-          )
-          .from(
-            ['.hero-role', '.hero-lead'],
-            {
-              y: 20,
-              opacity: 0,
-              duration: DURATION_REVEAL,
-              stagger: 0.08,
-            },
-            '-=0.5',
-          )
-          .from(
-            '.hero-action',
-            {
-              y: 16,
-              opacity: 0,
-              duration: DURATION_BASE,
-              stagger: 0.07,
-            },
-            '-=0.45',
-          )
-          .fromTo(
-            '.hero-bracket',
-            { scale: 0.9, opacity: 0 },
-            { scale: 1, opacity: 1, duration: DURATION_BASE, stagger: 0.04 },
-            '-=0.5',
-          )
-          .from(
-            '.hero-pill',
-            {
-              y: 14,
-              opacity: 0,
-              duration: DURATION_BASE,
-            },
-            '-=0.4',
-          )
-      })
+          duration: DURATION_SLOW,
+          stagger: 0.08,
+        },
+        0.2,
+      )
+      .from(
+        ['.hero-role', '.hero-lead'],
+        {
+          y: 20,
+          opacity: 0,
+          duration: DURATION_REVEAL,
+          stagger: 0.08,
+        },
+        '-=0.5',
+      )
+      .from(
+        '.hero-action',
+        {
+          y: 16,
+          opacity: 0,
+          duration: DURATION_BASE,
+          stagger: 0.07,
+        },
+        '-=0.45',
+      )
+      .fromTo(
+        '.hero-bracket',
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: DURATION_BASE, stagger: 0.04 },
+        '-=0.5',
+      )
+      .from(
+        '.hero-pill',
+        {
+          y: 14,
+          opacity: 0,
+          duration: DURATION_BASE,
+        },
+        '-=0.4',
+      )
+  })
 
-      mm.add(`${MQ_NO_REDUCED_MOTION} and ${MQ_FINE_POINTER}`, () => {
-        const headerEl = headerRef.current
-        const cutoutEl = cutoutRef.current
-        const archEl = archRef.current
-        if (!headerEl || !cutoutEl || !archEl) return
+  useMotion(
+    headerRef,
+    () => {
+      const headerEl = headerRef.current
+      const cutoutEl = cutoutRef.current
+      const archEl = archRef.current
+      if (!headerEl || !cutoutEl || !archEl) return
 
-        const cutX = gsap.quickTo(cutoutEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
-        const cutY = gsap.quickTo(cutoutEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
-        const archX = gsap.quickTo(archEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
-        const archY = gsap.quickTo(archEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
+      const cutX = gsap.quickTo(cutoutEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
+      const cutY = gsap.quickTo(cutoutEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
+      const archX = gsap.quickTo(archEl, 'x', { duration: DURATION_FAST, ease: EASE_OUT })
+      const archY = gsap.quickTo(archEl, 'y', { duration: DURATION_FAST, ease: EASE_OUT })
 
-        const handleMove = (e: MouseEvent) => {
-          const rect = headerEl.getBoundingClientRect()
-          const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
-          const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2
+      const handleMove = (e: MouseEvent) => {
+        const rect = headerEl.getBoundingClientRect()
+        const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
+        const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2
 
-          cutX(nx * CUTOUT_DRIFT_PX)
-          cutY(ny * CUTOUT_DRIFT_PX)
-          archX(nx * ARCH_DRIFT_PX)
-          archY(ny * ARCH_DRIFT_PX)
-        }
+        cutX(nx * CUTOUT_DRIFT_PX)
+        cutY(ny * CUTOUT_DRIFT_PX)
+        archX(nx * ARCH_DRIFT_PX)
+        archY(ny * ARCH_DRIFT_PX)
+      }
 
-        const handleLeave = () => {
-          cutX(0)
-          cutY(0)
-          archX(0)
-          archY(0)
-        }
+      const handleLeave = () => {
+        cutX(0)
+        cutY(0)
+        archX(0)
+        archY(0)
+      }
 
-        headerEl.addEventListener('mousemove', handleMove)
-        headerEl.addEventListener('mouseleave', handleLeave)
+      headerEl.addEventListener('mousemove', handleMove)
+      headerEl.addEventListener('mouseleave', handleLeave)
 
-        return () => {
-          headerEl.removeEventListener('mousemove', handleMove)
-          headerEl.removeEventListener('mouseleave', handleLeave)
-          gsap.set([cutoutEl, archEl], { x: 0, y: 0 })
-        }
-      })
+      return () => {
+        headerEl.removeEventListener('mousemove', handleMove)
+        headerEl.removeEventListener('mouseleave', handleLeave)
+        gsap.set([cutoutEl, archEl], { x: 0, y: 0 })
+      }
     },
-    { scope: headerRef },
+    { finePointer: true },
   )
 
   const words = SITE.name.split(' ')
