@@ -15,6 +15,7 @@ import { useMotion } from '../motion/useMotion'
 import { scrollToSection } from '../motion/smoothScroll'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
+import { Card } from './ui/Card'
 
 const CLOCK_INTERVAL_MS = 1000
 const CUTOUT_DRIFT_PX = 6
@@ -150,10 +151,11 @@ export function Hero() {
   const words = SITE.name.split(' ')
 
   return (
-    <header
+    <Card
+      as="header"
       ref={headerRef}
       id="top"
-      className="relative overflow-hidden mb-5 desk:mb-8 p-pad-sm pb-10 desk:p-pad desk:pb-14 bg-panel border border-line rounded-panel-sm desk:rounded-panel"
+      className="relative overflow-hidden mb-5 desk:mb-8 pb-10 desk:pb-14"
     >
       {/* Status Strip */}
       <div className="hero-strip relative flex justify-between items-center gap-4 py-2 px-4 bg-panel border border-line rounded-strip font-mono text-[12px] leading-[1.4] will-change-transform">
@@ -348,6 +350,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-    </header>
+    </Card>
   )
 }

@@ -9,6 +9,7 @@ import { AboutSection } from './components/AboutSection'
 import { ProjectsSection } from './components/ProjectsSection'
 import { ResumeSection } from './components/ResumeSection'
 import { Footer } from './components/Footer'
+import { Card } from './components/ui/Card'
 import { SECTION_IDS } from './content/sections'
 import { SITE } from './content/site'
 import { useActiveSection } from './hooks/useActiveSection'
@@ -86,7 +87,7 @@ export default function App() {
         <Hero />
 
         {/* BODY PANEL */}
-        <div className="p-pad-sm desk:p-pad bg-panel border border-line rounded-panel-sm desk:rounded-panel">
+        <Card>
           <div className="grid grid-cols-1 desk:grid-cols-[var(--spacing-side)_minmax(0,var(--spacing-content))] justify-center gap-0 desk:gap-gap">
             <Sidebar activeSection={activeSection} />
 
@@ -96,7 +97,7 @@ export default function App() {
               <ResumeSection />
             </main>
           </div>
-        </div>
+        </Card>
       </div>
 
       {/* FOOTER */}
