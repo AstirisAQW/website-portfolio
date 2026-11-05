@@ -1,4 +1,38 @@
-# React + TypeScript + Vite
+# Joseph Deysolong — Portfolio
+
+Personal portfolio website built with React 19, TypeScript, Tailwind CSS v4, GSAP, and Lenis.
+
+## Architecture
+
+```text
+website-portfolio/
+├── public/
+│   └── logos/
+├── scripts/
+└── src/
+    ├── components/
+    │   ├── hero/
+    │   └── ui/
+    ├── content/
+    ├── hooks/
+    ├── motion/
+    ├── types/
+    └── utils/
+```
+
+- `public/` — Static assets including project screenshots, portraits, background textures, and the resume PDF.
+- `public/logos/` — Local SVG technology and social icons served directly from the site.
+- `scripts/` — Build-time utilities such as PNG dimension extraction (`image-sizes.mjs`).
+- `src/components/` — Top-level page sections (`Hero`, `Sidebar`, `AboutSection`, `ProjectsSection`, `ResumeSection`, `Footer`) and layout pieces.
+- `src/components/hero/` — Modular hero subcomponents (`StatusStrip`, `LiveClock`, `PortraitFrame`, `HeroActions`) and hero-specific motion hooks.
+- `src/components/ui/` — Reusable presentation primitives (`Card`, `LinkButton`, `Icons`).
+- `src/content/` — Typed portfolio data (`site`, `projects`, `skills`, `profile`, `sections`), generated image dimensions, and content integrity tests.
+- `src/hooks/` — Custom React hooks for active section tracking (`useActiveSection`) and magnetic pointer interactions (`useMagnetic`).
+- `src/motion/` — Centralized GSAP plugin registration, motion constants, `useMotion`, `useScrollReveals`, debounced `ScrollTrigger` refresh, and Lenis smooth scroll.
+- `src/types/` — Shared TypeScript interfaces for site configuration, projects, profile credentials, and image references.
+- `src/utils/` — Asset path and image reference helpers (`asset`, `imageRef`).
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
