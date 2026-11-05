@@ -48,6 +48,10 @@ export function useSmoothScroll(): void {
   }, [])
 }
 
+export function getScrollBehavior(prefersReducedMotion: boolean): ScrollBehavior {
+  return prefersReducedMotion ? 'auto' : 'smooth'
+}
+
 export function scrollToSection(id: string, offset: number = SCROLL_OFFSET): void {
   const selector = id.startsWith('#') ? id : `#${id}`
 
@@ -61,7 +65,8 @@ export function scrollToSection(id: string, offset: number = SCROLL_OFFSET): voi
     const el = document.querySelector(selector)
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY + offset
-      window.scrollTo({ top, behavior: 'smooth' })
+      const isReducedMotion = window.matchMedia(MQ_REDUCED_MOTION).matches
+      window.scrollTo({ top, behavior: getScrollBehavior(isReducedMotion) })
     }
   }
 }
