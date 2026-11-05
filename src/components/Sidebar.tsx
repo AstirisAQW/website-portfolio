@@ -8,6 +8,8 @@ import { smoothScrollTo } from '../utils/lenis'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const SCROLL_OFFSET = -16
+
 interface SidebarProps {
   activeSection: string
 }
@@ -60,7 +62,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
   )
 
   const handleNavClick = (sectionId: SectionId) => {
-    smoothScrollTo(`#${sectionId}`, -16)
+    smoothScrollTo(`#${sectionId}`, SCROLL_OFFSET)
   }
 
   return (

@@ -8,6 +8,11 @@ import { smoothScrollTo } from '../utils/lenis'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const SCROLL_OFFSET = -16
+const CLOCK_INTERVAL_MS = 1000
+const CUTOUT_DRIFT_PX = 6
+const ARCH_DRIFT_PX = -3
+
 const timeFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: SITE.timeZone,
   hour: '2-digit',
@@ -27,7 +32,7 @@ export function Hero() {
   useEffect(() => {
     const id = window.setInterval(() => {
       setClock(timeFormatter.format(new Date()))
-    }, 1000)
+    }, CLOCK_INTERVAL_MS)
     return () => window.clearInterval(id)
   }, [])
 
@@ -112,10 +117,10 @@ export function Hero() {
           const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
           const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2
 
-          cutX(nx * 6)
-          cutY(ny * 6)
-          archX(nx * -3)
-          archY(ny * -3)
+          cutX(nx * CUTOUT_DRIFT_PX)
+          cutY(ny * CUTOUT_DRIFT_PX)
+          archX(nx * ARCH_DRIFT_PX)
+          archY(ny * ARCH_DRIFT_PX)
         }
 
         const handleLeave = () => {
@@ -270,7 +275,7 @@ export function Hero() {
               href="#projects"
               onClick={(e) => {
                 e.preventDefault()
-                smoothScrollTo('#projects', -16)
+                smoothScrollTo('#projects', SCROLL_OFFSET)
               }}
               className="hero-action inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline will-change-transform"
             >

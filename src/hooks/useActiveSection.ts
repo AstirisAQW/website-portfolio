@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+const OBSERVER_ROOT_MARGIN = '-40% 0px -55% 0px'
+
 /** Returns the id of the section crossing a thin band near the middle of the viewport. */
 export function useActiveSection(ids: readonly string[]): string {
   const [active, setActive] = useState(ids[0] ?? '')
@@ -11,7 +13,7 @@ export function useActiveSection(ids: readonly string[]): string {
           if (entry.isIntersecting) setActive(entry.target.id)
         }
       },
-      { rootMargin: '-40% 0px -55% 0px' },
+      { rootMargin: OBSERVER_ROOT_MARGIN },
     )
 
     for (const id of ids) {

@@ -48,7 +48,12 @@ export function destroySmoothScroll(): void {
   }
 }
 
-export function smoothScrollTo(target: string | HTMLElement, offset: number = -16) {
+const DEFAULT_SCROLL_OFFSET = -16
+
+export function smoothScrollTo(
+  target: string | HTMLElement,
+  offset: number = DEFAULT_SCROLL_OFFSET,
+) {
   if (lenisInstance) {
     lenisInstance.scrollTo(target, {
       offset,
