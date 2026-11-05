@@ -1,37 +1,31 @@
 import { useRef } from 'react'
-import { gsap, useGSAP } from '../motion/gsap'
-import { DURATION_DIVIDER, EASE_OUT, MQ_NO_REDUCED_MOTION } from '../motion/constants'
+import { gsap } from '../motion/gsap'
+import { DURATION_DIVIDER, EASE_OUT } from '../motion/constants'
+import { useMotion } from '../motion/useMotion'
 import { PROJECTS } from '../content/projects'
 import { ProjectCard } from './ProjectCard'
 
 export function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null)
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-
-      mm.add(MQ_NO_REDUCED_MOTION, () => {
-        const frames = gsap.utils.toArray<HTMLElement>('.project-image-frame')
-        frames.forEach((frame) => {
-          gsap.fromTo(
-            frame,
-            { clipPath: 'inset(12% 0% 12% 0%)' },
-            {
-              clipPath: 'inset(0% 0% 0% 0%)',
-              duration: DURATION_DIVIDER,
-              ease: EASE_OUT,
-              scrollTrigger: {
-                trigger: frame,
-                start: 'top 85%',
-              },
-            },
-          )
-        })
-      })
-    },
-    { scope: sectionRef },
-  )
+  useMotion(sectionRef, () => {
+    const frames = gsap.utils.toArray<HTMLElement>('.project-image-frame')
+    frames.forEach((frame) => {
+      gsap.fromTo(
+        frame,
+        { clipPath: 'inset(12% 0% 12% 0%)' },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: DURATION_DIVIDER,
+          ease: EASE_OUT,
+          scrollTrigger: {
+            trigger: frame,
+            start: 'top 85%',
+          },
+        },
+      )
+    })
+  })
 
   return (
     <section ref={sectionRef} id="projects" className="pt-[4.5rem] pb-0 scroll-mt-4">
