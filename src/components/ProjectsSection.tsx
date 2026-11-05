@@ -28,20 +28,16 @@ export function ProjectsSection() {
                 trigger: frame,
                 start: 'top 85%',
               },
-            }
+            },
           )
         })
       })
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   )
 
   return (
-    <section
-      ref={sectionRef}
-      id="projects"
-      className="pt-[4.5rem] pb-0 scroll-mt-4"
-    >
+    <section ref={sectionRef} id="projects" className="pt-[4.5rem] pb-0 scroll-mt-4">
       <h2 className="reveal text-[2.1rem] mb-4">Projects</h2>
 
       <div>

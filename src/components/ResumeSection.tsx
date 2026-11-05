@@ -22,9 +22,7 @@ export function ResumeSection() {
           className="block w-full h-[70vh]"
         >
           <div className="p-6 text-center text-soft">
-            <p className="mx-auto mb-3">
-              Inline PDF preview is not available in this browser.
-            </p>
+            <p className="mx-auto mb-3">Inline PDF preview is not available in this browser.</p>
             <a
               href={SITE.resumeUrl}
               target="_blank"

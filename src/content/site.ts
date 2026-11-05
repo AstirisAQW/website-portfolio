@@ -18,7 +18,8 @@ export const SITE = {
   githubUrl: 'https://github.com/AstirisAQW',
   githubIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
   linkedinUrl: 'https://www.linkedin.com/in/joseph-deysolong/',
-  linkedinIconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
+  linkedinIconUrl:
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
   email: 'mailto:deysolongjoseph@gmail.com',
   portrait: {
     src: asset('JosephDeysolong-GradPortrait-transparent.png'),

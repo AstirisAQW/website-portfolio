@@ -47,7 +47,7 @@ export function Hero() {
             '.hero-portrait-wipe',
             { clipPath: 'inset(100% 0% 0% 0%)' },
             { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.95 },
-            0.1
+            0.1,
           )
           .from(
             '.hero-word',
@@ -57,7 +57,7 @@ export function Hero() {
               duration: 0.8,
               stagger: 0.08,
             },
-            0.2
+            0.2,
           )
           .from(
             ['.hero-role', '.hero-lead'],
@@ -67,7 +67,7 @@ export function Hero() {
               duration: 0.75,
               stagger: 0.08,
             },
-            '-=0.5'
+            '-=0.5',
           )
           .from(
             '.hero-action',
@@ -77,13 +77,13 @@ export function Hero() {
               duration: 0.65,
               stagger: 0.07,
             },
-            '-=0.45'
+            '-=0.45',
           )
           .fromTo(
             '.hero-bracket',
             { scale: 0.9, opacity: 0 },
             { scale: 1, opacity: 1, duration: 0.65, stagger: 0.04 },
-            '-=0.5'
+            '-=0.5',
           )
           .from(
             '.hero-pill',
@@ -92,7 +92,7 @@ export function Hero() {
               opacity: 0,
               duration: 0.65,
             },
-            '-=0.4'
+            '-=0.4',
           )
       })
 
@@ -135,7 +135,7 @@ export function Hero() {
         }
       })
     },
-    { scope: headerRef }
+    { scope: headerRef },
   )
 
   const words = SITE.name.split(' ')
@@ -227,13 +227,8 @@ export function Hero() {
             className="text-[2.6rem] desk:text-[3.9rem] font-bold leading-[1.1] text-ink"
           >
             {words.map((word) => (
-              <span
-                key={word}
-                className="inline-block overflow-hidden pb-1 mr-[0.22em] last:mr-0"
-              >
-                <span className="hero-word inline-block will-change-transform">
-                  {word}
-                </span>
+              <span key={word} className="inline-block overflow-hidden pb-1 mr-[0.22em] last:mr-0">
+                <span className="hero-word inline-block will-change-transform">{word}</span>
               </span>
             ))}
           </h1>

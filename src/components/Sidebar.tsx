@@ -32,11 +32,11 @@ export function Sidebar({ activeSection }: SidebarProps) {
               end: 'bottom bottom',
               scrub: true,
             },
-          }
+          },
         )
       })
     },
-    { scope: sidebarRef }
+    { scope: sidebarRef },
   )
 
   useGSAP(
@@ -45,18 +45,18 @@ export function Sidebar({ activeSection }: SidebarProps) {
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const activeChev = sidebarRef.current?.querySelector<HTMLElement>(
-          `[data-section-chev="${activeSection}"]`
+          `[data-section-chev="${activeSection}"]`,
         )
         if (activeChev) {
           gsap.fromTo(
             activeChev,
             { x: -6, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }
+            { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
           )
         }
       })
     },
-    { dependencies: [activeSection], scope: sidebarRef }
+    { dependencies: [activeSection], scope: sidebarRef },
   )
 
   const handleNavClick = (sectionId: SectionId) => {
@@ -96,9 +96,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
                 }}
                 aria-current={isActive ? 'location' : undefined}
                 className={`group flex justify-center py-[0.8rem] desk:py-[0.6rem] font-display font-medium no-underline transition-colors ${
-                  isActive
-                    ? 'text-accent'
-                    : 'text-ink hover:text-accent focus-visible:text-accent'
+                  isActive ? 'text-accent' : 'text-ink hover:text-accent focus-visible:text-accent'
                 }`}
               >
                 <span className="relative">

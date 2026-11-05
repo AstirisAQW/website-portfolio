@@ -20,8 +20,7 @@ function scheduleRefresh() {
 export function Logo({ src, name, size = 'sm' }: LogoProps) {
   const [failed, setFailed] = useState(false)
 
-  const dimensions =
-    size === 'lg' ? 'h-12 w-12 text-xs' : 'h-7 w-7 text-[11px]'
+  const dimensions = size === 'lg' ? 'h-12 w-12 text-xs' : 'h-7 w-7 text-[11px]'
 
   if (src && !failed) {
     return (

@@ -52,7 +52,7 @@ export default function App() {
                 trigger: line,
                 start: 'top 90%',
               },
-            }
+            },
           )
         })
 
@@ -70,12 +70,12 @@ export default function App() {
                 end: 'bottom bottom',
                 scrub: true,
               },
-            }
+            },
           )
         }
       })
     },
-    { scope: appRef }
+    { scope: appRef },
   )
 
   useEffect(() => {

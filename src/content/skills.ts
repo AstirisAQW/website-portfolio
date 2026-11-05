@@ -1,7 +1,4 @@
-export type SkillGroup =
-  | 'Programming languages'
-  | 'Frameworks and libraries'
-  | 'Tools'
+export type SkillGroup = 'Programming languages' | 'Frameworks and libraries' | 'Tools'
 
 export interface SkillItem {
   name: string
@@ -62,4 +59,3 @@ export const SKILLS: readonly SkillItem[] = [
     group: 'Tools',
   },
 ]
-

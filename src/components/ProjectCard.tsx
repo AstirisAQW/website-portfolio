@@ -11,7 +11,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className="reveal group/project mb-14 last:mb-0">
       {/* Bordered Image Frame (shown whole at its own aspect ratio) */}
-      <div className="project-image-frame overflow-hidden bg-card border border-line text-soft">        {project.image.src ? (
+      <div className="project-image-frame overflow-hidden bg-card border border-line text-soft">
+        {' '}
+        {project.image.src ? (
           <img
             src={project.image.src}
             alt={project.image.alt}
@@ -28,9 +30,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       <h3 className="mt-4 text-[1.6rem] text-ink">{project.title}</h3>
-      {project.subtitle && (
-        <p className="text-accent mb-2">{project.subtitle}</p>
-      )}
+      {project.subtitle && <p className="text-accent mb-2">{project.subtitle}</p>}
       <p>{project.description}</p>
 
       <ul className="flex flex-wrap gap-2 mb-4">

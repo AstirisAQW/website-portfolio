@@ -34,9 +34,8 @@ content = content.replace(
     const pngPath = path.join(publicDir, fileName)
     const { width, height } = readPngSize(pngPath)
     return `image: { src: asset('${fileName}'), alt: ${altLiteral}, width: ${width}, height: ${height} }`
-  }
+  },
 )
 
 fs.writeFileSync(projectsFile, content, 'utf8')
 console.log('Updated project image dimensions in src/content/projects.ts')
-
