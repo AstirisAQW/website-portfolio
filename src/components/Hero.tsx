@@ -234,7 +234,7 @@ export function Hero() {
           </h1>
 
           <p className="hero-role font-display font-medium text-[1.5rem] desk:text-[1.9rem] text-soft mt-3 mb-5 will-change-transform">
-            {SITE.tagline}
+            {SITE.role}
           </p>
 
           <p className="hero-lead text-[1.1rem] max-w-[34rem] text-body mx-auto desk:mx-0 mb-0 will-change-transform">

@@ -3,7 +3,7 @@ import { asset } from '../utils/asset'
 
 export const SITE = {
   name: 'Joseph Deysolong',
-  tagline: 'Software Engineer',
+  role: 'Software Engineer',
   shortBio:
     'Software engineer working across low-level computer architecture, graph machine learning, and modern web platforms. Specialized in low-level computer architecture (MIPS, C++), temporal graph anomaly detection (PyTorch, DyMoN), and modern full-stack web platforms.',
   statusText: 'Available for Software Engineering Roles',
