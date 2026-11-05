@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 import { gsap } from '../motion/gsap'
 import { scheduleScrollRefresh } from '../motion/scrollRefresh'
-import { DURATION_FAST, EASE_NONE, EASE_OUT, SCROLL_OFFSET } from '../motion/constants'
+import { DURATION_FAST, EASE_NONE, EASE_OUT } from '../motion/constants'
 import { useMotion } from '../motion/useMotion'
+import { scrollToSection } from '../motion/smoothScroll'
 import { SECTIONS, type SectionId } from '../content/sections'
 import { SITE } from '../content/site'
-import { smoothScrollTo } from '../utils/lenis'
 
 interface SidebarProps {
   activeSection: string
@@ -53,7 +53,7 @@ export function Sidebar({ activeSection }: SidebarProps) {
   )
 
   const handleNavClick = (sectionId: SectionId) => {
-    smoothScrollTo(`#${sectionId}`, SCROLL_OFFSET)
+    scrollToSection(sectionId)
   }
 
   return (

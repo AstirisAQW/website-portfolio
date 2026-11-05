@@ -10,12 +10,11 @@ import {
   DURATION_WIPE,
   EASE_EXPO,
   EASE_OUT,
-  SCROLL_OFFSET,
 } from '../motion/constants'
 import { useMotion } from '../motion/useMotion'
+import { scrollToSection } from '../motion/smoothScroll'
 import { SITE } from '../content/site'
 import { useMagnetic } from '../hooks/useMagnetic'
-import { smoothScrollTo } from '../utils/lenis'
 
 const CLOCK_INTERVAL_MS = 1000
 const CUTOUT_DRIFT_PX = 6
@@ -280,7 +279,7 @@ export function Hero() {
               href="#projects"
               onClick={(e) => {
                 e.preventDefault()
-                smoothScrollTo('#projects', SCROLL_OFFSET)
+                scrollToSection('projects')
               }}
               className="hero-action inline-flex items-center gap-[0.6rem] py-[0.65rem] px-5 border border-line rounded-btn font-display font-medium text-[0.95rem] bg-panel text-ink hover:border-ink transition-colors no-underline will-change-transform"
             >

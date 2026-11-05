@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { gsap } from './motion/gsap'
-import { scheduleScrollRefresh } from './motion/scrollRefresh'
 import { DURATION_DIVIDER, DURATION_SLOW, EASE_NONE, EASE_OUT } from './motion/constants'
 import { useMotion } from './motion/useMotion'
+import { useSmoothScroll } from './motion/smoothScroll'
 import { Hero } from './components/Hero'
 import { Sidebar } from './components/Sidebar'
 import { AboutSection } from './components/AboutSection'
@@ -12,12 +12,13 @@ import { Footer } from './components/Footer'
 import { SECTION_IDS } from './content/sections'
 import { SITE } from './content/site'
 import { useActiveSection } from './hooks/useActiveSection'
-import { destroySmoothScroll, initSmoothScroll } from './utils/lenis'
 
 export default function App() {
   const activeSection = useActiveSection(SECTION_IDS)
   const appRef = useRef<HTMLDivElement>(null)
   const bgTextureRef = useRef<HTMLDivElement>(null)
+
+  useSmoothScroll()
 
   useMotion(appRef, () => {
     // Shared .reveal fade-up
@@ -69,20 +70,6 @@ export default function App() {
       )
     }
   })
-
-  useEffect(() => {
-    initSmoothScroll()
-
-    window.addEventListener('load', scheduleScrollRefresh)
-    document.fonts?.ready.then(() => {
-      scheduleScrollRefresh()
-    })
-
-    return () => {
-      window.removeEventListener('load', scheduleScrollRefresh)
-      destroySmoothScroll()
-    }
-  }, [])
 
   return (
     <div ref={appRef} className="relative isolate min-h-screen font-body text-body antialiased">
